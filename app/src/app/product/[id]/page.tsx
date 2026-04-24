@@ -206,9 +206,6 @@ export default function ProductDetail() {
                   <p className={`text-[11px] font-bold uppercase tracking-widest transition-colors ${sizeError ? "text-error" : "text-on-surface-variant"}`}>
                     {sizeError ? "Pilih ukuran terlebih dahulu" : selectedSize ? `Ukuran terpilih: EU ${selectedSize}` : "Pilih Ukuran (EU)"}
                   </p>
-                  <button className="text-[10px] uppercase tracking-widest text-outline underline underline-offset-2">
-                    Panduan Ukuran
-                  </button>
                 </div>
                 <div className="flex gap-2 flex-wrap">
                   {SIZES.map((size) => (
