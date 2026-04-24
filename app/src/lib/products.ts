@@ -9,9 +9,12 @@ export interface Product {
   priceNum: number;
   image: string;
   category: string;
+  colors: string[];
   isNewArrival: boolean;
+  bestSeller: boolean;
   badge?: string;
   featured?: boolean;
+  description?: string;
 }
 
 const DATA_PATH = path.join(process.cwd(), "src/data/products.json");

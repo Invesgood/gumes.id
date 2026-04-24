@@ -79,10 +79,16 @@ export default function Cart() {
                           <p className="text-xs text-outline mt-1 tracking-widest uppercase">
                             {item.material}
                           </p>
-                          <div className="flex items-center gap-4 mt-3">
+                          <div className="flex items-center gap-2 mt-3 flex-wrap">
                             <span className="border border-outline-variant/40 text-[10px] uppercase tracking-widest px-3 py-1 text-on-surface-variant">
                               EU {item.size}
                             </span>
+                            {item.color && (
+                              <span className="flex items-center gap-1.5 border border-outline-variant/40 text-[10px] uppercase tracking-widest px-3 py-1 text-on-surface-variant">
+                                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: { hitam: "#1a1a1a", coklat: "#5d4037", tan: "#c68642" }[item.color] }} />
+                                {item.color}
+                              </span>
+                            )}
                           </div>
                         </div>
                         <button

@@ -12,17 +12,19 @@ interface Product {
   priceNum: number;
   image: string;
   category: string;
+  colors: string[];
   isNewArrival: boolean;
+  bestSeller: boolean;
   badge?: string;
   featured?: boolean;
+  description?: string;
 }
 
-const CATEGORIES = [
-  "Burnished Boots",
-  "Artisan Sandals",
-  "Minimalist Loafers",
-  "Studio Slippers",
-  "Oxford",
+const CATEGORIES = ["Sendal", "Sepatu"];
+const COLORS = [
+  { id: "hitam", label: "Hitam", hex: "#1a1a1a" },
+  { id: "coklat", label: "Coklat", hex: "#5d4037" },
+  { id: "tan",    label: "Tan",    hex: "#c68642" },
 ];
 
 const ADMIN_PASSWORD = "gumes2025";
@@ -34,9 +36,12 @@ const emptyForm = (): Omit<Product, "id"> => ({
   priceNum: 0,
   image: "",
   category: CATEGORIES[0],
+  colors: [],
   isNewArrival: false,
+  bestSeller: false,
   badge: "",
   featured: false,
+  description: "",
 });
 
 export default function AdminPage() {
@@ -104,9 +109,12 @@ export default function AdminPage() {
       priceNum: p.priceNum,
       image: p.image,
       category: p.category,
+      colors: p.colors || [],
       isNewArrival: p.isNewArrival,
+      bestSeller: p.bestSeller || false,
       badge: p.badge || "",
       featured: p.featured || false,
+      description: p.description || "",
     });
     setEditingId(p.id);
     setShowForm(true);
@@ -432,7 +440,7 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
-                    Category *
+                    Kategori *
                   </label>
                   <select
                     required
@@ -447,13 +455,47 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+                    Warna (pilih semua yang tersedia)
+                  </label>
+                  <div className="flex gap-3 flex-wrap">
+                    {COLORS.map((c) => {
+                      const checked = form.colors.includes(c.id);
+                      return (
+                        <button
+                          key={c.id}
+                          type="button"
+                          onClick={() => {
+                            const next = checked
+                              ? form.colors.filter((x) => x !== c.id)
+                              : [...form.colors, c.id];
+                            setForm({ ...form, colors: next });
+                          }}
+                          className={`flex items-center gap-2 px-3 py-2.5 border-2 transition-all text-[11px] font-bold uppercase tracking-widest ${
+                            checked
+                              ? "border-on-surface bg-surface-container scale-105"
+                              : "border-outline-variant text-on-surface-variant"
+                          }`}
+                        >
+                          <span className="w-3 h-3 rounded-full" style={{ backgroundColor: c.hex }} />
+                          {c.label}
+                          {checked && <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {form.colors.length === 0 && (
+                    <p className="text-[10px] text-outline mt-1.5">Pilih minimal satu warna</p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
                     Badge Label
                   </label>
                   <input
                     value={form.badge}
                     onChange={(e) => setForm({ ...form, badge: e.target.value })}
                     className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary-container transition-colors"
-                    placeholder="e.g. New, Limited, Best Seller"
+                    placeholder="e.g. New, Limited"
                   />
                 </div>
               </div>
@@ -476,38 +518,42 @@ export default function AdminPage() {
                 )}
               </div>
 
-              <div className="flex gap-8 pt-2">
-                <label className="flex items-center gap-3 cursor-pointer group">
-                  <div
-                    onClick={() => setForm({ ...form, isNewArrival: !form.isNewArrival })}
-                    className={`w-5 h-5 border-2 flex items-center justify-center transition-colors ${
-                      form.isNewArrival ? "bg-primary-container border-primary-container" : "border-outline-variant"
-                    }`}
-                  >
-                    {form.isNewArrival && (
-                      <span className="material-symbols-outlined text-on-primary text-sm" style={{ fontVariationSettings: "'FILL' 1", fontSize: "14px" }}>check</span>
-                    )}
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface transition-colors">
-                    New Arrival
-                  </span>
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+                  Deskripsi Produk
                 </label>
+                <textarea
+                  value={form.description}
+                  onChange={(e) => setForm({ ...form, description: e.target.value })}
+                  rows={4}
+                  className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary-container transition-colors resize-none"
+                  placeholder="Jelaskan bahan, proses pembuatan, keunggulan produk..."
+                />
+                <p className="text-[10px] text-outline mt-1">{(form.description || "").length} karakter</p>
+              </div>
 
-                <label className="flex items-center gap-3 cursor-pointer group">
-                  <div
-                    onClick={() => setForm({ ...form, featured: !form.featured })}
-                    className={`w-5 h-5 border-2 flex items-center justify-center transition-colors ${
-                      form.featured ? "bg-primary-container border-primary-container" : "border-outline-variant"
-                    }`}
-                  >
-                    {form.featured && (
-                      <span className="material-symbols-outlined text-on-primary text-sm" style={{ fontVariationSettings: "'FILL' 1", fontSize: "14px" }}>check</span>
-                    )}
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface transition-colors">
-                    Featured (large card)
-                  </span>
-                </label>
+              <div className="flex flex-wrap gap-6 pt-2">
+                {[
+                  { key: "isNewArrival" as const, label: "New Arrival" },
+                  { key: "bestSeller" as const,   label: "Best Seller" },
+                  { key: "featured" as const,     label: "Featured (card besar)" },
+                ].map(({ key, label }) => (
+                  <label key={key} className="flex items-center gap-3 cursor-pointer group">
+                    <div
+                      onClick={() => setForm({ ...form, [key]: !form[key] })}
+                      className={`w-5 h-5 border-2 flex items-center justify-center transition-colors ${
+                        form[key] ? "bg-primary-container border-primary-container" : "border-outline-variant"
+                      }`}
+                    >
+                      {form[key] && (
+                        <span className="material-symbols-outlined text-on-primary" style={{ fontVariationSettings: "'FILL' 1", fontSize: "13px" }}>check</span>
+                      )}
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant group-hover:text-on-surface transition-colors">
+                      {label}
+                    </span>
+                  </label>
+                ))}
               </div>
 
               <div className="flex gap-3 pt-4 border-t border-outline-variant/20">

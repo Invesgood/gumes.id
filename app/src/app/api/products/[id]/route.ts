@@ -18,9 +18,12 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     priceNum: Number(body.priceNum) || 0,
     image: body.image,
     category: body.category,
+    colors: Array.isArray(body.colors) ? body.colors : (body.colors ? [body.colors] : ["hitam"]),
     isNewArrival: Boolean(body.isNewArrival),
+    bestSeller: Boolean(body.bestSeller),
     badge: body.badge || "",
     featured: Boolean(body.featured),
+    description: body.description || "",
   };
 
   saveProducts(products);

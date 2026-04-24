@@ -4,8 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
-import { useCart } from "@/components/CartProvider";
+import { useState, useEffect } from "react";
 
 interface Product {
   id: string;
@@ -16,46 +15,22 @@ interface Product {
   image: string;
   category: string;
   isNewArrival: boolean;
+  bestSeller: boolean;
   badge?: string;
   featured?: boolean;
+  description?: string;
 }
-
-const SIZES = [39, 40, 41, 42, 43];
 
 export default function NewArrival() {
   const [newArrivals, setNewArrivals] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
-  const [selectedSizes, setSelectedSizes] = useState<Record<string, number>>({});
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
-  const { addItem } = useCart();
 
   useEffect(() => {
     fetch("/api/products?newArrival=true")
       .then((r) => r.json())
       .then((data) => { setNewArrivals(data); setLoading(false); });
   }, []);
-
-  const handleAddToCart = useCallback((product: Product) => {
-    const size = selectedSizes[product.id] || 40;
-    addItem({
-      productId: product.id,
-      name: product.name,
-      material: product.material,
-      priceNum: product.priceNum,
-      price: product.price,
-      image: product.image,
-      size,
-    });
-    setAddedIds((prev) => new Set(prev).add(product.id));
-    setTimeout(() => {
-      setAddedIds((prev) => {
-        const next = new Set(prev);
-        next.delete(product.id);
-        return next;
-      });
-    }, 2000);
-  }, [addItem, selectedSizes]);
 
   const quickViewProduct = newArrivals.find((p) => p.id === quickViewId);
 
@@ -184,47 +159,17 @@ export default function NewArrival() {
                     {product.material}
                   </p>
 
-                  {/* Sizes */}
-                  <div className="mb-5">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-outline mb-2">
-                      Size (EU) {selectedSizes[product.id] ? `— ${selectedSizes[product.id]}` : ""}
-                    </p>
-                    <div className="flex gap-1.5 flex-wrap">
-                      {SIZES.map((size) => (
-                        <button
-                          key={size}
-                          onClick={() =>
-                            setSelectedSizes((prev) => ({ ...prev, [product.id]: size }))
-                          }
-                          className={`w-9 h-9 text-[11px] border transition-colors ${
-                            selectedSizes[product.id] === size
-                              ? "bg-on-surface text-surface border-on-surface"
-                              : "border-outline-variant text-on-surface-variant hover:border-on-surface"
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
                   <div className="flex items-center justify-between mt-auto">
                     <span className="font-[family-name:var(--font-headline)] text-xl text-primary-container">
                       {product.price}
                     </span>
-                    <button
-                      onClick={() => handleAddToCart(product)}
-                      className={`flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase px-6 py-3 transition-all ${
-                        addedIds.has(product.id)
-                          ? "bg-on-surface text-surface"
-                          : "burnished-gradient text-on-primary hover:brightness-110"
-                      }`}
+                    <Link
+                      href={`/product/${product.id}`}
+                      className="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase px-6 py-3 burnished-gradient text-on-primary hover:brightness-110 transition-all"
                     >
-                      <span className="material-symbols-outlined text-base">
-                        {addedIds.has(product.id) ? "check" : "shopping_bag"}
-                      </span>
-                      {addedIds.has(product.id) ? "Added" : "Add to Cart"}
-                    </button>
+                      <span className="material-symbols-outlined text-base">arrow_forward</span>
+                      Lihat Detail
+                    </Link>
                   </div>
                 </div>
               </article>
@@ -368,48 +313,25 @@ export default function NewArrival() {
                   {quickViewProduct.price}
                 </p>
 
-                <div className="mb-6">
-                  <p className="text-[11px] font-bold tracking-widest uppercase text-on-surface-variant mb-3">
-                    Select Size (EU)
-                  </p>
-                  <div className="flex gap-2 flex-wrap">
-                    {SIZES.map((size) => (
-                      <button
-                        key={size}
-                        onClick={() =>
-                          setSelectedSizes((prev) => ({
-                            ...prev,
-                            [quickViewProduct.id]: size,
-                          }))
-                        }
-                        className={`w-11 h-11 text-xs border transition-colors ${
-                          selectedSizes[quickViewProduct.id] === size
-                            ? "bg-on-surface text-surface border-on-surface"
-                            : "border-outline-variant text-on-surface-variant hover:border-on-surface"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-8">
+                  {quickViewProduct.description ||
+                    "Lihat halaman detail untuk informasi lengkap tentang bahan, ukuran, dan proses pembuatan produk ini."}
+                </p>
 
                 <div className="flex flex-col gap-3 mt-auto">
-                  <button
-                    onClick={() => {
-                      handleAddToCart(quickViewProduct);
-                      setQuickViewId(null);
-                    }}
+                  <Link
+                    href={`/product/${quickViewProduct.id}`}
+                    onClick={() => setQuickViewId(null)}
                     className="w-full burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase py-4 hover:brightness-110 transition-all flex items-center justify-center gap-2"
                   >
-                    <span className="material-symbols-outlined text-base">shopping_bag</span>
-                    Add to Cart
-                  </button>
+                    <span className="material-symbols-outlined text-base">arrow_forward</span>
+                    Lihat Detail & Pilih Ukuran
+                  </Link>
                   <Link
                     href="/cart"
-                    className="w-full border border-outline-variant text-[11px] font-bold tracking-widest uppercase py-4 text-center hover:bg-surface-container transition-colors"
+                    className="w-full border border-outline-variant text-[11px] font-bold tracking-widest uppercase py-4 text-center hover:bg-surface-container transition-colors block"
                   >
-                    View Cart
+                    Lihat Cart
                   </Link>
                 </div>
               </div>

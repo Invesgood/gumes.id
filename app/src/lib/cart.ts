@@ -7,6 +7,7 @@ export interface CartItem {
   price: string;
   image: string;
   size: number;
+  color?: string;
   qty: number;
 }
 
@@ -28,12 +29,12 @@ export function saveCart(items: CartItem[]): void {
 export function addToCart(item: Omit<CartItem, "cartId" | "qty">, qty = 1): CartItem[] {
   const cart = getCart();
   const existing = cart.find(
-    (c) => c.productId === item.productId && c.size === item.size
+    (c) => c.productId === item.productId && c.size === item.size && c.color === item.color
   );
   if (existing) {
     existing.qty += qty;
   } else {
-    cart.push({ ...item, cartId: `${item.productId}-${item.size}-${Date.now()}`, qty });
+    cart.push({ ...item, cartId: `${item.productId}-${item.size}-${item.color || ""}-${Date.now()}`, qty });
   }
   saveCart(cart);
   return cart;

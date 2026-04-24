@@ -3,8 +3,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import { useEffect, useState, useCallback } from "react";
-import { useCart } from "@/components/CartProvider";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface Product {
   id: string;
@@ -14,30 +14,32 @@ interface Product {
   priceNum: number;
   image: string;
   category: string;
+  colors: string[];
   isNewArrival: boolean;
+  bestSeller: boolean;
   badge?: string;
   featured?: boolean;
 }
 
-const CATEGORIES = [
-  "All Collections",
-  "Burnished Boots",
-  "Artisan Sandals",
-  "Minimalist Loafers",
-  "Studio Slippers",
-  "Oxford",
+const CATEGORIES = ["Semua", "Sendal", "Sepatu"];
+const COLORS = [
+  { id: "hitam", label: "Hitam", hex: "#1a1a1a" },
+  { id: "coklat", label: "Coklat", hex: "#5d4037" },
+  { id: "tan",    label: "Tan",    hex: "#c68642" },
 ];
-
-const SIZES = [39, 40, 41, 42, 43];
-
+const SORTS = [
+  { id: "default",   label: "Default" },
+  { id: "low-high",  label: "Harga: Terendah" },
+  { id: "high-low",  label: "Harga: Tertinggi" },
+  { id: "bestseller",label: "Best Seller" },
+];
 export default function ProductCatalog() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("All Collections");
-  const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
-  const [selectedSizes, setSelectedSizes] = useState<Record<string, number>>({});
+  const [activeCategory, setActiveCategory] = useState("Semua");
+  const [activeColor, setActiveColor] = useState<string | null>(null);
+  const [activeSort, setActiveSort] = useState("default");
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
-  const { addItem } = useCart();
 
   useEffect(() => {
     fetch("/api/products")
@@ -45,30 +47,15 @@ export default function ProductCatalog() {
       .then((data) => { setProducts(data); setLoading(false); });
   }, []);
 
-  const filtered = activeCategory === "All Collections"
-    ? products
-    : products.filter((p) => p.category === activeCategory);
-
-  const handleAddToCart = useCallback((product: Product) => {
-    const size = selectedSizes[product.id] || 40;
-    addItem({
-      productId: product.id,
-      name: product.name,
-      material: product.material,
-      priceNum: product.priceNum,
-      price: product.price,
-      image: product.image,
-      size,
-    });
-    setAddedIds((prev) => new Set(prev).add(product.id));
-    setTimeout(() => {
-      setAddedIds((prev) => {
-        const next = new Set(prev);
-        next.delete(product.id);
-        return next;
-      });
-    }, 2000);
-  }, [addItem, selectedSizes]);
+  const filtered = (() => {
+    let result = [...products];
+    if (activeCategory !== "Semua") result = result.filter((p) => p.category === activeCategory);
+    if (activeColor) result = result.filter((p) => p.colors?.includes(activeColor));
+    if (activeSort === "low-high")   result.sort((a, b) => a.priceNum - b.priceNum);
+    if (activeSort === "high-low")   result.sort((a, b) => b.priceNum - a.priceNum);
+    if (activeSort === "bestseller") result.sort((a, b) => (b.bestSeller ? 1 : 0) - (a.bestSeller ? 1 : 0));
+    return result;
+  })();
 
   const quickViewProduct = products.find((p) => p.id === quickViewId);
 
@@ -91,19 +78,20 @@ export default function ProductCatalog() {
           {/* Sidebar */}
           <aside className="hidden lg:block w-56 shrink-0">
             <div className="sticky top-48">
-              <div className="mb-10">
-                <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-5">
-                  Category
+              {/* Kategori */}
+              <div className="mb-8">
+                <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-4">
+                  Kategori
                 </h3>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-3">
                   {CATEGORIES.map((cat) => (
                     <li key={cat}>
                       <button
                         onClick={() => setActiveCategory(cat)}
-                        className={`text-left transition-colors ${
+                        className={`text-sm text-left w-full transition-colors ${
                           activeCategory === cat
                             ? "text-primary-container font-bold"
-                            : "text-on-surface-variant hover:text-primary transition-colors"
+                            : "text-on-surface-variant hover:text-primary"
                         }`}
                       >
                         {cat}
@@ -113,21 +101,75 @@ export default function ProductCatalog() {
                 </ul>
               </div>
 
-              <div className="mb-10">
-                <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-5">
-                  Tonal Palette
+              {/* Warna */}
+              <div className="mb-8">
+                <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-4">
+                  Warna
                 </h3>
-                <div className="flex flex-wrap gap-3">
-                  <button className="w-8 h-8 bg-black ring-1 ring-offset-4 ring-primary" />
-                  <button className="w-8 h-8 bg-[#5d4037]" />
-                  <button className="w-8 h-8 bg-[#c68642]" />
-                  <button className="w-8 h-8 bg-surface-container-highest border border-outline-variant" />
+                <div className="space-y-2.5">
+                  {COLORS.map((c) => (
+                    <button
+                      key={c.id}
+                      onClick={() => setActiveColor(activeColor === c.id ? null : c.id)}
+                      className="flex items-center gap-3 w-full group"
+                    >
+                      <span
+                        className={`w-5 h-5 rounded-full border-2 transition-all ${
+                          activeColor === c.id
+                            ? "border-primary-container scale-110"
+                            : "border-transparent"
+                        }`}
+                        style={{ backgroundColor: c.hex }}
+                      />
+                      <span className={`text-sm transition-colors ${
+                        activeColor === c.id
+                          ? "text-primary-container font-bold"
+                          : "text-on-surface-variant group-hover:text-primary"
+                      }`}>
+                        {c.label}
+                      </span>
+                      {activeColor === c.id && (
+                        <span className="material-symbols-outlined text-primary-container text-base ml-auto">check</span>
+                      )}
+                    </button>
+                  ))}
+                  {activeColor && (
+                    <button
+                      onClick={() => setActiveColor(null)}
+                      className="text-[10px] uppercase tracking-widest text-outline hover:text-error transition-colors mt-1"
+                    >
+                      Hapus filter
+                    </button>
+                  )}
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-outline-variant/20">
+              {/* Urutkan */}
+              <div className="mb-8">
+                <h3 className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-4">
+                  Urutkan
+                </h3>
+                <ul className="space-y-3">
+                  {SORTS.map((s) => (
+                    <li key={s.id}>
+                      <button
+                        onClick={() => setActiveSort(s.id)}
+                        className={`text-sm text-left w-full transition-colors ${
+                          activeSort === s.id
+                            ? "text-primary-container font-bold"
+                            : "text-on-surface-variant hover:text-primary"
+                        }`}
+                      >
+                        {s.label}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-5 border-t border-outline-variant/20">
                 <p className="text-xs leading-relaxed text-outline">
-                  {loading ? "Loading..." : `Showing ${filtered.length} refined pieces.`}
+                  {loading ? "Loading..." : `${filtered.length} produk ditemukan`}
                 </p>
               </div>
             </div>
@@ -135,8 +177,8 @@ export default function ProductCatalog() {
 
           {/* Grid */}
           <section className="flex-grow pb-32">
-            {/* Mobile category pills */}
-            <div className="flex gap-2 overflow-x-auto pb-4 mb-8 lg:hidden">
+            {/* Mobile filters */}
+            <div className="flex gap-2 overflow-x-auto pb-3 mb-3 lg:hidden">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
@@ -151,13 +193,70 @@ export default function ProductCatalog() {
                 </button>
               ))}
             </div>
+            <div className="flex gap-2 overflow-x-auto pb-3 mb-3 lg:hidden">
+              {COLORS.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setActiveColor(activeColor === c.id ? null : c.id)}
+                  className={`shrink-0 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase px-3 py-2 border transition-colors ${
+                    activeColor === c.id
+                      ? "bg-on-surface text-surface border-on-surface"
+                      : "border-outline-variant text-on-surface-variant"
+                  }`}
+                >
+                  <span className="w-3 h-3 rounded-full" style={{ backgroundColor: c.hex }} />
+                  {c.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Sort bar (desktop top + mobile) */}
+            <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
+              <p className="text-xs text-outline uppercase tracking-widest">
+                {loading ? "" : `${filtered.length} produk`}
+              </p>
+              <div className="flex items-center gap-2 flex-wrap">
+                {SORTS.filter((s) => s.id !== "default").map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setActiveSort(activeSort === s.id ? "default" : s.id)}
+                    className={`text-[10px] font-bold uppercase tracking-widest px-4 py-2 border transition-colors flex items-center gap-1.5 ${
+                      activeSort === s.id
+                        ? "bg-on-surface text-surface border-on-surface"
+                        : "border-outline-variant text-on-surface-variant hover:border-on-surface"
+                    }`}
+                  >
+                    {s.id === "bestseller" && (
+                      <span className="material-symbols-outlined text-base"
+                        style={{ fontVariationSettings: activeSort === s.id ? "'FILL' 1" : "'FILL' 0" }}>
+                        star
+                      </span>
+                    )}
+                    {s.id === "low-high" && <span className="material-symbols-outlined text-base">arrow_upward</span>}
+                    {s.id === "high-low" && <span className="material-symbols-outlined text-base">arrow_downward</span>}
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {loading ? (
               <div className="flex items-center justify-center py-40 text-outline text-sm tracking-widest uppercase">
                 Loading collection…
               </div>
+            ) : filtered.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-32 text-center">
+                <span className="material-symbols-outlined text-outline-variant mb-4" style={{ fontSize: "48px" }}>search_off</span>
+                <p className="text-on-surface-variant mb-2">Tidak ada produk ditemukan</p>
+                <button
+                  onClick={() => { setActiveCategory("Semua"); setActiveColor(null); setActiveSort("default"); }}
+                  className="text-[11px] uppercase tracking-widest text-primary-container border-b border-primary-container mt-2"
+                >
+                  Reset filter
+                </button>
+              </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-20">
                 {filtered.map((product) => (
                   <article
                     key={product.id}
@@ -175,16 +274,33 @@ export default function ProductCatalog() {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes={product.featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
                       />
-                      {product.badge && (
-                        <div className="absolute top-5 left-5 bg-surface-container px-3 py-1">
-                          <span className="text-[10px] uppercase tracking-widest font-bold text-primary-container">
-                            {product.badge}
-                          </span>
-                        </div>
-                      )}
-                      {product.isNewArrival && (
-                        <div className="absolute top-5 right-5 bg-primary-container px-3 py-1">
-                          <span className="text-[10px] uppercase tracking-widest font-bold text-on-primary">New</span>
+                      {/* Badges kiri */}
+                      <div className="absolute top-5 left-5 flex flex-col gap-1.5">
+                        {product.badge && (
+                          <div className="bg-surface-container px-3 py-1">
+                            <span className="text-[10px] uppercase tracking-widest font-bold text-primary-container">
+                              {product.badge}
+                            </span>
+                          </div>
+                        )}
+                        {product.bestSeller && (
+                          <div className="bg-on-surface px-3 py-1 flex items-center gap-1">
+                            <span className="material-symbols-outlined text-surface text-[11px]" style={{ fontVariationSettings: "'FILL' 1", fontSize: "11px" }}>star</span>
+                            <span className="text-[10px] uppercase tracking-widest font-bold text-surface">Best Seller</span>
+                          </div>
+                        )}
+                      </div>
+                      {/* Warna dots kanan atas */}
+                      {product.colors?.length > 0 && (
+                        <div className="absolute top-5 right-5">
+                          <div className="flex items-center gap-1 bg-surface-container-lowest/80 backdrop-blur-sm px-2 py-1.5">
+                            {product.colors.map((cid) => {
+                              const c = COLORS.find((x) => x.id === cid);
+                              return c ? (
+                                <span key={cid} className="w-3 h-3 rounded-full border border-white/20" style={{ backgroundColor: c.hex }} title={c.label} />
+                              ) : null;
+                            })}
+                          </div>
                         </div>
                       )}
                       {/* Quick view on hover */}
@@ -199,54 +315,24 @@ export default function ProductCatalog() {
                     </div>
 
                     <div className="flex-1 flex flex-col">
-                      <div className="flex justify-between items-start mb-1">
-                        <h2 className={`font-[family-name:var(--font-headline)] ${product.featured ? "text-2xl" : "text-xl"}`}>
-                          {product.name}
-                        </h2>
-                      </div>
-                      <p className="text-xs text-outline uppercase tracking-widest mb-4">
+                      <h2 className={`font-[family-name:var(--font-headline)] mb-0.5 ${product.featured ? "text-2xl" : "text-sm md:text-xl"} leading-tight`}>
+                        {product.name}
+                      </h2>
+                      <p className="text-[10px] md:text-xs text-outline uppercase tracking-widest mb-3">
                         {product.material}
                       </p>
 
-                      {/* Sizes */}
-                      <div className="mb-4">
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-outline mb-2">
-                          Size (EU) {selectedSizes[product.id] ? `— ${selectedSizes[product.id]}` : ""}
-                        </p>
-                        <div className="flex gap-1.5 flex-wrap">
-                          {SIZES.map((size) => (
-                            <button
-                              key={size}
-                              onClick={() => setSelectedSizes((prev) => ({ ...prev, [product.id]: size }))}
-                              className={`w-8 h-8 text-[11px] border transition-colors ${
-                                selectedSizes[product.id] === size
-                                  ? "bg-on-surface text-surface border-on-surface"
-                                  : "border-outline-variant text-on-surface-variant hover:border-on-surface"
-                              }`}
-                            >
-                              {size}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between mt-auto">
-                        <span className="font-[family-name:var(--font-headline)] text-lg text-primary-container">
+                      <div className="flex items-center justify-between mt-auto gap-2">
+                        <span className="font-[family-name:var(--font-headline)] text-sm md:text-lg text-primary-container leading-tight">
                           {product.price}
                         </span>
-                        <button
-                          onClick={() => handleAddToCart(product)}
-                          className={`flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase px-5 py-3 transition-all ${
-                            addedIds.has(product.id)
-                              ? "bg-on-surface text-surface"
-                              : "burnished-gradient text-on-primary hover:brightness-110"
-                          }`}
+                        <Link
+                          href={`/product/${product.id}`}
+                          className="flex items-center gap-1 text-[10px] md:text-[11px] font-bold tracking-widest uppercase px-3 md:px-5 py-2.5 md:py-3 burnished-gradient text-on-primary hover:brightness-110 transition-all"
                         >
-                          <span className="material-symbols-outlined text-base">
-                            {addedIds.has(product.id) ? "check" : "shopping_bag"}
-                          </span>
-                          {addedIds.has(product.id) ? "Added" : "Add to Cart"}
-                        </button>
+                          <span className="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+                          <span className="hidden sm:inline">Lihat Detail</span>
+                        </Link>
                       </div>
                     </div>
                   </article>
@@ -316,35 +402,22 @@ export default function ProductCatalog() {
                 <p className="font-[family-name:var(--font-headline)] text-2xl text-primary-container mb-6">
                   {quickViewProduct.price}
                 </p>
-                <div className="mb-6">
-                  <p className="text-[11px] font-bold tracking-widest uppercase text-on-surface-variant mb-3">Select Size (EU)</p>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {SIZES.map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => setSelectedSizes((prev) => ({ ...prev, [quickViewProduct.id]: size }))}
-                        className={`w-10 h-10 text-xs border transition-colors ${
-                          selectedSizes[quickViewProduct.id] === size
-                            ? "bg-on-surface text-surface border-on-surface"
-                            : "border-outline-variant text-on-surface-variant hover:border-on-surface"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                <p className="text-sm text-on-surface-variant leading-relaxed mb-8">
+                  {(quickViewProduct as Product & { description?: string }).description ||
+                    "Lihat halaman detail untuk informasi lengkap tentang bahan, ukuran, dan proses pembuatan produk ini."}
+                </p>
                 <div className="flex flex-col gap-3 mt-auto">
-                  <button
-                    onClick={() => { handleAddToCart(quickViewProduct); setQuickViewId(null); }}
+                  <Link
+                    href={`/product/${quickViewProduct.id}`}
+                    onClick={() => setQuickViewId(null)}
                     className="w-full burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase py-4 hover:brightness-110 transition-all flex items-center justify-center gap-2"
                   >
-                    <span className="material-symbols-outlined text-base">shopping_bag</span>
-                    Add to Cart
-                  </button>
-                  <a href="/cart" className="w-full border border-outline-variant text-[11px] font-bold tracking-widest uppercase py-4 text-center hover:bg-surface-container transition-colors block">
-                    View Cart
-                  </a>
+                    <span className="material-symbols-outlined text-base">arrow_forward</span>
+                    Lihat Detail & Pilih Ukuran
+                  </Link>
+                  <Link href="/cart" className="w-full border border-outline-variant text-[11px] font-bold tracking-widest uppercase py-4 text-center hover:bg-surface-container transition-colors block">
+                    Lihat Cart
+                  </Link>
                 </div>
               </div>
             </div>
