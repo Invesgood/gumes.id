@@ -1,0 +1,122 @@
+[
+  {
+    "id": "2",
+    "name": "Aurelius Sandal",
+    "material": "Matte Obsidian • Leather Sole",
+    "price": "Rp 2.850.000",
+    "priceNum": 2850000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDpp4BwsgC3lBofsOhn1Pfp_jlvIUqr8qV-OW3ha6m1DxtyZWjsfILs3wLV6Ak5HTThppyz26-qJVZAo5ufFKPR4nGHDfjPioCzd3YFM_ZxPRIyoOmihR_vwn2XAW1el0rYe0q5cKf7vEQ3-S1FUjhMfu9riCXcJP1cB_kiiPHbBro2ftoTU40fYW_OI5VbPwv17ugy6fS8GsoNRiE_4k2-vEGcRmhCYSROF8L5xhhMrqWELgqiL-ufhDGNp_M4zeihGSHgAJpr94KA",
+    "category": "Artisan Sandals",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "3",
+    "name": "Cento Loafer",
+    "material": "Mahogany Grain • Brass Detail",
+    "price": "Rp 4.500.000",
+    "priceNum": 4500000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBQ6VpPo-rcfDjuvw7bXGFPW9XZRENYw7Lwoi_qnXoVTF5Q9WBxECjaGHwxLpxQBGmPC-5E0BZRN2Dzho-rhkGbHwnvUa8h423zTbI4Qqm5Cgzsk1RjrcO-GjJlKovkVU75suSk2369ld5ng8eEo01gwyTsrZwCI4zDA285qZp59Tjl7BMDK4i2ys5lBV--f4PBsv7hxkgIChUE7V6rAKgYvuzYEjdI71aR5a-1h3jTHRRwgpQuCefIy2-OharpbG8cGZRVOcukXtrw",
+    "category": "Minimalist Loafers",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "name": "Studio Low-Top",
+    "material": "Pebbled Bone • Cork Insole",
+    "price": "Rp 3.700.000",
+    "priceNum": 3700000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCh0P7ULPq7F0t025-tcRHEoD4WXNOllS8OznwEy3sNMBuVdEoTAz5_fECyq6B1CwM7V6Ik6dNj5Po9FVCv5tkdFiJZeVDBCjdO-VLIrTlfZbqmDtFiPlosAEsd_cufARQrRaU_KuO6A2fQSs992odA0iAFNYHpXzCZV9NCuPTHhLcNiwh1U93YHgbixLYc-uifjbRXtU92YFfTfSwRK7CUsBjbHtnbuEoy-5gygePMHJeUfncLUIJD1npuaALWFxm85jGqYoVgNE3w",
+    "category": "Studio Slippers",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "5",
+    "name": "Marquee Court",
+    "material": "Optic White • Vachetta Trim",
+    "price": "Rp 4.800.000",
+    "priceNum": 4800000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuC4KVzeg24ACyj0Y57hu1300B7Q4Zk_UV2CHeomlfkpsd_psxPUYVk-PErufS3wV-dlNfl4DvXjCGUjAR6YDYTR2INlZgkmODx1hHY9TCVvrMJm6bz1ZTK5dOjW0mnwvm1dx-1rqFt0K8anF-E0xKtVJdaV2Rj6jUGi1x9W1nEnrdTJmjS1xFI7DCFU-6b7_4fb8tmSR0h1lDoieei1NhOm9TSEcwT5VBzc-KrdTJusvkVIWw5TBkLhMSK5hmDZmWfCCkhEzp-2AFEx",
+    "category": "Studio Slippers",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "6",
+    "name": "Nomad Slide",
+    "material": "Cognac • Hand-Stitched",
+    "price": "Rp 2.300.000",
+    "priceNum": 2300000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCmp6vFY0kstmKjKra0FbZLraGTGivAJBHF9G0QH16jckk9qKQ8BhGr4Mwo3pHPMpqtZ-Z0pS9Yfgt1MzCC5vG7sQEOmb1Uyq-2AJHPMhwgue0J0_x5Bw7om4-GZJGgCIDmre7E6x58nWdtVoVdIH0omxoLrqqKb5pLxw0_WxKyjDdLPw20YHAKHxIaQgDigudVkmAcuD5YDSlGooGdCBsiQw0fDESkDQy6ywYDjdaK8PMdkDljakkGufBGuOUaCPFePIIySwUdFsC-",
+    "category": "Artisan Sandals",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "7",
+    "name": "Ghost Chelsea",
+    "material": "Flint Suede • Crepe Sole",
+    "price": "Rp 5.650.000",
+    "priceNum": 5650000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAnKM1OgK7NIcOwdtMszv4ZpOz1XZRXiwD6WEjymln_zmP4nTCIwDODgRFQ4ww63Ty_rpBqOft5vQRLXxjqJnwVu2YU1raZBsXa8GwlBOqWYcpix05M8H1_8eVxKJa-Up2XFOv0fCE1arNaOD6DOPFh-jKzoR0zPKGA-RolJfPEKEFCvuZzI0EXBd1z2Ithl87iFn-gYa38oIlcFk8iU4pVLws2H2DL8XqNID387JR7oqcM--sw-FdNtknK3dRRJRQbfEz4_aSWWxpm",
+    "category": "Burnished Boots",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "8",
+    "name": "Vanguard Boot",
+    "material": "Eclipse Black • Polished Finish",
+    "price": "Rp 6.950.000",
+    "priceNum": 6950000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBfZ3iJmrlBkWR4sAou6T3zlodjmmNqmM5lcJHhRI-SV6RJj-PcCcjB5_Zct2fZm_v-EHraY4IhxqfaIJjBLBtte7tnbLdwBbdsAVZnEH8gHEZg-bT0jFxphvH7zmcbIJY-hD4ILQGss--ZOouMg6Gny_tDumQ3E2onT6wL8zaDqftW-1NKFhhQ93pafhmPltn12ty-CQ2A0-q9MtBmzct_1_qnGUZxv6j5Um27AlYKY3UibntLCVDG0w_m3L2l_WhdXYylSJjygnwZ",
+    "category": "Burnished Boots",
+    "isNewArrival": false,
+    "badge": "",
+    "featured": false
+  },
+  {
+    "id": "9",
+    "name": "Aurelius Oxford",
+    "material": "Nero Black / Polished",
+    "price": "Rp 12.600.000",
+    "priceNum": 12600000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDiQH8A-qaInq2OQQZFo7IH9WkK_2r7gjxKqPZOU9Wp6ssWR-4Ae70blPEiL_yTHpNoU9mQE7kPm_B4U61zZqRtmYKNAcWnJJo9woYUcEyHmTcnXRUmgZUHJS7wVJzT-DETAkmPYcmfyDjdJD3ngeoDJ7kwQx6eJzDbFXnZLk2tMkj6SfT6xvuuI2oxK6dx6Afp09d6YgjwxH5AXNdJaVB1KWvboM87l8BupSWLmerf8-9X9lh1IClfHm5hlfU3nJ6jwWOQEF1RwkVe",
+    "category": "Oxford",
+    "isNewArrival": true,
+    "badge": "New",
+    "featured": false
+  },
+  {
+    "id": "10",
+    "name": "Caelum Sandal",
+    "material": "Toasted Tan / Calfskin",
+    "price": "Rp 6.300.000",
+    "priceNum": 6300000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCv2f7bfTgvMH6soDLMqcNUKWFvxUqtdJzcS2PxHtELMn2Yjznk9Y4KVri1_IYg0yDiVikzLPHiRVsAMyW3xi2ohSPC6f5UYmaqdC-ighoy-rOE1Cq21fQ3RgM5JjhhoY_AFmKukiZZszG1GsA2P8h4XgZrMrhODr9dixba5SXKvk3BufTt3jVMmeVhvIzPcqZw6AarO4ZObqEhKIT-kgVkdximALCI5ecUgwoyhfXEGIckdhbi-NVwFOvAkZ7wU55vrv7TDk9WKgNq",
+    "category": "Artisan Sandals",
+    "isNewArrival": true,
+    "badge": "New",
+    "featured": false
+  },
+  {
+    "id": "11",
+    "name": "Vespera Boot",
+    "material": "Mahogany Brown / Matte",
+    "price": "Rp 14.400.000",
+    "priceNum": 14400000,
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuD2SHNRFyHR4RKpkIWWoMiejboP4nRZ28RG6Y9SZ_7Y5i7sBGEMusSzYkiaGU944EJzCK4c3THUKF_skh34PKwNpvXahFfObx39z7FGDe9aNqWHvaMmxFXlPdTBMh80W1tTp1v45imokdIEUGgEZgiTuAfzC-7Tm8h1aR-OwiZuAinrg2y5q_jAkAqTjH2J9svTQC-ei_GmqZzRhhbdiqQ2atIZaAWL-ibI-qwZoGtMY4DkFwNQwHLx_jIBcY0ervrjBohi10Tmv1HA",
+    "category": "Burnished Boots",
+    "isNewArrival": true,
+    "badge": "Limited",
+    "featured": false
+  }
+]
