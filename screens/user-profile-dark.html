@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Profile | GUMES.ID</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#e9c176",
+                    "on-secondary-container": "#c2b6b2",
+                    "on-primary-fixed": "#261900",
+                    "on-tertiary": "#462827",
+                    "on-secondary-fixed-variant": "#4d4542",
+                    "on-primary-container": "#4e3700",
+                    "inverse-on-surface": "#313030",
+                    "inverse-surface": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#5f3e3c",
+                    "surface": "#131313",
+                    "secondary": "#d0c4c0",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#393939",
+                    "on-background": "#e5e2e1",
+                    "on-surface-variant": "#d1c5b4",
+                    "surface-container": "#201f1f",
+                    "tertiary": "#eabcb8",
+                    "background": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed-dim": "#d0c4c0",
+                    "outline-variant": "#4e4639",
+                    "primary-fixed": "#ffdea5",
+                    "surface-container-highest": "#353534",
+                    "outline": "#9a8f80",
+                    "on-secondary": "#362f2c",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary-fixed": "#2e1413",
+                    "inverse-primary": "#775a19",
+                    "on-surface": "#e5e2e1",
+                    "on-error-container": "#ffdad6",
+                    "on-error": "#690005",
+                    "secondary-fixed": "#ede0dc",
+                    "on-secondary-fixed": "#201a18",
+                    "on-primary": "#412d00",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "tertiary-fixed": "#ffdad7",
+                    "on-tertiary-container": "#523331",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-dim": "#131313",
+                    "primary-container": "#c5a059",
+                    "primary": "#e9c176",
+                    "tertiary-fixed-dim": "#eabcb8",
+                    "tertiary-container": "#c69b98",
+                    "secondary-container": "#504745",
+                    "surface-variant": "#353534",
+                    "surface-tint": "#e9c176"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-burnish {
+            background: radial-gradient(circle at center, #e9c176 0%, #c5a059 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar (Updated to Centered Layout) -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-stone-950/90 backdrop-blur-md border-b border-[#c5a059]/10">
+<div class="relative flex flex-col items-center w-full py-6 px-8 max-w-screen-2xl mx-auto">
+<!-- Logo Section (Stacked) -->
+<div class="flex flex-col items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-[#c5a059] text-3xl">landscape</span>
+<span class="text-2xl font-bold tracking-[0.3em] text-[#c5a059] uppercase">GUMES.ID</span>
+</div>
+<!-- Navigation Links (Centered) -->
+<nav class="hidden md:flex items-center gap-12">
+<a class="text-stone-400 hover:text-[#e9c176] transition-colors text-xs uppercase tracking-[0.2em] font-medium" href="#">New Arrival</a>
+<a class="text-stone-400 hover:text-[#e9c176] transition-colors text-xs uppercase tracking-[0.2em] font-medium" href="#">Product</a>
+<a class="text-stone-400 hover:text-[#e9c176] transition-colors text-xs uppercase tracking-[0.2em] font-medium" href="#">Location</a>
+<a class="text-stone-400 hover:text-[#e9c176] transition-colors text-xs uppercase tracking-[0.2em] font-medium" href="#">Contact Us</a>
+</nav>
+<!-- Profile Action (Positioned Top Right) -->
+<div class="absolute top-6 right-8 flex items-center gap-6">
+<div class="hidden sm:flex flex-col items-end">
+<span class="text-[10px] uppercase tracking-tighter text-outline">Welcome back</span>
+<span class="text-[#e9c176] font-bold text-sm">Hello Al</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-[#e9c176] transition-all">shopping_bag</button>
+<div class="w-10 h-10 border border-[#c5a059]/30 flex items-center justify-center p-0.5">
+<img alt="Al" class="w-full h-full object-cover" data-alt="Close up portrait of a sophisticated man with a groomed beard, soft dramatic side lighting, warm tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBe54zSw80lsT0TL-uch9xdKxHeQjCqFyLhKLw2dtKvUJgyHO45wgRWnnvEp_EXBZqj40SfOs9dq3e1fnNzjpeYACxRviYGvA4Y63agdRyfzYih5eBLFjzPxYaPWVGvBs-Mjiq1HVyno3bct7WWe_r1w16GDI9BVn0mI6wROYHrm8Z1xUiOWBmT_lvftB8rvOTale5VsYukuFJJGip8tlCFQELkiA-9nwfbUllVAUmkQSuxDjMCchNINqNY_078P651nmGDQJD4vWbl"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-48 min-h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-48 pb-8 bg-stone-900 w-64 hidden lg:flex border-r border-[#c5a059]/10">
+<div class="px-8 mb-12">
+<h2 class="text-[#c5a059] font-black tracking-tighter text-xl mb-1">Al</h2>
+<p class="text-stone-500 text-xs uppercase tracking-widest font-bold">Premium Member</p>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 py-4 text-[#e9c176] font-bold border-l-2 border-[#c5a059] pl-8 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-sm">Profile Details</span>
+</a>
+<a class="flex items-center gap-4 py-4 text-stone-500 pl-8 hover:bg-stone-800/50 hover:text-stone-200 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="text-sm">Order History</span>
+</a>
+<a class="flex items-center gap-4 py-4 text-stone-500 pl-8 hover:bg-stone-800/50 hover:text-stone-200 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-4 py-4 text-stone-500 pl-8 hover:text-error transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm">Logout</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 lg:ml-64 px-6 md:px-16 pb-24 max-w-7xl">
+<!-- Header Section -->
+<div class="mb-16">
+<h1 class="text-5xl md:text-7xl font-bold text-on-surface mb-4 leading-none tracking-tight">Account Dashboard</h1>
+<p class="text-outline max-w-xl text-lg font-light leading-relaxed">
+                Manage your artisanal collection, view your journey through our craftsmanship, and refine your bespoke preferences.
+            </p>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Profile Details Section (Asymmetric Overlay Style) -->
+<section class="md:col-span-8 flex flex-col md:flex-row bg-surface-container-low overflow-hidden">
+<div class="md:w-1/3 h-64 md:h-auto overflow-hidden">
+<img alt="Leather Detail" class="w-full h-full object-cover opacity-80" data-alt="Macro detail of hand-stitched dark brown leather texture with golden thread and soft bokeh highlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRt8Wzy-Biha5gTL2oWishP_dhvBvwscdUepvWZa8fO1thz2GSAq30rLnKAoX47gzOkiocrUgDLAgRoeW6urPzxj3KFImh_IxHisyKQyI2jVkkgnCZLlcFmROLv_W0675np31FvBmrGvv9GfJacH2xl680_sCpzVLFKuudZY9v3HRzM6xNG9rtWmTCUcdv5lLRj0wNPw7AVuMYSSZXCp0d_jMOfk2IfAbwFcfpXttskSm9U4Ad1fDuK6kHsJENij6bRB5xhoj1t90W"/>
+</div>
+<div class="p-10 md:w-2/3 flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-6">
+<span class="h-[1px] w-8 bg-[#c5a059]"></span>
+<span class="text-[#c5a059] uppercase tracking-widest text-xs font-bold">Personal Profile</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-12">
+<div>
+<label class="block text-[10px] text-outline-variant uppercase tracking-widest mb-1">Full Name</label>
+<p class="text-lg font-semibold border-b border-outline-variant/20 pb-2">Alaric G. Sterling</p>
+</div>
+<div>
+<label class="block text-[10px] text-outline-variant uppercase tracking-widest mb-1">Email Address</label>
+<p class="text-lg font-semibold border-b border-outline-variant/20 pb-2">al@gumes.id</p>
+</div>
+<div>
+<label class="block text-[10px] text-outline-variant uppercase tracking-widest mb-1">Member Since</label>
+<p class="text-lg font-semibold border-b border-outline-variant/20 pb-2">October 2023</p>
+</div>
+<div>
+<label class="block text-[10px] text-outline-variant uppercase tracking-widest mb-1">Tier Status</label>
+<p class="text-lg font-semibold text-[#e9c176] flex items-center gap-2 border-b border-outline-variant/20 pb-2">
+                                Platinum <span class="material-symbols-outlined text-sm">verified</span>
+</p>
+</div>
+</div>
+<button class="mt-10 self-start text-xs uppercase tracking-widest font-bold border-b border-on-surface pb-1 hover:text-[#c5a059] hover:border-[#c5a059] transition-all">
+                        Edit Profile Information
+                    </button>
+</div>
+</section>
+<!-- Order Summary Card -->
+<section class="md:col-span-4 bg-surface-container flex flex-col p-10 justify-between">
+<div>
+<div class="flex justify-between items-start mb-12">
+<h3 class="text-2xl font-bold">Order History</h3>
+<span class="material-symbols-outlined text-[#c5a059]">history</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-4 group">
+<div class="w-14 h-14 bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Pair of designer leather boots on a dark wooden floor with dramatic spotlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp0df7O6Q4IO4eA1q7hnM-2UAAYFdXYhKR5BURa-CgEGoBJuhdxcmrxTg1tqyQ_f4_hjoufaao85rr3_Jp8GDmUxmXbrO5PSy2tKhb9BAhCXVKgx_tjJMIDdbU1NePZDVmjnBuT8R_hnc16VAJbZJt_3o54ORFHzxU3wHj00t0h90y0S9pd9Iy_CV7Q0-zTJkusD10nyPV2fgIY7NyP6IVH4pXrDejGj34oO5qb65klt2IcQW9ryarfFzIk1SLh58ZepP2SHtLXa1D"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold truncate">Artisan Heritage Boot</p>
+<p class="text-xs text-outline tracking-wider">ORD-22485 • $450.00</p>
+</div>
+<span class="text-[10px] text-primary bg-primary/10 px-2 py-0.5 font-bold uppercase tracking-tighter">Shipped</span>
+</div>
+<div class="flex items-center gap-4 group">
+<div class="w-14 h-14 bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Bespoke leather belt with a minimalist golden buckle on a textured stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSlAjo88765gNDq2ookuveOc8vseYIbNRNTyhgZYljDd2YNtF9vXgLyKgMs99Tozya2H7YeA-iUZ5RldQ9eObiybpiU6k0BxBEWUbbPRyqid9wj8_NMCPtjasFYuCjPTyAKJOPmLGnQHKFwIQzAUaaJSiPZKlY8vqiVKu_SRIt9FyDY3O8T_nebMDshsgSdq76m-RBbEtvwBki0BdqIE41omS64GT3xi5UMmiRwrYQxm2YjO3VdD-YC2do9DQc5R6cQCL0ffHf0oZF"/>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold truncate">Burnished Gold Belt</p>
+<p class="text-xs text-outline tracking-wider">ORD-22102 • $185.00</p>
+</div>
+<span class="text-[10px] text-on-surface-variant bg-surface-variant px-2 py-0.5 font-bold uppercase tracking-tighter">Delivered</span>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-surface-container-highest text-xs font-bold uppercase tracking-widest mt-8 hover:bg-stone-800 transition-colors">
+                    View All Activity
+                </button>
+</section>
+<!-- Account Settings & Preferences -->
+<section class="md:col-span-6 bg-surface-container-low p-10">
+<h3 class="text-2xl font-bold mb-10">Security &amp; Privacy</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between py-5 border-b border-outline-variant/10">
+<div>
+<p class="text-sm font-bold mb-1">Two-Factor Authentication</p>
+<p class="text-xs text-outline tracking-wide">Enhanced security for your account access.</p>
+</div>
+<div class="w-10 h-5 bg-[#c5a059] flex items-center justify-end px-1">
+<div class="w-3 h-3 bg-white"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-5 border-b border-outline-variant/10">
+<div>
+<p class="text-sm font-bold mb-1">Change Password</p>
+<p class="text-xs text-outline tracking-wide">Last updated 3 months ago.</p>
+</div>
+<button class="material-symbols-outlined text-outline">chevron_right</button>
+</div>
+<div class="flex items-center justify-between py-5">
+<div>
+<p class="text-sm font-bold mb-1">Payment Methods</p>
+<p class="text-xs text-outline tracking-wide">Visa ending in **** 8829</p>
+</div>
+<button class="material-symbols-outlined text-outline">credit_card</button>
+</div>
+</div>
+</section>
+<!-- Loyalty / Rewards Feature -->
+<section class="md:col-span-6 bg-burnish text-on-primary-fixed p-10 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-3xl">workspace_premium</span>
+<p class="text-[10px] font-black uppercase tracking-widest">Premium Rewards</p>
+</div>
+<h3 class="text-3xl serif font-bold mb-4">GUMES Atelier Credits</h3>
+<div class="flex items-baseline gap-2 mb-8">
+<span class="text-5xl font-black">1,450</span>
+<span class="text-xs uppercase font-bold opacity-70 tracking-widest">Available Points</span>
+</div>
+<p class="text-sm font-medium mb-8 leading-relaxed max-w-xs">
+                        Your loyalty defines our craft. You are only 550 points away from an exclusive atelier invite.
+                    </p>
+</div>
+<button class="w-full py-4 border border-on-primary-fixed/30 text-xs font-bold uppercase tracking-widest hover:bg-on-primary-fixed hover:text-primary transition-all">
+                    Redeem Exclusive Benefits
+                </button>
+</section>
+<!-- Preferences Grid -->
+<section class="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
+<div class="bg-surface-container-high p-8 group hover:bg-stone-800 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[#c5a059] mb-4">notifications</span>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-2">Notification Center</h4>
+<p class="text-xs text-outline-variant leading-relaxed">Manage how you receive updates on new arrivals and collection drops.</p>
+</div>
+<div class="bg-surface-container-high p-8 group hover:bg-stone-800 transition-all cursor-pointer border border-[#c5a059]/10">
+<span class="material-symbols-outlined text-[#c5a059] mb-4">location_on</span>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-2">Shipping Directory</h4>
+<p class="text-xs text-outline-variant leading-relaxed">View and edit your saved global shipping destinations for express delivery.</p>
+</div>
+<div class="bg-surface-container-high p-8 group hover:bg-stone-800 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[#c5a059] mb-4">favorite</span>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-2">Curated Wishlist</h4>
+<p class="text-xs text-outline-variant leading-relaxed">12 items awaiting your final selection in the atelier vault.</p>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer Branding -->
+<footer class="bg-surface-container-lowest py-20 px-16">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#c5a059] text-3xl">landscape</span>
+<span class="text-3xl font-bold tracking-[0.3em] text-[#c5a059] uppercase">GUMES.ID</span>
+</div>
+<p class="text-outline text-sm tracking-widest uppercase">The Digital Curator</p>
+</div>
+<div class="flex gap-16 text-[10px] font-bold uppercase tracking-[0.2em] text-outline-variant">
+<a class="hover:text-[#e9c176] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#e9c176] transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-[#e9c176] transition-colors" href="#">Contact Atelier</a>
+</div>
+<div class="text-[10px] text-outline-variant uppercase tracking-widest opacity-50">
+            © 2024 GUMES.ID Craftsmanship Collective
+        </div>
+</div>
+</footer>
+</body></html>

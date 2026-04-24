@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#131313",
+                    "surface-bright": "#393939",
+                    "secondary-fixed-dim": "#d0c4c0",
+                    "on-tertiary-container": "#523331",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "on-secondary-fixed-variant": "#4d4542",
+                    "on-primary-container": "#4e3700",
+                    "surface-container": "#201f1f",
+                    "on-error-container": "#ffdad6",
+                    "secondary-fixed": "#ede0dc",
+                    "inverse-on-surface": "#313030",
+                    "outline": "#9a8f80",
+                    "on-tertiary": "#462827",
+                    "on-surface": "#e5e2e1",
+                    "on-tertiary-fixed": "#2e1413",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-fixed": "#ffdad7",
+                    "error-container": "#93000a",
+                    "primary-container": "#c5a059",
+                    "on-secondary": "#362f2c",
+                    "surface-container-highest": "#353534",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-fixed": "#261900",
+                    "surface": "#131313",
+                    "inverse-primary": "#775a19",
+                    "tertiary-fixed-dim": "#eabcb8",
+                    "primary": "#e9c176",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#201a18",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-surface": "#e5e2e1",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#d1c5b4",
+                    "primary-fixed-dim": "#e9c176",
+                    "secondary": "#d0c4c0",
+                    "on-background": "#e5e2e1",
+                    "tertiary": "#eabcb8",
+                    "on-tertiary-fixed-variant": "#5f3e3c",
+                    "surface-variant": "#353534",
+                    "primary-fixed": "#ffdea5",
+                    "on-secondary-container": "#c2b6b2",
+                    "outline-variant": "#4e4639",
+                    "surface-tint": "#e9c176",
+                    "tertiary-container": "#c69b98",
+                    "secondary-container": "#504745",
+                    "background": "#131313",
+                    "on-primary": "#412d00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #0e0e0e; color: #e5e2e1; }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .gold-gradient { background: radial-gradient(circle at center, #e9c176, #c5a059); }
+        .glass-nav { background: rgba(14, 14, 14, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+<!-- TopNavBar (Updated based on COMPONENTS_32) -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e] dark:bg-[#0e0e0e] border-none shadow-none">
+<div class="flex flex-col items-center w-full pt-8 pb-4 px-12 space-y-4">
+<!-- Top Row: Secondary Action & Bag -->
+<div class="absolute top-8 right-12 flex items-center space-x-6">
+<span class="font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase text-[#c5a059]">Hello Al</span>
+<button class="text-[#c5a059] hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+<!-- Center: Brand Identity -->
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[#c5a059] text-3xl mb-1">terrain</span>
+<h1 class="text-2xl font-bold tracking-widest text-[#c5a059] font-['Noto_Serif'] uppercase">GUMES.ID</h1>
+</div>
+<!-- Bottom: Navigation Links -->
+<div class="flex space-x-12 pt-2">
+<a class="text-[#e9c176] border-b border-[#e9c176] pb-1 font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase" href="#">New Arrival</a>
+<a class="text-white/70 hover:text-white transition-colors duration-300 font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase" href="#">Product</a>
+<a class="text-white/70 hover:text-white transition-colors duration-300 font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase" href="#">Location</a>
+<a class="text-white/70 hover:text-white transition-colors duration-300 font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase" href="#">Contact Us</a>
+</div>
+</div>
+</nav>
+<main class="pt-48">
+<!-- Hero Editorial Section -->
+<section class="relative h-[921px] flex items-center px-12 overflow-hidden mb-32">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-60" data-alt="dramatic cinematic shot of high-end tan leather artisan boots on a dark reflective surface with moody warm spotlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNaYDcFiEcOVCNK5vcPicdonq7dU5XRo0t9kYh5s7OtoqoqSI-mUmu9-pcsZWNEsd1My-Iqy6dd5GZssi_YQJ0VSzwZT1sUVXRZBmV5JSxw4LD63XMQNJZJDsE27MsyFG3XiKjNaG1RjxoqhbC4K1TzJIEvvouD-Tqj_9J0KjKErj4VURo4YzL6Bvvmdyh58pEUDpk_e9ZtGHNwKF1pywmYRRSIapyThcnb0tpgpHuMc6qqKHz1i9wKJ0FPONhVviVOlLvQ7RjoUmO"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-2xl">
+<p class="font-label text-primary text-xs tracking-[0.3em] uppercase mb-4">The Artisan Collection</p>
+<h2 class="font-serif text-7xl md:text-8xl leading-none mb-8 -ml-1">The New<br/><span class="italic text-primary-container">Legacy</span></h2>
+<div class="bg-surface-container p-8 border-none shadow-2xl inline-block max-w-md translate-x-12 md:translate-x-24">
+<p class="font-body text-on-surface-variant text-sm leading-relaxed mb-6">
+                        Crafted from hand-burnished Italian calfskin, our new seasonal arrivals redefine the architectural silhouette of luxury footwear. Each piece is a testament to the master's blade.
+                    </p>
+<button class="gold-gradient text-on-primary font-label text-xs font-bold tracking-widest uppercase px-10 py-4 hover:opacity-90 transition-all">
+                        Discover Collection
+                    </button>
+</div>
+</div>
+</section>
+<!-- Product Gallery Grid (Intentional Asymmetry) -->
+<section class="max-w-screen-2xl mx-auto px-12 mb-48">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+<!-- Large Feature Item -->
+<div class="md:col-span-7 group">
+<div class="bg-surface-container-low aspect-[4/5] overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="close-up detail of hand-stitched black leather oxford shoes highlighting the texture and precision craftsmanship" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiQH8A-qaInq2OQQZFo7IH9WkK_2r7gjxKqPZOU9Wp6ssWR-4Ae70blPEiL_yTHpNoU9mQE7kPm_B4U61zZqRtmYKNAcWnJJo9woYUcEyHmTcnXRUmgZUHJS7wVJzT-DETAkmPYcmfyDjdJD3ngeoDJ7kwQx6eJzDbFXnZLk2tMkj6SfT6xvuuI2oxK6dx6Afp09d6YgjwxH5AXNdJaVB1KWvboM87l8BupSWLmerf8-9X9lh1IClfHm5hlfU3nJ6jwWOQEF1RwkVe"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-serif text-3xl mb-1">Aurelius Oxford</h3>
+<p class="font-label text-outline text-xs uppercase tracking-widest">Nero Black / Polished</p>
+</div>
+<p class="font-serif text-primary-container text-xl">$840</p>
+</div>
+</div>
+<!-- Secondary Vertical Item (Offset) -->
+<div class="md:col-span-5 pt-32 group">
+<div class="bg-surface-container-low aspect-[3/4] overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="minimalist aesthetic photo of tan leather sandals arranged on a natural stone slab in soft afternoon sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv2f7bfTgvMH6soDLMqcNUKWFvxUqtdJzcS2PxHtELMn2Yjznk9Y4KVri1_IYg0yDiVikzLPHiRVsAMyW3xi2ohSPC6f5UYmaqdC-ighoy-rOE1Cq21fQ3RgM5JjhhoY_AFmKukiZZszG1GsA2P8h4XgZrMrhODr9dixba5SXKvk3BufTt3jVMmeVhvIzPcqZw6AarO4ZObqEhKIT-kgVkdximALCI5ecUgwoyhfXEGIckdhbi-NVwFOvAkZ7wU55vrv7TDk9WKgNq"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-serif text-2xl mb-1">Caelum Sandal</h3>
+<p class="font-label text-outline text-xs uppercase tracking-widest">Toasted Tan / Calfskin</p>
+</div>
+<p class="font-serif text-primary-container text-xl">$420</p>
+</div>
+</div>
+<!-- Third Item (Small & Centered) -->
+<div class="md:col-start-2 md:col-span-4 group">
+<div class="bg-surface-container-low aspect-square overflow-hidden mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="dark chocolate brown leather boots against a charcoal grey background with moody side lighting capturing grain details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2SHNRFyHR4RKpkIWWoMiejboP4nRZ28RG6Y9SZ_7Y5i7sBGEMusSzYkiaGU944EJzCK4c3THUKF_skh34PKwNpvXahFfObx39z7FGDe9aNqWHvaMmxFXlPdTBMh80W1tTp1v45imokdIEUGgEZgiTuAfzC-7Tm8h1aR-OwiZuAinrg2y5q_jAkAqTjH2J9svTQC-ei_GmqZzRhhbdiqQ2atIZaAWL-ibI-qwZoGtMY4DkFwNQwHLx_jIBcY0ervrjBohi10Tmv1HA"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-serif text-2xl mb-1">Vespera Boot</h3>
+<p class="font-label text-outline text-xs uppercase tracking-widest">Mahogany Brown / Matte</p>
+</div>
+<p class="font-serif text-primary-container text-xl">$960</p>
+</div>
+</div>
+<!-- Descriptive Editorial Block -->
+<div class="md:col-span-6 flex flex-col justify-center px-12">
+<h4 class="font-serif text-5xl mb-8">The <span class="italic">Philosophy</span> of Form.</h4>
+<p class="font-body text-on-surface-variant leading-relaxed text-lg mb-10">
+                        Every GUMES creation begins with a single piece of premium hide. We believe in the preservation of the material's integrity, ensuring that as time passes, the leather develops a patina unique to your journey.
+                    </p>
+<div class="flex space-x-12">
+<div>
+<p class="text-primary text-2xl font-serif mb-1">120+</p>
+<p class="font-label text-[10px] tracking-widest text-outline uppercase">Hours per pair</p>
+</div>
+<div>
+<p class="text-primary text-2xl font-serif mb-1">Hand-Cut</p>
+<p class="font-label text-[10px] tracking-widest text-outline uppercase">Sourcing Origin</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Signature Texture Callout -->
+<section class="bg-surface-container py-32">
+<div class="max-w-screen-xl mx-auto px-12 grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="relative">
+<div class="absolute -top-12 -left-12 w-48 h-48 gold-gradient opacity-10 blur-3xl"></div>
+<img class="w-full relative z-10" data-alt="extreme close up of premium leather texture showing fine grain and professional stitching with warm gold light highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1FoPjTjHt4Kbpcg8DrEf2UqksJ6WIuTN4Wp_KyxhnJhII94grr155mhv3C5E6w1eg2oA--GXy8HO3F-PjNKPs9oGToSByqXVe7OeiZGrFQhmotmWUDjR151UoYGo2xoA8oybCbOatqhPj0FQt3zDMjQtPRaCS6_0fafcW49W4F92aiepU-N2SE0-Q1KRHSUisDIBXahoaaIG_NCYsC-hCCPpjfoHOBaqR4P7g48rbVAFLK9K6iR2c7P-oxdJdnPwBwfOkqvJbrUFt"/>
+</div>
+<div>
+<h5 class="font-serif text-4xl mb-6">Unrivaled Materiality</h5>
+<p class="font-body text-on-surface-variant mb-8 leading-relaxed">
+                        Our burnishing process is a guarded secret. Layers of wax and pigment are applied by hand to achieve a tonal depth that factory machines simply cannot replicate. It is the signature of the Digital Curator.
+                    </p>
+<a class="inline-block font-label text-xs tracking-widest uppercase text-on-surface border-b border-primary pb-2 hover:text-primary transition-colors" href="#">Learn about our leather</a>
+</div>
+</div>
+</section>
+<!-- Location Teaser -->
+<section class="py-48 px-12 text-center">
+<p class="font-label text-primary text-xs tracking-[0.3em] uppercase mb-4">Visit the Atelier</p>
+<h2 class="font-serif text-6xl mb-12">Where Tradition <span class="italic">Breaks</span> Ground</h2>
+<div class="max-w-4xl mx-auto h-[400px] bg-surface-container-high relative overflow-hidden group">
+<img class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-[2000ms]" data-alt="luxury boutique interior with dark wood paneling, brass accents, and minimalist display shelves featuring premium shoes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC5exXRYz6sFZ5IXHGky-U0Q9wtAREZXspEd-7FvERZQpVIi6t9rUGgivBt8ywODtzOoFfnnHZa4LNZywqQbZFwKRPSmBmsCZJW3k1nyVBgKIwoERMOTppRlnQxbGD_SmiXCfkSTuPGl66gCDDzl6ArlZF6uj50QX3psBSCGxRO8UypC4HkPKsQv7yxiLkk2K7VWGDQqyrDsII-McnDIesgAosBbWQ30P9GCC9J8JfaTGxxezpO4M8WieQj3gZKyziv3uSO1MCy2kv"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-surface-container-lowest/80 backdrop-blur-md p-10 max-w-sm">
+<p class="font-serif text-2xl mb-2">Grand Atelier, Milan</p>
+<p class="font-label text-xs tracking-widest text-outline uppercase mb-6">Via Montenapoleone, 27</p>
+<button class="w-full border border-outline-variant py-4 font-label text-[10px] tracking-[0.2em] uppercase hover:bg-on-surface hover:text-surface transition-colors">Book a private view</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#393939]/15 flex flex-col md:flex-row justify-between items-center px-12 py-12 w-full mt-auto bg-[#0e0e0e]">
+<div class="mb-6 md:mb-0">
+<p class="font-manrope text-xs tracking-widest uppercase text-[#393939]">© 2024 GUMES.ID - THE DIGITAL CURATOR</p>
+</div>
+<div class="flex space-x-8">
+<a class="font-manrope text-xs tracking-widest uppercase text-[#393939] hover:text-[#e9c176] transition-colors" href="#">Privacy Policy</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-[#393939] hover:text-[#e9c176] transition-colors" href="#">Terms of Service</a>
+<a class="font-manrope text-xs tracking-widest uppercase text-[#393939] hover:text-[#e9c176] transition-colors" href="#">Sustainability</a>
+</div>
+</footer>
+</body></html>

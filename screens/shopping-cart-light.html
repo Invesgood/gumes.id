@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#313030",
+                        "tertiary": "#eabcb8",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed": "#ffdea5",
+                        "error": "#ffb4ab",
+                        "outline": "#9a8f80",
+                        "surface-tint": "#e9c176",
+                        "surface-bright": "#393939",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "surface-container-high": "#2a2a2a",
+                        "primary": "#e9c176",
+                        "on-primary-fixed": "#261900",
+                        "surface-dim": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-container": "#c69b98",
+                        "secondary-container": "#504745",
+                        "on-secondary": "#362f2c",
+                        "on-tertiary-fixed": "#2e1413",
+                        "error-container": "#93000a",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-fixed-variant": "#5f3e3c",
+                        "on-background": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#201a18",
+                        "on-primary-container": "#4e3700",
+                        "inverse-primary": "#775a19",
+                        "outline-variant": "#4e4639",
+                        "tertiary-fixed": "#ffdad7",
+                        "primary-container": "#c5a059",
+                        "secondary-fixed-dim": "#d0c4c0",
+                        "on-secondary-fixed-variant": "#4d4542",
+                        "on-primary": "#412d00",
+                        "on-secondary-container": "#c2b6b2",
+                        "on-tertiary": "#462827",
+                        "surface-variant": "#353534",
+                        "secondary": "#d0c4c0",
+                        "inverse-surface": "#e5e2e1",
+                        "surface": "#f9f7f2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4e4639",
+                        "primary-fixed-dim": "#e9c176",
+                        "on-error": "#690005",
+                        "background": "#f9f7f2",
+                        "secondary-fixed": "#ede0dc",
+                        "on-tertiary-container": "#523331",
+                        "tertiary-fixed-dim": "#eabcb8",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface-variant selection:bg-primary-container selection:text-on-primary-container">
+<nav class="fixed top-0 w-full z-[100] bg-surface/80 backdrop-blur-md px-6 md:px-12 py-4 w-full shadow-[0_20px_40px_rgba(0,0,0,0.03)]">
+<!-- Top Bar for User Info -->
+<div class="flex justify-end items-center gap-6 mb-2">
+<div class="flex items-center gap-2">
+<span class="text-[11px] uppercase tracking-widest font-medium">Hello Al</span>
+<span class="material-symbols-outlined text-primary-container">person</span>
+</div>
+<span class="material-symbols-outlined relative cursor-pointer">shopping_bag</span>
+</div>
+<!-- Centered Brand Identity -->
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1; font-size: 32px;">landscape</span>
+<span class="text-3xl font-bold text-primary-container tracking-[0.2em]">GUMES.ID</span>
+</div>
+<!-- Centered Navigation Menu -->
+<div class="flex justify-center gap-10 mt-6 font-['Manrope'] uppercase tracking-[0.2em] text-[11px]">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">New Arrival</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Product</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Location</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Contact Us</a>
+</div>
+</nav>
+<main class="pt-56 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<header class="mb-16">
+<h1 class="text-5xl md:text-7xl font-light tracking-tight text-on-surface-variant">Shopping Cart</h1>
+<p class="mt-4 font-body text-sm tracking-[0.2em] uppercase text-outline">Selected pieces from the digital curator</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<div class="lg:col-span-8 space-y-12">
+<!-- Cart Item 1 -->
+<div class="group flex flex-col md:flex-row gap-8 pb-12 border-b border-outline-variant/10">
+<div class="w-full md:w-48 aspect-[3/4] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700" data-alt="Close-up of premium tan leather high boots with artisan stitching and burnished finish on a minimalist pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgopKJ6VbzsYhQk_Ka6M7GxclHajCN1wrC_k1LTsS-Il5bPQuYVgze_7GTg_5Da4ESiDmdaetpL2GPxYsLZ8HwKtaz-adpfl3kr8GPebPRBuN38LqtSkyxiJdR0mTg3S8ZWdH8JkR8eoKMmQKAXuwbVJamnvdNH0boVhyyNuLWS_9juDFKQ04fMHVtUxBZMdICryjomTu34GGwtoCPoFXS3lGEg75euz9uT1bj_XAQdi16wuLgxRznMgkoMjt9nbHDYeD5bWnvyADS"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-2">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-medium text-on-surface-variant">The Heritage High-Boot</h3>
+<p class="text-sm text-outline mt-1 font-light tracking-widest uppercase">Tan • Hand-Burnished Leather</p>
+</div>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-error transition-colors">close</span>
+</div>
+<div class="flex justify-between items-end mt-8">
+<div class="flex items-center border border-outline-variant/30 py-2 px-4 gap-6">
+<button class="text-outline hover:text-primary-container transition-colors">—</button>
+<span class="font-medium text-sm w-4 text-center">1</span>
+<button class="text-outline hover:text-primary-container transition-colors">+</button>
+</div>
+<div class="text-right">
+<p class="text-xs text-outline uppercase tracking-widest mb-1">Price</p>
+<p class="text-xl font-headline">$ 1,250.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="group flex flex-col md:flex-row gap-8 pb-12 border-b border-outline-variant/10">
+<div class="w-full md:w-48 aspect-[3/4] bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist architectural black leather sandal on a warm stone surface with dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM1NuPUctpMWnYvef9NjjB8aI-2kYgNSnh3kKv6cU_uDd9kaXahAR-5xDMKcekujnTbNDYF5vRXrSSDeTaCLCen4LJwtEbS8MEVjyLVG-_E_NFWsTYxVCyh4hDXrqatJZN-0QDdxelEJMGo9XewhekRvr5t98S7Hk8Ey8g0VeViOb9I6jdrS5ZXpEhKNX1wncGm4ukqlWUK_StXMNE6QCX20KCghiaqM3oFTpC9jlme-Rcq8nhkVbn_0M2yUqxIgfYk_ioEToD7oa8"/>
+</div>
+<div class="flex-1 flex flex-col justify-between py-2">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-medium text-on-surface-variant">Caelum Sandal</h3>
+<p class="text-sm text-outline mt-1 font-light tracking-widest uppercase">Black • Italian Calfskin</p>
+</div>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-error transition-colors">close</span>
+</div>
+<div class="flex justify-between items-end mt-8">
+<div class="flex items-center border border-outline-variant/30 py-2 px-4 gap-6">
+<button class="text-outline hover:text-primary-container transition-colors">—</button>
+<span class="font-medium text-sm w-4 text-center">1</span>
+<button class="text-outline hover:text-primary-container transition-colors">+</button>
+</div>
+<div class="text-right">
+<p class="text-xs text-outline uppercase tracking-widest mb-1">Price</p>
+<p class="text-xl font-headline">$ 850.00</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center py-8 gap-6">
+<a class="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-all group" href="#">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    Continue Shopping
+                </a>
+<div class="flex items-center gap-4 text-xs uppercase tracking-[0.2em]">
+<span class="text-outline">Need assistance?</span>
+<a class="underline underline-offset-4 decoration-primary-container/30 hover:decoration-primary-container transition-all" href="#">Contact Atelier</a>
+</div>
+</div>
+</div>
+<!-- Summary Column -->
+<aside class="lg:col-span-4 bg-surface-container-lowest p-8 md:p-12 shadow-[0_40px_80px_rgba(0,0,0,0.02)] sticky top-56">
+<h2 class="text-2xl mb-8 border-b border-outline-variant/10 pb-6">Summary</h2>
+<div class="space-y-6 mb-12">
+<div class="flex justify-between items-center text-sm">
+<span class="text-outline uppercase tracking-widest">Subtotal</span>
+<span class="font-medium font-headline">$ 2,100.00</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-outline uppercase tracking-widest">Shipping</span>
+<span class="font-medium text-xs">Complimentary</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-outline uppercase tracking-widest">Estimated Tax</span>
+<span class="font-medium font-headline">$ 168.00</span>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/10 pt-6 mb-12">
+<span class="text-lg uppercase tracking-[0.2em] font-light">Total</span>
+<span class="text-3xl font-headline text-primary-container">$ 2,268.00</span>
+</div>
+<button class="w-full bg-gradient-to-r from-primary-container to-primary text-on-primary-container py-5 text-sm uppercase tracking-[0.3em] font-bold shadow-xl shadow-primary-container/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300">
+                Proceed to Checkout
+            </button>
+<div class="mt-8 space-y-4">
+<div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                    Secure payment processing
+                </div>
+<div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">local_shipping</span>
+                    Worldwide carbon-neutral shipping
+                </div>
+</div>
+</aside>
+</div>
+</main>
+<footer class="w-full py-16 px-6 md:px-12 border-t border-outline-variant/10 bg-surface">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 max-w-7xl mx-auto">
+<div class="text-[10px] tracking-[0.3em] uppercase text-outline">
+            © 2024 GUMES.ID - THE DIGITAL CURATOR
+        </div>
+<div class="flex gap-8 items-center">
+<a class="text-[10px] tracking-[0.3em] uppercase text-outline hover:text-primary-container transition-colors" href="#">Privacy Policy</a>
+<a class="text-[10px] tracking-[0.3em] uppercase text-outline hover:text-primary-container transition-colors" href="#">Terms of Service</a>
+<a class="text-[10px] tracking-[0.3em] uppercase text-outline hover:text-primary-container transition-colors" href="#">Shipping &amp; Returns</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary-container">language</span>
+<span class="text-[10px] tracking-[0.3em] uppercase text-outline">EN / USD</span>
+</div>
+</div>
+</footer>
+</body></html>

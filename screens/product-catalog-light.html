@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GUMES.ID | Product Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed": "#2e1413",
+                    "surface-container-high": "#ebe9e4",
+                    "secondary-fixed-dim": "#d0c4c0",
+                    "secondary-container": "#f1eee9",
+                    "on-error": "#690005",
+                    "tertiary": "#eabcb8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#362f2c",
+                    "primary-container": "#c5a059",
+                    "surface-container": "#f4f2ed",
+                    "primary-fixed": "#ffdea5",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary": "#462827",
+                    "on-primary": "#412d00",
+                    "on-secondary-container": "#4d4542",
+                    "surface-variant": "#e7e2d9",
+                    "outline-variant": "#d1c5b4",
+                    "on-surface": "#1c1b1b",
+                    "on-tertiary-container": "#523331",
+                    "inverse-surface": "#313030",
+                    "surface-dim": "#e5e2e1",
+                    "primary": "#e9c176",
+                    "secondary-fixed": "#ede0dc",
+                    "on-background": "#1c1b1b",
+                    "inverse-primary": "#e9c176",
+                    "surface-bright": "#f9f7f2",
+                    "surface-container-low": "#f9f7f2",
+                    "surface": "#f9f7f2",
+                    "tertiary-fixed": "#ffdad7",
+                    "background": "#f9f7f2",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-primary-fixed": "#261900",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#4e3700",
+                    "tertiary-fixed-dim": "#eabcb8",
+                    "secondary": "#635b59",
+                    "on-secondary-fixed-variant": "#4d4542",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "tertiary-container": "#c69b98",
+                    "surface-tint": "#c5a059",
+                    "inverse-on-surface": "#f5f0ef",
+                    "outline": "#807667",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#5f3e3c",
+                    "on-surface-variant": "#4e4639",
+                    "primary-fixed-dim": "#c5a059",
+                    "on-secondary-fixed": "#201a18"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .hero-gradient { background: radial-gradient(circle at center, #e9c176 0%, #c5a059 100%); }
+        .surface-glass { background-color: rgba(249, 247, 242, 0.8); backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-[#f9f7f2] dark:bg-[#0e0e0e] flex flex-col items-center w-full pt-8 pb-4 px-12 max-w-screen-2xl mx-auto sticky top-0 z-50 transition-colors duration-300">
+<div class="w-full flex justify-between items-center mb-6">
+<div class="flex-1"></div>
+<div class="text-2xl font-serif text-[#c5a059] flex flex-col items-center tracking-widest">
+<span class="material-symbols-outlined text-4xl mb-1" data-icon="landscape">landscape</span>
+<span class="font-headline font-bold">GUMES.ID</span>
+</div>
+<div class="flex-1 flex justify-end">
+<span class="font-label text-sm uppercase tracking-widest text-on-surface font-semibold">Hello Al</span>
+</div>
+</div>
+<nav class="flex gap-12 items-center">
+<a class="text-[#393939] dark:text-[#f9f7f2] font-medium hover:text-[#c5a059] transition-colors duration-300 font-label text-sm uppercase tracking-tight" href="#">New Arrival</a>
+<a class="text-[#c5a059] border-b border-[#c5a059] pb-1 font-bold hover:text-[#c5a059] transition-colors duration-300 font-label text-sm uppercase tracking-tight" href="#">Product</a>
+<a class="text-[#393939] dark:text-[#f9f7f2] font-medium hover:text-[#c5a059] transition-colors duration-300 font-label text-sm uppercase tracking-tight" href="#">Location</a>
+<a class="text-[#393939] dark:text-[#f9f7f2] font-medium hover:text-[#c5a059] transition-colors duration-300 font-label text-sm uppercase tracking-tight" href="#">Contact Us</a>
+</nav>
+</header>
+<main class="flex-grow max-w-screen-2xl mx-auto w-full px-12 pt-12">
+<!-- Hero Context -->
+<div class="mb-20 flex flex-col items-center text-center">
+<h1 class="font-headline text-6xl text-on-surface mb-4 tracking-tighter">The Footwear Collection</h1>
+<p class="font-body text-outline max-w-lg mx-auto text-lg">Curated leather goods, meticulously handcrafted for the discerning aesthetic. Every stitch tells a story of heritage and precision.</p>
+</div>
+<div class="flex gap-16">
+<!-- Asymmetrical Filter Sidebar -->
+<aside class="w-64 shrink-0">
+<div class="sticky top-48">
+<div class="mb-12">
+<h3 class="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">Category</h3>
+<ul class="space-y-4 font-body text-sm">
+<li><a class="text-primary font-bold" href="#">All Collections</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Artisan Sandals</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Burnished Boots</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Minimalist Loafers</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Studio Slippers</a></li>
+</ul>
+</div>
+<div class="mb-12">
+<h3 class="font-label text-xs font-extrabold uppercase tracking-[0.2em] text-on-surface-variant mb-6">Tonal Palette</h3>
+<div class="flex flex-wrap gap-3">
+<button class="w-8 h-8 bg-[#000000] ring-1 ring-offset-4 ring-primary ring-opacity-100" title="Black"></button>
+<button class="w-8 h-8 bg-[#5d4037]" title="Deep Brown"></button>
+<button class="w-8 h-8 bg-[#c68642]" title="Tan"></button>
+<button class="w-8 h-8 bg-[#e5e2e1] border border-outline-variant" title="Bone"></button>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant border-opacity-20">
+<p class="font-body text-xs leading-relaxed text-outline">Showing 24 refined pieces curated for your selection.</p>
+</div>
+</div>
+</aside>
+<!-- Product Bento Grid -->
+<section class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12 pb-32">
+<!-- Product Item 1: Large Featured -->
+<div class="md:col-span-2 group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[16/10] overflow-hidden mb-6">
+<img alt="Tan Leather Boots" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="close-up of handcrafted tan leather boots with exquisite stitching on a minimalist cream platform background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC26Ol0PrPGKHIeqWEvHcBlj0EZo9hJY2vx8zbinf0NDwuCFXYScNMSxTKHXLlBENr9iiR_jK3NHolCohLkxPb0AQbyQ3kEDMLA1VWMBY2be5RJZ196CKwSKIQfmj5iZRZMhdOdKvHgl2HpYWItLQPGnzqlIVCpolMHJU4rQ1YwhtHBVn_HaBAe8-fXKpPWMB1vHYED6gsHU0k5PTZuzJPXllOng0xuwQ5S2eLhOagH_oxNCIQu4E4KeszVbaJqxTUa3az12-DQZfEf"/>
+<div class="absolute top-6 left-6 bg-surface-container px-4 py-1">
+<span class="font-label text-[10px] uppercase tracking-widest font-bold">Limited Edition</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline text-3xl mb-2">The Heritage High-Boot</h2>
+<p class="font-label text-sm text-outline uppercase tracking-widest">Hand-Burnished Calfskin • Tan</p>
+</div>
+<div class="text-right">
+<span class="font-body text-xl font-light">$420</span>
+</div>
+</div>
+</div>
+<!-- Product Item 2 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="Black Minimalist Sandal" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="minimalist black leather artisan sandals captured from an architectural angle on a warm limestone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpp4BwsgC3lBofsOhn1Pfp_jlvIUqr8qV-OW3ha6m1DxtyZWjsfILs3wLV6Ak5HTThppyz26-qJVZAo5ufFKPR4nGHDfjPioCzd3YFM_ZxPRIyoOmihR_vwn2XAW1el0rYe0q5cKf7vEQ3-S1FUjhMfu9riCXcJP1cB_kiiPHbBro2ftoTU40fYW_OI5VbPwv17ugy6fS8GsoNRiE_4k2-vEGcRmhCYSROF8L5xhhMrqWELgqiL-ufhDGNp_M4zeihGSHgAJpr94KA"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Aurelius Sandal</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Matte Obsidian • Leather Sole</p>
+<span class="font-body text-lg font-light">$185</span>
+</div>
+<!-- Product Item 3 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="Deep Brown Loafers" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="polished deep brown mahogany leather loafers with subtle highlights showing the rich grain texture of the hide" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ6VpPo-rcfDjuvw7bXGFPW9XZRENYw7Lwoi_qnXoVTF5Q9WBxECjaGHwxLpxQBGmPC-5E0BZRN2Dzho-rhkGbHwnvUa8h423zTbI4Qqm5Cgzsk1RjrcO-GjJlKovkVU75suSk2369ld5ng8eEo01gwyTsrZwCI4zDA285qZp59Tjl7BMDK4i2ys5lBV--f4PBsv7hxkgIChUE7V6rAKgYvuzYEjdI71aR5a-1h3jTHRRwgpQuCefIy2-OharpbG8cGZRVOcukXtrw"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Cento Loafer</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Mahogany Grain • Brass Detail</p>
+<span class="font-body text-lg font-light">$290</span>
+</div>
+<!-- Product Item 4 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="Casual Leather Shoe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="contemporary minimalist leather trainers in a soft beige tone with raw edge detailing and artisanal construction" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh0P7ULPq7F0t025-tcRHEoD4WXNOllS8OznwEy3sNMBuVdEoTAz5_fECyq6B1CwM7V6Ik6dNj5Po9FVCv5tkdFiJZeVDBCjdO-VLIrTlfZbqmDtFiPlosAEsd_cufARQrRaU_KuO6A2fQSs992odA0iAFNYHpXzCZV9NCuPTHhLcNiwh1U93YHgbixLYc-uifjbRXtU92YFfTfSwRK7CUsBjbHtnbuEoy-5gygePMHJeUfncLUIJD1npuaALWFxm85jGqYoVgNE3w"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Studio Low-Top</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Pebbled Bone • Cork Insole</p>
+<span class="font-body text-lg font-light">$240</span>
+</div>
+<!-- Product Item 5 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="White Leather Sneaker" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="premium white leather sneakers with subtle gold foil branding on the tongue placed on a clean marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4KVzeg24ACyj0Y57hu1300B7Q4Zk_UV2CHeomlfkpsd_psxPUYVk-PErufS3wV-dlNfl4DvXjCGUjAR6YDYTR2INlZgkmODx1hHY9TCVvrMJm6bz1ZTK5dOjW0mnwvm1dx-1rqFt0K8anF-E0xKtVJdaV2Rj6jUGi1x9W1nEnrdTJmjS1xFI7DCFU-6b7_4fb8tmSR0h1lDoieei1NhOm9TSEcwT5VBzc-KrdTJusvkVIWw5TBkLhMSK5hmDZmWfCCkhEzp-2AFEx"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Marquee Court</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Optic White • Vachetta Trim</p>
+<span class="font-body text-lg font-light">$310</span>
+</div>
+<!-- Editorial Breakout -->
+<div class="md:col-span-3 flex items-center gap-0 my-16">
+<div class="w-2/3 h-[500px] bg-surface-container overflow-hidden">
+<img alt="Craftsmanship Close-up" class="w-full h-full object-cover grayscale" data-alt="black and white artistic close up of a craftsman's hands working with thick leather and vintage brass tools in an atelier" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZxEgnEkTwz3XFLi2GNoZgD61X-IzPJw9ntup7ggSo8uSdkmaGiij8-DKePA68PJ1Rdd9-EQd6ZVqCo7HouzB3Md1_gWX8snxBxLMrf8UEMF4VwSc6uu4baVFgvIAkTFoi0Y7grODVJh_VjZrmWDqyAvI4JK4gzcr9KNCggqaq0rMTfw-c7Shk9lMrPnL9Yu4GmrlBFZGKHAOXvfrl2ZwoBDoIWrjQ2yH2W9pgR2N-LY45zjFUZLsYxKncnOW98y6DZOUj5F5yWN8_"/>
+</div>
+<div class="w-1/3 -ml-20 z-10 bg-surface-container-lowest p-16 shadow-sm">
+<span class="font-label text-xs uppercase tracking-[0.3em] text-primary block mb-6">The Atelier Process</span>
+<h3 class="font-headline text-4xl mb-6 leading-tight">Every piece is an heirloom in waiting.</h3>
+<p class="font-body text-sm text-on-surface-variant mb-8 leading-relaxed">Our leather is sourced from small, family-owned tanneries in Tuscany, ensuring that our environmental impact is as minimal as our aesthetic.</p>
+<a class="inline-block border-b border-on-surface pb-1 font-label text-xs uppercase tracking-widest font-bold hover:text-primary hover:border-primary transition-all" href="#">Discover Our Story</a>
+</div>
+</div>
+<!-- Product Item 6 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="Brown Leather Slide" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="textured brown leather slide sandals with heavy waxed thread stitching details and an ergonomic wooden footbed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmp6vFY0kstmKjKra0FbZLraGTGivAJBHF9G0QH16jckk9qKQ8BhGr4Mwo3pHPMpqtZ-Z0pS9Yfgt1MzCC5vG7sQEOmb1Uyq-2AJHPMhwgue0J0_x5Bw7om4-GZJGgCIDmre7E6x58nWdtVoVdIH0omxoLrqqKb5pLxw0_WxKyjDdLPw20YHAKHxIaQgDigudVkmAcuD5YDSlGooGdCBsiQw0fDESkDQy6ywYDjdaK8PMdkDljakkGufBGuOUaCPFePIIySwUdFsC-"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Nomad Slide</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Cognac • Hand-Stitched</p>
+<span class="font-body text-lg font-light">$150</span>
+</div>
+<!-- Product Item 7 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="Suede Chelsea Boot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="velvety grey suede chelsea boots with a clean silhouette and dark elasticated gussets on a neutral backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnKM1OgK7NIcOwdtMszv4ZpOz1XZRXiwD6WEjymln_zmP4nTCIwDODgRFQ4ww63Ty_rpBqOft5vQRLXxjqJnwVu2YU1raZBsXa8GwlBOqWYcpix05M8H1_8eVxKJa-Up2XFOv0fCE1arNaOD6DOPFh-jKzoR0zPKGA-RolJfPEKEFCvuZzI0EXBd1z2Ithl87iFn-gYa38oIlcFk8iU4pVLws2H2DL8XqNID387JR7oqcM--sw-FdNtknK3dRRJRQbfEz4_aSWWxpm"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Ghost Chelsea</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Flint Suede • Crepe Sole</p>
+<span class="font-body text-lg font-light">$365</span>
+</div>
+<!-- Product Item 8 -->
+<div class="group cursor-pointer">
+<div class="relative bg-surface-container-lowest aspect-[4/5] overflow-hidden mb-6">
+<img alt="Luxury Black Boot" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="dramatic high fashion black leather boots with a sharp silhouette and metallic zip accents in a high-contrast lighting setup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfZ3iJmrlBkWR4sAou6T3zlodjmmNqmM5lcJHhRI-SV6RJj-PcCcjB5_Zct2fZm_v-EHraY4IhxqfaIJjBLBtte7tnbLdwBbdsAVZnEH8gHEZg-bT0jFxphvH7zmcbIJY-hD4ILQGss--ZOouMg6Gny_tDumQ3E2onT6wL8zaDqftW-1NKFhhQ93pafhmPltn12ty-CQ2A0-q9MtBmzct_1_qnGUZxv6j5Um27AlYKY3UibntLCVDG0w_m3L2l_WhdXYylSJjygnwZ"/>
+</div>
+<h2 class="font-headline text-xl mb-1">Vanguard Boot</h2>
+<p class="font-label text-xs text-outline uppercase tracking-widest mb-4">Eclipse Black • Polished Finish</p>
+<span class="font-body text-lg font-light">$450</span>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f9f7f2] dark:bg-[#0e0e0e] flex flex-col items-center py-12 w-full mt-auto border-t-0">
+<div class="max-w-screen-2xl w-full px-12 grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-12">
+<div class="hidden md:block">
+<span class="font-label text-[10px] uppercase tracking-[0.4em] text-outline font-bold">The Tactile Atelier</span>
+</div>
+<div class="flex justify-center space-x-12">
+<a class="text-[#393939] opacity-60 hover:opacity-100 transition-opacity font-label text-sm tracking-tight uppercase" href="#">Privacy Policy</a>
+<a class="text-[#393939] opacity-60 hover:opacity-100 transition-opacity font-label text-sm tracking-tight uppercase" href="#">Terms of Service</a>
+<a class="text-[#393939] opacity-60 hover:opacity-100 transition-opacity font-label text-sm tracking-tight uppercase" href="#">Shipping</a>
+</div>
+<div class="flex justify-end space-x-6">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="share">share</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="public">public</span>
+</div>
+</div>
+<p class="font-label text-xs tracking-tight text-center text-outline uppercase font-medium">
+            © 2024 GUMES.ID - THE TACTILE ATELIER
+        </p>
+</footer>
+</body></html>

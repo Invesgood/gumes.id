@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#2e1413",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed-dim": "#d0c4c0",
+                        "secondary-container": "#504745",
+                        "on-error": "#690005",
+                        "tertiary": "#eabcb8",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#362f2c",
+                        "primary-container": "#c5a059",
+                        "surface-container": "#201f1f",
+                        "primary-fixed": "#ffdea5",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#462827",
+                        "on-primary": "#412d00",
+                        "on-secondary-container": "#c2b6b2",
+                        "surface-variant": "#353534",
+                        "outline-variant": "#4e4639",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary-container": "#523331",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "primary": "#e9c176",
+                        "secondary-fixed": "#ede0dc",
+                        "on-background": "#e5e2e1",
+                        "inverse-primary": "#775a19",
+                        "surface-bright": "#393939",
+                        "surface-container-low": "#1c1b1b",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#ffdad7",
+                        "background": "#131313",
+                        "surface-container-highest": "#353534",
+                        "on-primary-fixed": "#261900",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#4e3700",
+                        "tertiary-fixed-dim": "#eabcb8",
+                        "secondary": "#d0c4c0",
+                        "on-secondary-fixed-variant": "#4d4542",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "tertiary-container": "#c69b98",
+                        "surface-tint": "#e9c176",
+                        "inverse-on-surface": "#313030",
+                        "outline": "#9a8f80",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#5f3e3c",
+                        "on-surface-variant": "#d1c5b4",
+                        "primary-fixed-dim": "#e9c176",
+                        "on-secondary-fixed": "#201a18",
+                        "custom-cream": "#f9f7f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #f9f7f2; color: #131313; font-family: 'Manrope', sans-serif; }
+        .serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .burnished-gradient { background: radial-gradient(circle at center, #e9c176, #c5a059); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-custom-cream text-surface-dim selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-[#f9f7f2] dark:bg-[#0e0e0e] flex flex-col items-center w-full pt-8 pb-4 px-12 max-w-screen-2xl mx-auto fixed top-0 left-0 right-0 z-50 backdrop-blur-md">
+<div class="w-full flex justify-between items-center mb-6">
+<div class="flex-1"></div>
+<div class="text-2xl font-serif text-[#c5a059] flex flex-col items-center tracking-widest">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="landscape">landscape</span>
+<span class="font-bold">GUMES.ID</span>
+</div>
+<div class="flex-1 flex justify-end items-center">
+<span class="font-label text-sm uppercase tracking-widest text-[#393939] font-medium mr-4">Hello Al</span>
+<span class="material-symbols-outlined text-surface-dim" data-icon="shopping_bag">shopping_bag</span>
+</div>
+</div>
+<div class="flex space-x-12">
+<a class="text-[#c5a059] border-b border-[#c5a059] pb-1 font-bold font-label text-xs uppercase tracking-tighter transition-colors duration-300" href="#">New Arrival</a>
+<a class="text-[#393939] dark:text-[#f9f7f2] font-medium font-label text-xs uppercase tracking-tighter hover:text-[#c5a059] transition-colors duration-300" href="#">Product</a>
+<a class="text-[#393939] dark:text-[#f9f7f2] font-medium font-label text-xs uppercase tracking-tighter hover:text-[#c5a059] transition-colors duration-300" href="#">Location</a>
+<a class="text-[#393939] dark:text-[#f9f7f2] font-medium font-label text-xs uppercase tracking-tighter hover:text-[#c5a059] transition-colors duration-300" href="#">Contact Us</a>
+</div>
+</nav>
+<main class="pt-48 pb-24 px-8 md:px-16 max-w-screen-2xl mx-auto overflow-hidden">
+<!-- Hero Editorial Section -->
+<section class="relative mb-48 flex flex-col md:flex-row items-center gap-16">
+<div class="w-full md:w-3/5 relative">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden">
+<img alt="Premium leather footwear" class="w-full h-full object-cover" data-alt="Close-up of premium black leather boots with detailed stitching on a clean neutral background with soft shadows and warm light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi2jhamH9_Sq5X7lxf3njTXEpfhN04tswgDQGx3XABA_GVg0p7Iy8WpVTNh8S7hklQrXDJD5_lAKc5hwL8a_8XMTR4SU0wYWlfNevTXQkhSw4VlvfYhGrkWBlDDwmO0n87i6jzqqwDvIINOpgcbhTig5hew2qkNBw_LHKy-NFuk-99vibUX7vJ3WWJiLrRDJf5EwAF8syYPkr6cHUUJP3ro0WKdl09GUVxZTffGUEGuIz1Pj_zTt_sIHbAgKj9pvnS67J76GrI6WC8"/>
+</div>
+<!-- Asymmetric Floating Label -->
+<div class="absolute -bottom-8 -right-8 bg-custom-cream p-12 max-w-xs shadow-xl border-none">
+<p class="font-label text-[10px] uppercase tracking-[0.3em] mb-4 text-[#c5a059]">Collection No. 24</p>
+<h2 class="serif text-3xl font-bold leading-tight mb-6">The Tactile Tradition</h2>
+<p class="font-body text-sm leading-relaxed text-[#393939] opacity-80 mb-8">
+                        Every piece is a testament to the artisan's hand. Hand-burnished hides meeting contemporary silhouettes.
+                    </p>
+<button class="w-full burnished-gradient text-on-primary py-4 px-8 font-label text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all duration-300">
+                        Explore Collection
+                    </button>
+</div>
+</div>
+<div class="w-full md:w-2/5 flex flex-col justify-center">
+<h1 class="serif text-7xl md:text-8xl leading-none font-bold tracking-tighter mb-12 -ml-12 md:-ml-24 relative z-10">
+                    New<br/><span class="italic text-[#c5a059]">Arrivals</span>
+</h1>
+<div class="flex items-center gap-4 border-l border-[#c5a059] pl-6 py-2">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-[#393939]">Season / 2024</span>
+<span class="h-[1px] w-12 bg-[#c5a059]"></span>
+<span class="font-label text-xs font-bold uppercase tracking-widest text-[#393939]">Handcrafted</span>
+</div>
+</div>
+</section>
+<!-- Product Grid - Intentional Asymmetry -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-y-32 gap-x-12 mb-48">
+<!-- Product 1: The Dark Artisan -->
+<div class="md:col-span-5 flex flex-col">
+<div class="aspect-[3/4] bg-surface-container-low mb-8 group overflow-hidden">
+<img alt="Black Leather Loafer" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Minimalist high-end black leather loafers presented in a studio setting with dramatic shadows and clean architectural lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2BVI98fzyWwZJ8XC4m6jn9npKPzj7bSAPbwz43MBI-TRoXZzaQ7GNaZYRjjpwmd2p14IJt_fdRiU1WorchpHeiHtyVN5nxxYNFPxK7jTIahKjg4sxE-VD8F0wJNDpDRNB7CotL9gA19EhjMmNn1f6UgG1nSfEYKeYl6dZlgU80z1cjZpBkhDUmAYsQ82XjTKlULn1Mc1lXr9AaW0qxHSRyVZ3Hgf_FcqqlzsoucR6r-2AbroPuqJ1mVz8FVK1eyIVo0hBpoi0qL4L"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-[#c5a059] mb-2">Heritage Black</p>
+<h3 class="serif text-2xl font-bold">Midnight Cavalier</h3>
+</div>
+<span class="serif text-xl font-medium">$420.00</span>
+</div>
+<div class="mt-6">
+<a class="font-label text-xs font-bold uppercase tracking-widest border-b-2 border-surface-dim pb-1 hover:text-[#c5a059] hover:border-[#c5a059] transition-all" href="#">Details</a>
+</div>
+</div>
+<!-- Product 2: The Tan Texture -->
+<div class="md:col-span-6 md:col-start-7 flex flex-col md:mt-24">
+<div class="aspect-square bg-surface-container-low mb-8 group overflow-hidden">
+<img alt="Tan Leather Sandal" class="w-full h-h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Luxury tan leather sandals with intricate hand-woven straps resting on a piece of raw limestone under bright warm sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN2Sc-Z3h9N9_bAQMJOGmcnZ5flZ1R-hSyBBALdGKpoahuYDadZOGIqWEnZfhHGQYXLYOO5nQayJoYEzM1lqkeWbZvAENmeYhmm-SYDBRmlL6cLiRpguA3B74QTLrMmkNsAfNS_tzzpuTANHaxP5EUqdUReSq3ERbbK8-ToIh45qf1dG7_nBHs8I242I8N52hn7EfbUNry5wYAzOyYvFooWxXTMT2hbIOZv4Rezs63yCPIzbz3vzaWuCbOeXEz5bu-0I2h0yvoqaSs"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-[#c5a059] mb-2">Artisan Tan</p>
+<h3 class="serif text-2xl font-bold">Sirocco Nomad</h3>
+</div>
+<span class="serif text-xl font-medium">$310.00</span>
+</div>
+<div class="mt-6">
+<a class="font-label text-xs font-bold uppercase tracking-widest border-b-2 border-surface-dim pb-1 hover:text-[#c5a059] hover:border-[#c5a059] transition-all" href="#">Details</a>
+</div>
+</div>
+<!-- Product 3: The Earthy Brown -->
+<div class="md:col-span-8 md:col-start-2 flex flex-col md:mt-12">
+<div class="aspect-[16/9] bg-surface-container-low mb-8 group overflow-hidden relative">
+<img alt="Deep Brown Oxford" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Pair of deep chocolate brown oxford shoes with a mirror-shine finish, reflected on a polished dark surface with warm ambient light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBQkdlfE7apEQUCcwis9jCGYQEK-ksMqt2-2SAgcZy5c-RZ8LoxCgxjVvT7R6X6Z5xG_DNHlDBuf0_O1Wd_vTP8A-f96BNu7dkts6fxDrZaLjo5dVl4hsYWZj5fv6Q0w1b2zXrG3ekWgfN0IypqNmqhfd9zpwM0NhMKLGqr99Y2eWOck9BE_00h5WNBtuELzB92M2sCVAWEXMG7wk9cIdagNYABto57XBxk-PQS2gp9ojkG2TgpoflNTWleRH2tRE6ApmUrsCRUcnj"/>
+<div class="absolute inset-0 bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="font-label text-xs uppercase tracking-[0.5em] text-white bg-black/40 backdrop-blur-md px-12 py-4">Limited Edition</span>
+</div>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-[#c5a059] mb-2">Earth Tones</p>
+<h3 class="serif text-3xl font-bold">Terrene Gentleman</h3>
+</div>
+<span class="serif text-2xl font-medium">$495.00</span>
+</div>
+</div>
+</section>
+<!-- Newsletter Overlay Component -->
+<section class="relative w-full py-32 flex justify-center items-center">
+<div class="w-full aspect-[21/9] bg-surface-container-highest overflow-hidden absolute inset-0">
+<img alt="Workshop background" class="w-full h-full object-cover opacity-40 mix-blend-multiply" data-alt="Atmospheric wide shot of an artisan leather workshop with rolls of hide, tools, and a single warm spotlight illuminating a workbench." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdgoERnjclUC7npo-IZYjYDw35RMu3OoZhcf1o1mAJ1Bfi8XFBQRwlt4wD0tBJpMHYl3Cw772s7Q4bxO2TbKhEdiC-AHjVHkW5kS2cQa3mpLpkbeQO2HZ6Qj8S5g2N2G7jHt6PVzzoKSmSAW6bvGjxBvPhJN6n-4aPFekM5d2LWt-AnXhkAUlWAJtXXz_wiSXfgt9Mdfqk1jLObbgrw_FZhNuacAgH5PuR6eRhp5UmvrIUxxqaJZ8u-YtjBZWODKE8uVZACKzw7A90"/>
+</div>
+<div class="relative z-10 text-center max-w-2xl px-8">
+<span class="font-label text-[10px] uppercase tracking-[0.4em] text-[#c5a059] mb-6 block">Join the Atelier</span>
+<h2 class="serif text-4xl md:text-5xl font-bold mb-8">Early access to future drops.</h2>
+<div class="flex flex-col md:flex-row gap-0">
+<input class="flex-grow bg-custom-cream/80 backdrop-blur-sm border-none px-6 py-5 font-label text-sm tracking-wide focus:ring-0 focus:bg-white transition-all" placeholder="Your Email Address" type="email"/>
+<button class="bg-surface-dim text-custom-cream px-10 py-5 font-label text-xs font-bold uppercase tracking-widest hover:bg-primary-container transition-colors">Subscribe</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col items-center py-12 w-full mt-auto bg-[#f9f7f2] dark:bg-[#0e0e0e]">
+<div class="flex space-x-8 mb-8">
+<a class="text-[#393939] opacity-60 font-label text-xs uppercase tracking-tight hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="text-[#393939] opacity-60 font-label text-xs uppercase tracking-tight hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
+<a class="text-[#393939] opacity-60 font-label text-xs uppercase tracking-tight hover:opacity-100 transition-opacity" href="#">Shipping</a>
+</div>
+<div class="text-[#c5a059] font-label text-xs tracking-tight text-center">
+            © 2024 GUMES.ID - THE TACTILE ATELIER
+        </div>
+</footer>
+<!-- FAB Suppression: Not rendered as per Task rules for details/specialized pages -->
+</body></html>

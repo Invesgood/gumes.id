@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact — GUMES.ID ARTISAN ATELIER</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#393939",
+                    "on-secondary": "#362f2c",
+                    "on-primary-container": "#4e3700",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "surface-dim": "#131313",
+                    "primary-fixed-dim": "#e9c176",
+                    "on-tertiary": "#462827",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#d0c4c0",
+                    "background": "#131313",
+                    "on-primary": "#412d00",
+                    "on-secondary-fixed": "#201a18",
+                    "on-background": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "surface-tint": "#e9c176",
+                    "primary": "#e9c176",
+                    "on-surface-variant": "#d1c5b4",
+                    "on-primary-fixed": "#261900",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary": "#d0c4c0",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "surface-container": "#201f1f",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed": "#ede0dc",
+                    "tertiary-fixed": "#ffdad7",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#504745",
+                    "surface": "#131313",
+                    "on-tertiary-fixed": "#2e1413",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-container": "#523331",
+                    "on-tertiary-fixed-variant": "#5f3e3c",
+                    "surface-variant": "#353534",
+                    "on-secondary-fixed-variant": "#4d4542",
+                    "primary-fixed": "#ffdea5",
+                    "on-error-container": "#ffdad6",
+                    "inverse-primary": "#775a19",
+                    "tertiary-fixed-dim": "#eabcb8",
+                    "tertiary": "#eabcb8",
+                    "on-secondary-container": "#c2b6b2",
+                    "primary-container": "#c5a059",
+                    "tertiary-container": "#c69b98",
+                    "outline": "#9a8f80",
+                    "surface-container-highest": "#353534",
+                    "on-surface": "#e5e2e1",
+                    "outline-variant": "#4e4639"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        h1, h2, h3, .serif {
+            font-family: 'Noto Serif', serif;
+        }
+        .burnished-gradient {
+            background: radial-gradient(circle at center, #e9c176, #c5a059);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar: Updated to match COMPONENTS_32 specification -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e0e] dark:bg-[#0e0e0e] border-none">
+<div class="flex flex-col items-center w-full pt-8 pb-6 px-12 space-y-4">
+<!-- Centered mountain logo and Brand Name -->
+<div class="flex flex-col items-center space-y-2">
+<span class="material-symbols-outlined text-[#c5a059] text-4xl">landscape</span>
+<div class="text-2xl font-bold tracking-[0.2em] uppercase text-[#c5a059] font-['Noto_Serif']">
+                    GUMES.ID
+                </div>
+</div>
+<!-- Navigation Links centered below logo -->
+<div class="hidden md:flex space-x-12 items-center font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase">
+<a class="text-white/70 hover:text-white transition-colors duration-300" href="#">New Arrival</a>
+<a class="text-white/70 hover:text-white transition-colors duration-300" href="#">Product</a>
+<a class="text-white/70 hover:text-white transition-colors duration-300" href="#">Location</a>
+<a class="text-[#e9c176] border-b border-[#e9c176] pb-1" href="#">Contact Us</a>
+</div>
+<!-- Absolute positioned login/cart for the 'Hello Al' state from original design -->
+<div class="absolute right-12 top-10 flex items-center space-x-6">
+<span class="hidden md:block text-[#c5a059] font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase">Hello Al</span>
+<div class="flex space-x-4">
+<span class="material-symbols-outlined text-white/70 cursor-pointer hover:text-[#e9c176] transition-all duration-300 scale-95 active:scale-90">person</span>
+<span class="material-symbols-outlined text-white/70 cursor-pointer hover:text-[#e9c176] transition-all duration-300 scale-95 active:scale-90">shopping_bag</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-64 pb-64">
+<!-- Hero Section: Intentional Asymmetry -->
+<section class="max-w-screen-2xl mx-auto px-8 md:px-16 mb-32">
+<div class="flex flex-col md:flex-row gap-16 items-end">
+<div class="w-full md:w-1/2">
+<h1 class="text-6xl md:text-8xl tracking-tighter leading-tight mb-8">Connect with <br/><span class="italic font-normal">the Craft.</span></h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-lg leading-relaxed font-light">
+                        Our atelier is a space of dialogue. Whether you are seeking a custom commission or have questions about our seasonal collections, our curators are here to assist.
+                    </p>
+</div>
+<div class="w-full md:w-1/2">
+<div class="relative h-[500px] w-full overflow-hidden">
+<img alt="Interior of a luxury leather atelier" class="w-full h-full object-cover" data-alt="dramatically lit interior of a luxury leather artisan studio with raw leather hides, brass tools, and soft morning light through large windows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDczF44loOUc-73M6bl1AqI1Ez5CWGo8HHZi8sZvhD4Fh4Ha3P-5J_gdFuxoaSQJl3VjFWULwV1et3J_PiuAD0du3iIX9aEzGJHyF8Ixqi3pnkLH6pxLJO61cxSX_-oO7JoA9FSluGtbMAWTwkNXl0U1tpFB0UW_rxf1OHX05Db0F1uMvwGcAXL48l4qNgqo9BS3J2JYHw7l9YDdlJw8bjRnQ3Ihdb-Nr16mBkP0gRZ8Mn2cf25a63U1Mkdjcbmbf60speJxTehG6_2"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Interaction Section -->
+<section class="max-w-screen-2xl mx-auto px-8 md:px-16 grid grid-cols-1 md:grid-cols-12 gap-24">
+<!-- Left: Minimalist Inquiry Form -->
+<div class="md:col-span-7 bg-surface-container-low p-12 md:p-20">
+<h2 class="text-3xl mb-16 italic">Direct Inquiry</h2>
+<form class="space-y-12">
+<div class="group relative">
+<label class="block text-xs uppercase tracking-widest text-outline mb-2 transition-all group-focus-within:text-primary">Your Name</label>
+<input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 text-lg placeholder:text-surface-variant" placeholder="Full Name" type="text"/>
+</div>
+<div class="group relative">
+<label class="block text-xs uppercase tracking-widest text-outline mb-2 transition-all group-focus-within:text-primary">Email Address</label>
+<input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 text-lg placeholder:text-surface-variant" placeholder="email@address.com" type="email"/>
+</div>
+<div class="group relative">
+<label class="block text-xs uppercase tracking-widest text-outline mb-2 transition-all group-focus-within:text-primary">Nature of Inquiry</label>
+<select class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 text-lg text-on-surface-variant">
+<option class="bg-surface">Product Availability</option>
+<option class="bg-surface">Sizing &amp; Fit</option>
+<option class="bg-surface">Order Tracking</option>
+<option class="bg-surface">Press &amp; Media</option>
+</select>
+</div>
+<div class="group relative">
+<label class="block text-xs uppercase tracking-widest text-outline mb-2 transition-all group-focus-within:text-primary">Message</label>
+<textarea class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:border-primary focus:ring-0 px-0 py-3 text-lg placeholder:text-surface-variant resize-none" placeholder="How may we assist you today?" rows="4"></textarea>
+</div>
+<button class="burnished-gradient w-full md:w-auto px-12 py-5 text-on-primary-container text-xs font-bold tracking-[0.2em] uppercase transition-transform active:scale-95" type="submit">
+                        Send Message
+                    </button>
+</form>
+</div>
+<!-- Right: Details & Bespoke -->
+<div class="md:col-span-5 flex flex-col justify-between space-y-24">
+<!-- Contact Details -->
+<div class="space-y-12">
+<div>
+<span class="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">Connect Directly</span>
+<div class="space-y-4">
+<a class="block text-2xl hover:text-primary transition-colors" href="mailto:curator@gumes.id">curator@gumes.id</a>
+<a class="block text-2xl hover:text-primary transition-colors" href="tel:+18005550192">+1 800 555 0192</a>
+</div>
+</div>
+<div class="pt-8">
+<span class="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">Our Atelier</span>
+<p class="text-xl leading-relaxed text-on-surface-variant">
+                            Via dell'Artigianato, 14<br/>
+                            Firenze FI 50123, Italy
+                        </p>
+</div>
+<div class="pt-8">
+<span class="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">Social Discovery</span>
+<div class="flex flex-wrap gap-8 text-sm font-medium tracking-widest uppercase">
+<a class="hover:underline underline-offset-8 decoration-primary" href="#">Instagram</a>
+<a class="hover:underline underline-offset-8 decoration-primary" href="#">TikTok</a>
+<a class="hover:underline underline-offset-8 decoration-primary" href="#">Shopee</a>
+<a class="hover:underline underline-offset-8 decoration-primary" href="#">Pinterest</a>
+<a class="hover:underline underline-offset-8 decoration-primary" href="#">Journal</a>
+</div>
+</div>
+</div>
+<!-- Editorial Bespoke Section -->
+<div class="relative bg-surface-container-high p-10 overflow-hidden group">
+<div class="relative z-10">
+<h3 class="text-3xl mb-4 italic">Bespoke Inquiries</h3>
+<p class="text-on-surface-variant mb-8 leading-relaxed">
+                            For those seeking singular expressions. Our master artisans are available for private consultations and custom-last creations.
+                        </p>
+<a class="inline-flex items-center gap-4 text-xs font-bold tracking-widest uppercase border-b border-primary pb-2 text-primary group-hover:gap-6 transition-all" href="#">
+                            Consult with an Artisan
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="absolute -right-10 -bottom-10 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: 'wght' 100;">handyman</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Visual Anchor: Texture Close-up -->
+<section class="mt-48 max-w-screen-2xl mx-auto px-8 md:px-16">
+<div class="relative h-[400px] w-full flex items-center justify-center">
+<img alt="Macro of premium leather texture" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" data-alt="extreme close-up of dark full-grain leather showing organic texture and pores under cinematic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9HYzxCQ9LIob4v8hiNOkpS2LJ0JvqQrUo6fdYVTsYa8i0FtDNXyu3etmyIu7SxpO0aTmIAMmbbI27LiH67_N19_DZ4y1KaWqLNo8NmbTNi_1VV0glylC9y79yU3eep6PDAh2xdHBs42PYEE_uyLoIoQussF42EzM1qHkifVGq7vLfGSUAMK3NA3lJFWwnBMwzntOzHxuf0s3c4MFw0FKHE5cn9HMneCJGLuRARQH_hZxUM1DiOUWgq_YY8B3EcF7oMaDD8FHI6l66"/>
+<div class="relative z-10 text-center space-y-4">
+<span class="text-xs uppercase tracking-[0.5em] text-primary">Philosophy</span>
+<h2 class="text-4xl md:text-5xl italic serif">Quality is a silent conversation.</h2>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-stone-200/20 dark:border-neutral-800/20 bg-stone-100 dark:bg-neutral-900">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full max-w-screen-2xl mx-auto">
+<div class="text-lg font-serif text-neutral-800 dark:text-stone-200 mb-8 md:mb-0">
+                GUMES.ID ARTISAN ATELIER
+            </div>
+<div class="flex flex-col md:flex-row gap-8 items-center font-serif italic text-lg text-neutral-500 dark:text-stone-500">
+<a class="hover:underline underline-offset-4 decoration-amber-500 transition-opacity duration-300 hover:opacity-80" href="#">Privacy Policy</a>
+<a class="hover:underline underline-offset-4 decoration-amber-500 transition-opacity duration-300 hover:opacity-80" href="#">Terms of Service</a>
+<a class="hover:underline underline-offset-4 decoration-amber-500 transition-opacity duration-300 hover:opacity-80" href="#">Shipping &amp; Returns</a>
+</div>
+<div class="mt-8 md:mt-0 text-xs tracking-widest text-neutral-500 uppercase">
+                © 2024 GUMES.ID ARTISAN ATELIER
+            </div>
+</div>
+</footer>
+</body></html>

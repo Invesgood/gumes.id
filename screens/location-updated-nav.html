@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;400;700&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "tertiary-container": "#c69b98",
+                  "surface-tint": "#e9c176",
+                  "on-background": "#e5e2e1",
+                  "on-error-container": "#ffdad6",
+                  "error": "#ffb4ab",
+                  "outline": "#9a8f80",
+                  "surface-variant": "#353534",
+                  "on-secondary-fixed-variant": "#4d4542",
+                  "surface-container-high": "#2a2a2a",
+                  "surface-bright": "#393939",
+                  "on-primary-fixed-variant": "#5d4201",
+                  "primary-fixed": "#ffdea5",
+                  "tertiary-fixed-dim": "#eabcb8",
+                  "surface": "#131313",
+                  "secondary-fixed-dim": "#d0c4c0",
+                  "error-container": "#93000a",
+                  "secondary": "#d0c4c0",
+                  "secondary-fixed": "#ede0dc",
+                  "background": "#131313",
+                  "primary": "#e9c176",
+                  "on-tertiary-fixed-variant": "#5f3e3c",
+                  "secondary-container": "#504745",
+                  "surface-container-low": "#1c1b1b",
+                  "inverse-surface": "#e5e2e1",
+                  "on-surface": "#e5e2e1",
+                  "tertiary": "#eabcb8",
+                  "surface-dim": "#131313",
+                  "on-tertiary-container": "#523331",
+                  "on-error": "#690005",
+                  "on-surface-variant": "#d1c5b4",
+                  "on-primary-fixed": "#261900",
+                  "surface-container-highest": "#353534",
+                  "primary-container": "#c5a059",
+                  "outline-variant": "#4e4639",
+                  "surface-container": "#201f1f",
+                  "inverse-primary": "#775a19",
+                  "on-secondary": "#362f2c",
+                  "on-tertiary": "#462827",
+                  "inverse-on-surface": "#313030",
+                  "on-secondary-container": "#c2b6b2",
+                  "on-primary-container": "#4e3700",
+                  "on-secondary-fixed": "#201a18",
+                  "on-tertiary-fixed": "#2e1413",
+                  "on-primary": "#412d00",
+                  "tertiary-fixed": "#ffdad7",
+                  "surface-container-lowest": "#0e0e0e",
+                  "primary-fixed-dim": "#e9c176"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0px",
+                  "lg": "0px",
+                  "xl": "0px",
+                  "full": "9999px"
+          },
+          "fontFamily": {
+                  "headline": ["Noto Serif"],
+                  "body": ["Manrope"],
+                  "label": ["Manrope"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #0e0e0e;
+      color: #e5e2e1;
+      font-family: 'Manrope', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 40;
+    }
+    .gold-gradient {
+      background: radial-gradient(circle at center, #e9c176 0%, #c5a059 100%);
+    }
+    .surface-glow {
+      box-shadow: 0 0 60px 10px rgba(233, 193, 118, 0.03);
+    }
+    .glass-effect {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  </style>
+</head>
+<body class="antialiased overflow-hidden">
+<!-- Header Anchor -->
+<header class="fixed top-0 w-full z-50 bg-transparent flex justify-center items-center py-12">
+<div class="flex flex-col items-center">
+<div class="mb-2 text-[#c5a059]">
+<span class="material-symbols-outlined text-4xl" data-icon="filter_hdr">filter_hdr</span>
+</div>
+<h1 class="text-2xl font-light tracking-[0.4em] text-[#c5a059] font-['Noto_Serif']">THE ATELIER</h1>
+</div>
+</header>
+<main class="relative h-screen w-full flex items-center justify-center overflow-hidden px-6">
+<!-- Asymmetric Background Element -->
+<div class="absolute inset-0 z-0">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
+<img class="w-full h-full object-cover opacity-20 grayscale brightness-50" data-alt="Deep textured macro shot of premium black burnished leather with subtle golden light reflections across the grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp3I0atqiZnyw9puzPmh9t5Qb1SOBW2BLV7bKAACFNKq3E35mCtNwnVmzcuovk3TsohyAzEaXQJGkVNj73-X5QU7wH2MPkB9iY-nI00JZtwQKHosYwEcnHt2p2nQ_2GiSlOIdrREzhKpS-ME_qy0dKBknzBEbP62tck2LB5c1C2jFegLcxq1JfuDmxsUPEa6qYiUVA7S84V7xFpkoAtVYfJ888DbuSEkPhvnDs6w_slU0Foat1z3N1XyyLI8z3eFOX2RyT-uNE1UXH"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-[#0e0e0e] via-transparent to-[#0e0e0e]"></div>
+</div>
+<!-- Content Canvas -->
+<section class="relative z-10 w-full max-w-2xl flex flex-col items-center text-center">
+<!-- Elegant Checkmark Success Icon -->
+<div class="mb-16 relative">
+<div class="absolute inset-0 bg-[#e9c176] blur-3xl opacity-10 rounded-full"></div>
+<div class="relative w-24 h-24 flex items-center justify-center border border-[#c5a059]/20">
+<span class="material-symbols-outlined text-6xl text-[#e9c176] font-thin" style="font-variation-settings: 'wght' 100;">check</span>
+</div>
+</div>
+<!-- Typography Shell -->
+<div class="space-y-6">
+<h2 class="text-4xl md:text-6xl font-['Noto_Serif'] font-light text-on-surface tracking-tight">
+          Payment Successful
+        </h2>
+<p class="text-neutral-500 font-['Manrope'] text-sm md:text-base tracking-[0.1em] max-w-md mx-auto leading-relaxed">
+          Your order is being prepared. Check your email for the receipt.
+        </p>
+</div>
+<!-- Separator Gap (The Luxury of Space) -->
+<div class="h-24"></div>
+<!-- Action Cluster -->
+<div class="w-full flex flex-col items-center gap-12">
+<!-- Main CTA -->
+<a class="gold-gradient px-12 py-5 text-[10px] font-['Manrope'] font-bold tracking-[0.2em] uppercase text-on-primary-container hover:brightness-110 transition-all duration-300" href="#">
+          Back to Collections
+        </a>
+<!-- Secondary Information / Order Meta -->
+<div class="grid grid-cols-2 gap-x-16 gap-y-2 opacity-60">
+<div class="text-left">
+<p class="text-[9px] uppercase tracking-widest text-[#c5a059]">Order ID</p>
+<p class="text-xs font-['Manrope']">#GMS-881023</p>
+</div>
+<div class="text-left">
+<p class="text-[9px] uppercase tracking-widest text-[#c5a059]">Arrival</p>
+<p class="text-xs font-['Manrope']">3-5 Business Days</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Anchor (Suppressed navigation, showing minimal legal) -->
+<footer class="fixed bottom-0 w-full py-12 flex flex-col items-center gap-4 px-8 z-50">
+<div class="w-full max-w-sm h-[1px] bg-[#393939]/30 mb-8"></div>
+<div class="flex flex-col items-center gap-4">
+<p class="text-[10px] font-['Manrope'] tracking-[0.2em] uppercase text-neutral-600">
+          © 2024 THE TACTILE ATELIER. ALL RIGHTS RESERVED.
+        </p>
+<div class="flex gap-8">
+<a class="text-[9px] font-['Manrope'] tracking-[0.2em] uppercase text-neutral-600 hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="text-[9px] font-['Manrope'] tracking-[0.2em] uppercase text-neutral-600 hover:text-white transition-colors" href="#">Shipping &amp; Returns</a>
+</div>
+</div>
+</footer>
+<!-- Background Texture Layer -->
+<div class="fixed inset-0 pointer-events-none z-[-1] opacity-5 overflow-hidden">
+<div class="absolute inset-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5ilNH1RDheVMFDupAeKgOYPahHd9SBFOjZChQN1_6b_7_prJ12YZEKf4J5zl_k_T7Ni182ZYmtCYrssR_CfgW2Ujt6_PFxypzlHXL69sDP90W-_M3H_5KGW4lNd8A_92uD6Q22d9nYOHspEkGN1zh0Zg_r8VGy7EiejeiXj8D55l_agSeV8dCIWJ6yz2zsdGUBXSxx59-7T-3qOKRHPEk-1GtYn9J23LstOQ6xaEir_ZIB24sDd4NQ_eQHQU1rofPjTwsRjbmB9Gv');"></div>
+</div>
+</body></html>

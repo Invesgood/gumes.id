@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#e9c176",
+                    "on-secondary-container": "#c2b6b2",
+                    "on-primary-fixed": "#261900",
+                    "on-tertiary": "#462827",
+                    "on-secondary-fixed-variant": "#4d4542",
+                    "on-primary-container": "#4e3700",
+                    "inverse-on-surface": "#313030",
+                    "inverse-surface": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#5f3e3c",
+                    "surface": "#f9f7f2",
+                    "secondary": "#d0c4c0",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#ffffff",
+                    "on-background": "#201f1f",
+                    "on-surface-variant": "#4e4639",
+                    "surface-container": "#f1eee6",
+                    "tertiary": "#eabcb8",
+                    "background": "#f9f7f2",
+                    "surface-container-high": "#e9e5db",
+                    "secondary-fixed-dim": "#d0c4c0",
+                    "outline-variant": "#d1c5b4",
+                    "primary-fixed": "#ffdea5",
+                    "surface-container-highest": "#e2ddd1",
+                    "outline": "#9a8f80",
+                    "on-secondary": "#362f2c",
+                    "surface-container-low": "#f6f3eb",
+                    "on-tertiary-fixed": "#2e1413",
+                    "inverse-primary": "#775a19",
+                    "on-surface": "#201f1f",
+                    "on-error-container": "#ffdad6",
+                    "on-error": "#690005",
+                    "secondary-fixed": "#ede0dc",
+                    "on-secondary-fixed": "#201a18",
+                    "on-primary": "#412d00",
+                    "on-primary-fixed-variant": "#5d4201",
+                    "tertiary-fixed": "#ffdad7",
+                    "on-tertiary-container": "#523331",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#f9f7f2",
+                    "primary-container": "#c5a059",
+                    "primary": "#e9c176",
+                    "tertiary-fixed-dim": "#eabcb8",
+                    "tertiary-container": "#c69b98",
+                    "secondary-container": "#504745",
+                    "surface-variant": "#ede8de",
+                    "surface-tint": "#e9c176"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0px",
+                    "lg": "0px",
+                    "xl": "0px",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-headline { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed-dim/30">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-stone-950/90 backdrop-blur-md">
+<div class="relative w-full py-6 px-8 max-w-screen-2xl mx-auto flex flex-col items-center">
+<!-- Top Right Status -->
+<div class="absolute top-8 right-8 flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-stone-800 pr-6">
+<span class="text-stone-300 text-sm font-medium">Hello Al</span>
+<div class="w-10 h-10 bg-stone-800 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-[#e9c176]">person</span>
+</div>
+</div>
+<a class="text-stone-300 hover:text-[#e9c176] transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+</a>
+</div>
+<!-- Centered Branding & Navigation -->
+<div class="flex flex-col items-center gap-4">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[#c5a059] text-3xl">terrain</span>
+<h1 class="text-2xl font-bold tracking-[0.3em] text-[#c5a059] uppercase font-headline">GUMES.ID</h1>
+</div>
+<nav class="hidden md:flex items-center gap-10 mt-2">
+<a class="text-stone-400 hover:text-stone-200 transition-colors text-[10px] font-bold tracking-[0.2em] uppercase" href="#">New Arrival</a>
+<a class="text-stone-400 hover:text-stone-200 transition-colors text-[10px] font-bold tracking-[0.2em] uppercase" href="#">Product</a>
+<a class="text-stone-400 hover:text-stone-200 transition-colors text-[10px] font-bold tracking-[0.2em] uppercase" href="#">Location</a>
+<a class="text-stone-400 hover:text-stone-200 transition-colors text-[10px] font-bold tracking-[0.2em] uppercase" href="#">Contact Us</a>
+</nav>
+</div>
+</div>
+</header>
+<main class="pt-52 min-h-screen flex max-w-screen-2xl mx-auto">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col w-64 fixed h-full pt-8 pb-8">
+<div class="mb-12">
+<h3 class="font-headline text-2xl text-on-surface">Al</h3>
+<p class="text-xs tracking-widest uppercase text-outline font-bold mt-1">Premium Member</p>
+</div>
+<nav class="space-y-4">
+<a class="flex items-center gap-4 text-[#e9c176] font-bold border-l-2 border-[#c5a059] pl-4 transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-sm">person</span>
+<span class="text-sm tracking-wide">Profile Details</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 pl-4 hover:bg-stone-100/50 hover:text-stone-900 transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-sm">local_mall</span>
+<span class="text-sm tracking-wide">Order History</span>
+</a>
+<a class="flex items-center gap-4 text-stone-500 pl-4 hover:bg-stone-100/50 hover:text-stone-900 transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span class="text-sm tracking-wide">Settings</span>
+</a>
+<div class="pt-8 mt-8 border-t border-outline-variant/20">
+<a class="flex items-center gap-4 text-stone-500 pl-4 hover:bg-stone-100/50 hover:text-stone-900 transition-all duration-300 ease-in-out group" href="#">
+<span class="material-symbols-outlined text-sm text-error">logout</span>
+<span class="text-sm tracking-wide">Logout</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<section class="flex-1 md:ml-64 px-8 pb-24">
+<!-- Header Section -->
+<div class="mb-16">
+<h2 class="font-headline text-5xl md:text-6xl text-on-background tracking-tight">Account Overview</h2>
+<div class="w-24 h-1 bg-primary mt-6"></div>
+</div>
+<!-- Dashboard Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Profile Section -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Profile Card -->
+<div class="bg-surface-container p-10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 -mr-16 -mt-16 rotate-45"></div>
+<div class="flex justify-between items-start mb-12">
+<div>
+<span class="text-[10px] tracking-[0.3em] uppercase text-outline font-bold block mb-2">Personal Information</span>
+<h3 class="font-headline text-3xl">Profile Details</h3>
+</div>
+<button class="px-6 py-2 border border-outline/30 text-xs font-bold uppercase tracking-widest hover:bg-on-background hover:text-surface transition-colors">Edit Profile</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-outline">Full Name</label>
+<p class="text-lg font-medium border-b border-outline-variant/30 pb-2">Alaric "Al" Gumes</p>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-outline">Email Address</label>
+<p class="text-lg font-medium border-b border-outline-variant/30 pb-2">al.gumes@premium.id</p>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-outline">Phone Number</label>
+<p class="text-lg font-medium border-b border-outline-variant/30 pb-2">+62 812 3456 7890</p>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase tracking-widest text-outline">Shipping Address</label>
+<p class="text-lg font-medium border-b border-outline-variant/30 pb-2">Jakarta Selatan, Indonesia</p>
+</div>
+</div>
+</div>
+<!-- Order Summary (Minimalist Table) -->
+<div class="bg-surface-container-low p-10">
+<div class="flex justify-between items-end mb-10">
+<div>
+<span class="text-[10px] tracking-[0.3em] uppercase text-outline font-bold block mb-2">Recent Transactions</span>
+<h3 class="font-headline text-3xl">Order History</h3>
+</div>
+<a class="text-xs font-bold uppercase tracking-widest text-primary hover:text-on-primary-container transition-colors border-b-2 border-primary/20 pb-1" href="#">View All Orders</a>
+</div>
+<div class="space-y-6">
+<!-- Order Item -->
+<div class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 bg-surface-container-highest flex-shrink-0">
+<img alt="Order" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Close-up of a high-end tan leather shoe with intricate stitching on a dark marble surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsH03XCJQ9mcluSi5WrqLmXB4Qj_ushU9fQC6ZmMqxHwZRlIi2fNd5mPpADGmrdCEkSuMiokAt52MibdwrD-AT_YAQKZvGeNMwxL03o22pplc7IgCcHt26KIjYf4EaNA7GhfTNChQYLMc9sgVW5noXkFJFr4u98mZ8dJFj3zDQSuFcHAbYLbYJRbvH0aKzU5pEphwKKECPKErdglUoBkdLtqQ6sUlULIhiDRXE2Rl_z52BTAX1Bjp-EjdNzI41wXK0Q8-NiXHfapSa"/>
+</div>
+<div>
+<h4 class="font-bold text-sm">Hand-Burnished Oxford</h4>
+<p class="text-xs text-outline">Order #GM-9921 • Delivered</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-sm">IDR 4.250.000</p>
+<p class="text-[10px] text-outline uppercase tracking-tighter">Oct 12, 2023</p>
+</div>
+</div>
+<!-- Order Item -->
+<div class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 bg-surface-container-highest flex-shrink-0">
+<img alt="Order" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Minimalist artisanal leather sandal displayed on a wooden pedestal with dramatic soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvud_srMyonEp3vK3aYoPSFeyYUFqgqVXUhUvjDj2tKPykYH_TepwEjUaGR9RPtJnPZHCFI4YxhmC59HJWRs7d_CK30KG3zeOgY1eCIyBA4wh-DStT-rQ41JCMxvnqhtkUOb-DqvNOu5ZDDHQLUdiF5WWifxJIN3GwYcV1Lqmia6SYA1D9FBN4kWgFj3AsZ2FRBQeULAB4l69PPsBxEx4S_VYbVn8KUJ0MeFU3VsIHU_oR69QPT6NI1kK9Ix_mKoHYgTihdoPrYMcr"/>
+</div>
+<div>
+<h4 class="font-bold text-sm">Suede Desert Boot</h4>
+<p class="text-xs text-outline">Order #GM-8842 • In Transit</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-sm">IDR 3.800.000</p>
+<p class="text-[10px] text-outline uppercase tracking-tighter">Nov 05, 2023</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Settings & Quick Actions -->
+<div class="space-y-8">
+<!-- Membership Status -->
+<div class="bg-primary text-on-primary-container p-8 flex flex-col justify-between aspect-square lg:aspect-auto">
+<div>
+<span class="text-[10px] tracking-[0.4em] uppercase font-bold opacity-70">GUMES Elite Status</span>
+<h3 class="font-headline text-4xl mt-4">Platinum Curator</h3>
+</div>
+<div class="mt-8">
+<div class="flex justify-between text-[10px] uppercase font-bold mb-2">
+<span>Level Progress</span>
+<span>85%</span>
+</div>
+<div class="w-full h-px bg-on-primary-container/20">
+<div class="h-full bg-on-primary-container w-[85%]"></div>
+</div>
+<p class="text-xs mt-4 opacity-80">You're 2,500 pts away from Bespoke Tier.</p>
+</div>
+</div>
+<!-- Settings Box -->
+<div class="bg-surface-container-highest p-8">
+<h3 class="font-headline text-2xl mb-8">Account Settings</h3>
+<ul class="space-y-6">
+<li>
+<button class="flex items-center justify-between w-full group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">lock</span>
+<span class="text-sm font-medium">Security &amp; Password</span>
+</div>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</button>
+</li>
+<li>
+<button class="flex items-center justify-between w-full group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</button>
+</li>
+<li>
+<button class="flex items-center justify-between w-full group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">credit_card</span>
+<span class="text-sm font-medium">Saved Payments</span>
+</div>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</button>
+</li>
+<li>
+<button class="flex items-center justify-between w-full group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">location_on</span>
+<span class="text-sm font-medium">Address Book</span>
+</div>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+</button>
+</li>
+</ul>
+</div>
+<!-- Promotional Banner -->
+<div class="relative h-64 overflow-hidden group">
+<img alt="Promotional" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Moody atmospheric shot of a master craftsman in a sun-drenched workshop working on a leather piece" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhvMBjyuMPBQN0LGrmzkpN9ohz59tVSjOW2Tb7jzu5KX2BdRjSIRmTZfcIkq2QQvLACXMxXDKXlM42z5u3Q8OwxR0PQ95eC7xFXzcFK_eX2FvN_6239QTtwNZum4DsbZYSJEfyH3yCyCzEXCaqPY4O_tmvhiSUHe8Pzxj1zMAwppVBthQoZBOrrN7Kyv_dZzfjlGEM6UXJui08EzFlVh6tLflSvuGQVAhfWVL62pbKrfJKk3zE6ceLd8Sl0JM6gk6QGIFYnc2UX6Ci"/>
+<div class="absolute inset-0 bg-stone-950/40 flex flex-col justify-end p-8">
+<span class="text-[10px] tracking-widest uppercase text-primary font-bold">New Workshop</span>
+<h4 class="text-surface font-headline text-xl mt-2 leading-tight">Masterclass: The Art of Leather Burnishing</h4>
+<a class="mt-4 text-xs font-bold text-white border-b border-white/40 pb-1 self-start" href="#">Reserve Spot</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Mobile Bottom Navigation Shell -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-surface-bright/95 backdrop-blur-md py-4 px-6 flex justify-around items-center z-50 border-t border-outline-variant/10">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Profile</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-outline" href="#">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Orders</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-outline" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Explore</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-outline" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] uppercase font-bold tracking-tighter">Settings</span>
+</a>
+</div>
+</body></html>

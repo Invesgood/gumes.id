@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#5f3e3c",
+                        "surface-container": "#201f1f",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#2e1413",
+                        "secondary-container": "#504745",
+                        "on-secondary": "#362f2c",
+                        "tertiary-container": "#c69b98",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-dim": "#131313",
+                        "surface-container-high": "#2a2a2a",
+                        "primary": "#e9c176",
+                        "on-primary-fixed": "#261900",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "surface-tint": "#e9c176",
+                        "surface-bright": "#393939",
+                        "outline": "#9a8f80",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed": "#ffdea5",
+                        "error": "#ffb4ab",
+                        "tertiary": "#eabcb8",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed-dim": "#eabcb8",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#ede0dc",
+                        "on-tertiary-container": "#523331",
+                        "background": "#131313",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#e9c176",
+                        "on-surface-variant": "#d1c5b4",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface": "#131313",
+                        "secondary": "#d0c4c0",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-variant": "#353534",
+                        "on-tertiary": "#462827",
+                        "on-secondary-container": "#c2b6b2",
+                        "on-secondary-fixed-variant": "#4d4542",
+                        "on-primary": "#412d00",
+                        "secondary-fixed-dim": "#d0c4c0",
+                        "primary-container": "#c5a059",
+                        "tertiary-fixed": "#ffdad7",
+                        "outline-variant": "#4e4639",
+                        "on-primary-container": "#4e3700",
+                        "inverse-primary": "#775a19",
+                        "on-secondary-fixed": "#201a18",
+                        "on-surface": "#e5e2e1",
+                        "on-background": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Manrope', sans-serif;
+        }
+        .serif-header {
+            font-family: 'Noto Serif', serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1c1b1b;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e9c176;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-on-primary-fixed overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0e0e0e]/95 backdrop-blur-md transition-all duration-300 ease-in-out">
+<div class="flex flex-col items-center w-full pt-8 pb-4 px-12 space-y-4 max-w-screen-2xl mx-auto">
+<!-- Top Row: Logo and Text -->
+<div class="flex flex-col items-center space-y-2 relative w-full">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="terrain">terrain</span>
+<span class="text-2xl font-['Noto_Serif'] font-bold tracking-[0.3em] text-[#c5a059] uppercase">GUMES.ID</span>
+<!-- Absolute Positioned Trailing Action -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 flex items-center space-x-6">
+<span class="text-[#c5a059] font-label text-sm uppercase tracking-wider">Hello Al</span>
+<button class="text-white/70 hover:text-primary transition-transform duration-200 scale-95">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</div>
+<!-- Bottom Row: Navigation Links -->
+<div class="flex items-center space-x-12 pt-2">
+<a class="font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase text-white/70 hover:text-[#e9c176] transition-all duration-300" href="#">New Arrival</a>
+<a class="font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase text-[#e9c176] border-b border-[#e9c176] pb-1 transition-all duration-300" href="#">Product</a>
+<a class="font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase text-white/70 hover:text-[#e9c176] transition-all duration-300" href="#">Location</a>
+<a class="font-['Noto_Serif'] text-sm tracking-[0.1rem] uppercase text-white/70 hover:text-[#e9c176] transition-all duration-300" href="#">Contact Us</a>
+</div>
+</div>
+</nav>
+<main class="pt-56 pb-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+<!-- Page Header -->
+<header class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+<div class="max-w-2xl">
+<p class="font-label text-xs uppercase tracking-[0.3em] text-primary mb-4">The Digital Curator</p>
+<h1 class="serif-header text-5xl md:text-7xl font-bold leading-tight tracking-tight text-on-surface">
+                    Refined <br/> Footwear
+                </h1>
+</div>
+<div class="flex flex-col items-start md:items-end">
+<p class="font-body text-on-surface-variant max-w-xs md:text-right mb-6 leading-relaxed">
+                    Explore our curated collection of hand-burnished leather essentials, where traditional craftsmanship meets modern utility.
+                </p>
+</div>
+</header>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Filter Sidebar -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="sticky top-60 space-y-12">
+<!-- Category Section -->
+<section>
+<h3 class="font-label text-xs uppercase tracking-widest text-primary mb-6">Categories</h3>
+<div class="space-y-4">
+<label class="flex items-center group cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<span class="w-4 h-4 border border-outline-variant mr-3 group-hover:border-primary transition-colors peer-checked:bg-primary peer-checked:border-primary"></span>
+<span class="font-label text-sm uppercase tracking-wider text-on-surface-variant group-hover:text-on-surface transition-colors">All Products</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<span class="w-4 h-4 border border-outline-variant mr-3 group-hover:border-primary transition-colors peer-checked:bg-primary peer-checked:border-primary"></span>
+<span class="font-label text-sm uppercase tracking-wider text-on-surface-variant group-hover:text-on-surface transition-colors">Shoes</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<span class="w-4 h-4 border border-outline-variant mr-3 group-hover:border-primary transition-colors peer-checked:bg-primary peer-checked:border-primary"></span>
+<span class="font-label text-sm uppercase tracking-wider text-on-surface-variant group-hover:text-on-surface transition-colors">Sandals</span>
+</label>
+<label class="flex items-center group cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<span class="w-4 h-4 border border-outline-variant mr-3 group-hover:border-primary transition-colors peer-checked:bg-primary peer-checked:border-primary"></span>
+<span class="font-label text-sm uppercase tracking-wider text-on-surface-variant group-hover:text-on-surface transition-colors">Accessories</span>
+</label>
+</div>
+</section>
+<!-- Color Section -->
+<section>
+<h3 class="font-label text-xs uppercase tracking-widest text-primary mb-6">Palette</h3>
+<div class="flex flex-wrap gap-3">
+<button class="w-8 h-8 bg-black border border-outline-variant hover:border-primary transition-all ring-offset-2 ring-offset-background hover:ring-1 ring-primary"></button>
+<button class="w-8 h-8 bg-[#4a2c2a] border border-outline-variant hover:border-primary transition-all"></button>
+<button class="w-8 h-8 bg-[#b48a56] border border-outline-variant hover:border-primary transition-all"></button>
+</div>
+</section>
+<!-- Filter Actions -->
+<button class="w-full py-4 border border-outline-variant font-label text-[10px] uppercase tracking-[0.2em] hover:bg-surface-variant transition-colors">
+                        Clear Filters
+                    </button>
+</div>
+</aside>
+<!-- Product Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-20 gap-x-12">
+<!-- Product 1: Heritage Boot -->
+<div class="group relative">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover grayscale-[0.2] group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="close-up of hand-burnished tan leather boot with intricate stitching and rich texture under dramatic studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDls2CfFlWxZHeYlSJyrLoL3Y9_xgZi-1WgEHfprasBnNb9jIoFKoRl88eg1HBHRRotIZfOXBmZoGeLueMO6p2hZ0pI0KXpnK3BokQbuKSu2A7KrLdysg2R_UlD3SQLkxghWfoSgaPEREcBv61lDUlx0BJuWcYQCWcMwSnmhScNEQct0xsIesEPGlknHHWcV2iT8pYiS3_pWb9v-4mj6IyRl1JTXP1-tdlF-hw_RPCAkA0pyu3Z20BnG9VQUV7PQWJk9qf_sigj-Iko"/>
+</div>
+<div class="flex flex-col space-y-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Heritage Series</span>
+<div class="flex justify-between items-baseline">
+<h3 class="font-label text-sm uppercase tracking-wider text-on-surface group-hover:text-primary transition-colors">Vanguard Boot</h3>
+<span class="font-body text-sm text-on-surface-variant">$320</span>
+</div>
+</div>
+</div>
+<!-- Product 2: Black Oxford -->
+<div class="group relative translate-y-12">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="minimalist black leather oxford shoe on a dark textured surface with sharp architectural shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0nMOssZHxlgL27xdqTVSOplnzGNkj9A0HRRk0Fmc3u59Npdg_9t3b0r6CHtc6XoSqwQ_FJLdxXBDf23i84ccbZPdX3S25aqkAod3FsB5GaDvFs1gmxiSbZcVJm17Alf78utsKwBUQH83GWdjMAwW3XaSKhlMOJM2Rnii_CTbPOXWNdOcCU1h_j_YGGA331rxiC_TmC7THYuACqnBg2J6pYZ1AdsUfOWqnhXFMTEy4tLq0hvvXIDzh6t0Xo7F7lCN_6UDvCVkBT3kq"/>
+</div>
+<div class="flex flex-col space-y-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Atelier Series</span>
+<div class="flex justify-between items-baseline">
+<h3 class="font-label text-sm uppercase tracking-wider text-on-surface group-hover:text-primary transition-colors">Noir Oxford</h3>
+<span class="font-body text-sm text-on-surface-variant">$285</span>
+</div>
+</div>
+</div>
+<!-- Product 3: Leather Sandal -->
+<div class="group relative">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover grayscale-[0.1] group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="artisan brown leather sandal with brass buckles resting on a warm wooden pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHC2jLO0dGqFoXh7JVfjm0uh-SxADDoduYhhPdLahpTOiKGNXJqxk6VlWOZJQjkknQsErPQaPdCzffTbPG1hXPrKK1Zwa8MesX_lpv-Jvkg5Thn8O8bcufuThK0CGLUddLK-Io8ocG9BtLuHPXs-kMOhSGs6bjIDbBdl8pNthvBej3BqpREwsC4n52vu-mF2MWHM4YAdNv3hNFlWqldfIuW-wfirbtdQRcxUjf9S9dlnhuNB0HJOAF4uLqwjGIIlzNkAJs3EC80MuO"/>
+</div>
+<div class="flex flex-col space-y-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Nomad Series</span>
+<div class="flex justify-between items-baseline">
+<h3 class="font-label text-sm uppercase tracking-wider text-on-surface group-hover:text-primary transition-colors">Solis Sandal</h3>
+<span class="font-body text-sm text-on-surface-variant">$165</span>
+</div>
+</div>
+</div>
+<!-- Product 4: Mahogany Loafer -->
+<div class="group relative">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="polished mahogany leather loafer with light reflecting off the mirror finish toe box" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYo4uqSGqtQaSwI0h4RfoYQ7ru47WacbtxIZGuIs7GX6LSNwnyYcTsMfxz-ufPtezzbnCyoJ6g-bPc5HJRKD4-YKWEcew-I_B3RyojQ_F27XFdevnqomkJ1lI-558H3L1WtcVIl2NV1963gXKeMy9xDOtF3ccbrYl2yJRfMcl_NnvxzNzM3ROIDUS2zBRN6Pni40aC39n-M8xHVcAcEEVLacamXoS_LDuHSr4fG45ZhHRPfKUEnhrWqBfjkiIw_ixLo_tSZHs0Drwq"/>
+</div>
+<div class="flex flex-col space-y-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Heritage Series</span>
+<div class="flex justify-between items-baseline">
+<h3 class="font-label text-sm uppercase tracking-wider text-on-surface group-hover:text-primary transition-colors">Regal Loafer</h3>
+<span class="font-body text-sm text-on-surface-variant">$295</span>
+</div>
+</div>
+</div>
+<!-- Product 5: Chelsea Boot -->
+<div class="group relative -translate-y-12">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<div class="absolute inset-0 bg-gradient-to-t from-stone-950/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="rugged dark brown leather chelsea boot with elastic gusset detail in a cinematic dark interior setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQzGcyvOpuY9CjOznz75TZEGekPzPwDVFb_xLauZDm3LGCCl6zpLwIAy3DQgXhf26FNNdWv7vZ4_Qn8vgBA539YJ9etIAsy0lfjLh1Khw4bUg9km-10H5uNNqs8QfQwvmwPNU916vDDlyhDSNt6HtWLz88TPmr-Yx8fRXJ9BFSie2pwNtQDk0fHOOH9-_WUrtx8ypTV2GlnZNryaNCVciEIa20opTojxpddeO8JtupXkieUAtgwwUpO0FAI3LOsrHj0MFZOwa8hZjP"/>
+</div>
+<div class="flex flex-col space-y-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Heritage Series</span>
+<div class="flex justify-between items-baseline">
+<h3 class="font-label text-sm uppercase tracking-wider text-on-surface group-hover:text-primary transition-colors">Ghost Chelsea</h3>
+<span class="font-body text-sm text-on-surface-variant">$340</span>
+</div>
+</div>
+</div>
+<!-- Product 6: Minimalist Slide -->
+<div class="group relative">
+<div class="aspect-[3/4] overflow-hidden bg-surface-container-low mb-6">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="tan leather flat slide sandal with single wide strap showcasing natural grain texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMFVecpZHn8jCY0Cvf5nB4w_B4aNoKEDWzOHGM5Wl2D0VGsYsCYW152BgOKuzFu5l0DMFXUdf2lNdsPvHQ4VE_sAqhdoo91JAhvoJtXoVPmAvvZmbo-ZhMkxXh3ajRGxC6SdxEy-wCHx1eH7XavObdzQQwuvx9VpcKUTXMfZ2jOMO2x7tGC1rRuWFDewx8iKeyR2zIhCdW0DRiehlLkq7Ob2FD2hJvVFOqrPz5O6ry5Ka4514ZZ8hZd24exPOGZkZYt4LWa4noQLtv"/>
+</div>
+<div class="flex flex-col space-y-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary">Nomad Series</span>
+<div class="flex justify-between items-baseline">
+<h3 class="font-label text-sm uppercase tracking-wider text-on-surface group-hover:text-primary transition-colors">Lune Slide</h3>
+<span class="font-body text-sm text-on-surface-variant">$140</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-32 flex justify-center">
+<button class="group relative px-12 py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed text-xs font-label uppercase tracking-[0.2em] font-bold overflow-hidden">
+<span class="relative z-10">Load More Artifacts</span>
+<div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Editorial Spotlight Section -->
+<section class="mt-32 mb-48 bg-surface-container py-32 overflow-hidden">
+<div class="max-w-screen-2xl mx-auto px-6 md:px-12">
+<div class="relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 relative z-10">
+<img class="w-full h-[600px] object-cover grayscale-[0.3]" data-alt="close-up of artisan hands working with leather and traditional tools with warm directional light casting long shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfxQh3Ow21wtFV2UW7Y7DSbygXIdpZKlSXN77KMgjoEx2UiwKTSje-04vyZI21PppaUXmI3ccEGVb7vNB83upX3vwx5-pgzNTF2cW_w6hn5uxjmfo8wyfVO0NBr5m-YSychCSX8wNUq01bTJ9ldsHfX6HxdsWKeZzDChng0tWEYHy0UCT-rkdpS-jR4ThyFtLpLpYgcPGzxfrEmgLSR5oy42J-EYoiX6VIF610SRJFtxoLDOaLcEEBsJZffUEmbi4XDot97gyWKxTm"/>
+</div>
+<div class="lg:col-span-6 lg:absolute lg:right-0 lg:z-20 bg-surface-container-highest p-12 md:p-20 shadow-2xl">
+<span class="font-label text-[10px] uppercase tracking-[0.4em] text-primary mb-6 block">Our Craft</span>
+<h2 class="serif-header text-4xl md:text-5xl font-bold leading-tight text-on-surface mb-8">The Soul of the Material.</h2>
+<p class="font-body text-on-surface-variant leading-relaxed mb-10 text-lg">
+                        Every GUMES piece begins with premium bovine hides, selected for their unique natural markings. Our master artisans then apply a proprietary burnishing technique that ensures no two pairs are identical.
+                    </p>
+<a class="inline-block font-label text-xs uppercase tracking-widest border-b-2 border-primary pb-1 hover:text-primary transition-colors" href="#">Read the Curator's Note</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-stone-950">
+<div class="flex flex-col items-center justify-center space-y-8 px-8 py-12 max-w-screen-2xl mx-auto">
+<div class="text-[#e9c176] font-serif text-3xl tracking-widest uppercase">GUMES.ID</div>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="text-stone-500 hover:text-[#e9c176] transition-colors font-label text-[10px] uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-stone-500 hover:text-[#e9c176] transition-colors font-label text-[10px] uppercase tracking-widest" href="#">Terms of Service</a>
+<a class="text-stone-500 hover:text-[#e9c176] transition-colors font-label text-[10px] uppercase tracking-widest" href="#">Care Guide</a>
+</div>
+<div class="w-full h-px bg-outline-variant/10"></div>
+<div class="text-stone-500 font-label text-[10px] uppercase tracking-[0.2em] text-center">
+                © 2024 GUMES.ID - THE DIGITAL CURATOR. ALL RIGHTS RESERVED.
+            </div>
+</div>
+</footer>
+</body></html>

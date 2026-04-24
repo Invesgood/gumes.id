@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#2e1413",
+                        "on-surface-variant": "#d1c5b4",
+                        "tertiary-fixed": "#ffdad7",
+                        "surface": "#131313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#c5a059",
+                        "tertiary-fixed-dim": "#eabcb8",
+                        "surface-container": "#201f1f",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-container": "#4e3700",
+                        "surface-container-highest": "#353534",
+                        "on-background": "#e5e2e1",
+                        "secondary-container": "#504745",
+                        "primary": "#e9c176",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#261900",
+                        "on-secondary-fixed": "#201a18",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed-dim": "#e9c176",
+                        "surface-dim": "#131313",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "on-secondary-fixed-variant": "#4d4542",
+                        "surface-tint": "#e9c176",
+                        "background": "#131313",
+                        "inverse-primary": "#775a19",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2a2a2a",
+                        "on-secondary": "#362f2c",
+                        "secondary-fixed-dim": "#d0c4c0",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-container": "#c69b98",
+                        "secondary": "#d0c4c0",
+                        "on-tertiary-container": "#523331",
+                        "outline": "#9a8f80",
+                        "surface-variant": "#353534",
+                        "primary-fixed": "#ffdea5",
+                        "secondary-fixed": "#ede0dc",
+                        "on-tertiary-fixed-variant": "#5f3e3c",
+                        "outline-variant": "#4e4639",
+                        "on-secondary-container": "#c2b6b2",
+                        "surface-bright": "#393939",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#462827",
+                        "tertiary": "#eabcb8",
+                        "on-primary": "#412d00",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .burnished-gradient {
+            background: radial-gradient(circle at center, #e9c176 0%, #c5a059 100%);
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+        h1, h2, h3 {
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center px-8 py-6 w-full fixed top-0 z-50 bg-neutral-950/80 backdrop-blur-md">
+<div class="text-2xl font-bold tracking-widest text-[#c5a059] font-['Noto_Serif']">GUMES.ID</div>
+<div class="hidden md:flex space-x-12">
+<a class="text-neutral-400 font-['Noto_Serif'] tracking-tight hover:text-[#e9c176] transition-colors duration-300" href="#">New Arrival</a>
+<a class="text-neutral-400 font-['Noto_Serif'] tracking-tight hover:text-[#e9c176] transition-colors duration-300" href="#">Product</a>
+<a class="text-neutral-400 font-['Noto_Serif'] tracking-tight hover:text-[#e9c176] transition-colors duration-300" href="#">Location</a>
+<a class="text-neutral-400 font-['Noto_Serif'] tracking-tight hover:text-[#e9c176] transition-colors duration-300" href="#">Contact Us</a>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-[#c5a059] hover:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+<div class="w-10 h-10 bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="Hello Al profile picture" class="w-full h-full object-cover" data-alt="close-up portrait of a sophisticated man with a well-groomed beard, wearing a dark turtleneck in moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUeH8XZzt9m4gPXXHiiQ_EjjO56a2di8iJaOilHEWFDzUW9QNbp5UxLHYF8JfbFK_udQPB_R50NKa4yNlFAKqfKPOtOxRr14ecsSvfpKySkM0fsEFcI-UwN3iT8-tRT_KtjZZDXlL6z8di20ThDtb_5koX-CvMz9uGfyMcNfkNasFgoIH6TUxUAsJazRl2G3icFZyXjSx42EuF1E1ypNIMgz-Wvy6W2Wi2vnlY7_e4qtsnGTmSXrckL8_wQiR5zfZDCDwxBojlTAdj"/>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-20">
+<p class="font-label text-primary text-xs uppercase tracking-[0.3em] mb-4">Archives &amp; Receipts</p>
+<h1 class="text-5xl md:text-7xl font-headline tracking-tighter">Order History</h1>
+<div class="w-24 h-[1px] bg-primary mt-8"></div>
+</header>
+<!-- Orders Grid (Bento Style & Asymmetric) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Filter & Status Column (Side Aesthetic) -->
+<aside class="lg:col-span-3 space-y-12">
+<section>
+<h3 class="font-label text-outline text-[10px] uppercase tracking-widest mb-6">Status Categories</h3>
+<ul class="space-y-4">
+<li class="flex items-center justify-between group cursor-pointer">
+<span class="text-primary font-bold">All Orders</span>
+<span class="text-xs text-outline">12</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer text-outline hover:text-on-surface">
+<span>In Transit</span>
+<span class="text-xs">2</span>
+</li>
+<li class="flex items-center justify-between group cursor-pointer text-outline hover:text-on-surface">
+<span>Delivered</span>
+<span class="text-xs">10</span>
+</li>
+</ul>
+</section>
+<section class="bg-surface-container p-8 space-y-4">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<h4 class="font-headline text-xl">Curator Member</h4>
+<p class="text-xs text-outline leading-relaxed font-body">As a Digital Curator, your bespoke orders are prioritized in our workshop queue.</p>
+</section>
+</aside>
+<!-- Main Orders List -->
+<div class="lg:col-span-9 space-y-24">
+<!-- Order Entry 01 -->
+<article class="group">
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="w-full md:w-72 aspect-[4/5] bg-surface-container-low overflow-hidden relative">
+<img alt="Leather Boot" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="extreme close-up of hand-stitched leather detail on a luxury boot, warm side lighting highlighting the texture and grain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALyiYtWOd9GQ633E_gcJqS00RR4eC30RQlk4FEOCLz-vEl8HAINvCr9mmedfbXC8AS_jNYtxrV9Ap3LzwP-KzwG2H69JskZinykTAukMM9dPHi2tUBWY7wwuBtiUaidHXCTsm_uQdF-AbtWDpG1EEL1IPDim5gAYkUSVaYXcemabJgAhBLe5o5fXP7Jz0XQGQmktIAEajwsHMo79Vng4z2QVqmcIQc_TeuD-IFPeU0Vw6NrxMuTc0vvkHsodwFR_fxjyy5EjXDK1wK"/>
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary text-on-primary-container px-3 py-1 text-[10px] font-bold uppercase tracking-widest">In Transit</span>
+</div>
+</div>
+<div class="flex-1 space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="font-label text-outline text-[10px] uppercase tracking-widest mb-1">Order #GM-99281</p>
+<h2 class="text-3xl font-headline tracking-tight">The Heritage Chelsea</h2>
+</div>
+<div class="text-right">
+<p class="font-headline text-2xl text-primary">$420.00</p>
+<p class="font-label text-outline text-[10px] uppercase">Placed Oct 12, 2023</p>
+</div>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-xl">
+                                Hand-burnished Italian calfskin in Espresso. Custom-fitted with brass hardware and reinforced arch support. Currently departing our Singapore distribution center.
+                            </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="burnished-gradient text-on-primary-container px-8 py-3 text-[10px] font-bold uppercase tracking-widest hover:brightness-110 transition-all">Track Shipment</button>
+<button class="border border-outline-variant px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container transition-all">View Details</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Order Entry 02 -->
+<article class="group">
+<div class="flex flex-col md:flex-row-reverse gap-8 items-start">
+<div class="w-full md:w-72 aspect-[4/5] bg-surface-container-low overflow-hidden relative">
+<img alt="Leather Wallet" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="a minimalist leather wallet resting on a dark marble surface, soft focus background, artisan craft vibe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfrRKPz1uf2IeYVzBIs-XZaY_g38TJ8hp-GdXCLv9fGbx4QkW_Iy42b_d7IvO4A1x3_kiFRDhAx7H_pMzUYSizorNH6BQyZHJIQln2UB0oOQFvJFnVtF0FQ8UVVToCGrHrdaxXvbBGVGC4CAOZAagfeMLivmR1pxpbqHFdU5Cq6w1ZUDV1PBKjf2qi4eDl7lyDCyVtYPklzQ2dmQC2cji69CrzDwFxGRIsVhjin4FEhWfKO7kLI8pnxnJsLQROdalP_18Y3pCgRohY"/>
+<div class="absolute top-0 left-0 p-4">
+<span class="bg-surface-container-highest text-on-surface px-3 py-1 text-[10px] font-bold uppercase tracking-widest">Delivered</span>
+</div>
+</div>
+<div class="flex-1 space-y-6 text-left md:text-right">
+<div class="flex flex-col md:flex-row-reverse md:items-end justify-between gap-4">
+<div>
+<p class="font-label text-outline text-[10px] uppercase tracking-widest mb-1">Order #GM-98440</p>
+<h2 class="text-3xl font-headline tracking-tight">Vanguard Card Holder</h2>
+</div>
+<div class="text-left md:text-right">
+<p class="font-headline text-2xl text-primary">$125.00</p>
+<p class="font-label text-outline text-[10px] uppercase">Placed Sep 04, 2023</p>
+</div>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-xl md:ml-auto">
+                                Veg-tan leather in Saddle Tan. Signature cross-stitch finish with GUMES.ID embossed monogram. Delivered to the concierge at 12:45 PM.
+                            </p>
+<div class="flex flex-wrap gap-4 pt-4 md:justify-end">
+<button class="border border-outline-variant px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container transition-all">Order Again</button>
+<button class="border border-outline-variant px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container transition-all">Download Invoice</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Order Entry 03 -->
+<article class="group">
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="w-full md:w-72 aspect-[4/5] bg-surface-container-low overflow-hidden relative">
+<img alt="Leather Bag" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" data-alt="a premium leather duffle bag with brass buckles, dramatic overhead lighting on a dark workshop table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeeEHd1b973sVTGdxh7NizVU-z9h1SPWKrPTIWAlifzmViH5URRbCT5Puss6yIcJage15CzqtRXZgUKUy6eQIH_yAqj9DGhXkeVXNuiAoy2M-rGmX1vRQYxmi6lC1MDEF2QPl9EiMuoMT9Z3QSfJa2ITn4mz0Es_yYybtMT14ZVgckae8rgtqvRMFSO0_wt7VKXlv2ZcVM4laVRPv8o33KrpXxV_Ffzv9hrreuO7EWWWfDVeg9ARb9GT1p1j6jM5qt502FaGI7irAd"/>
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-surface-container-highest text-on-surface px-3 py-1 text-[10px] font-bold uppercase tracking-widest">Delivered</span>
+</div>
+</div>
+<div class="flex-1 space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="font-label text-outline text-[10px] uppercase tracking-widest mb-1">Order #GM-97102</p>
+<h2 class="text-3xl font-headline tracking-tight">Atelier Weekender</h2>
+</div>
+<div class="text-right">
+<p class="font-headline text-2xl text-primary">$890.00</p>
+<p class="font-label text-outline text-[10px] uppercase">Placed Aug 21, 2023</p>
+</div>
+</div>
+<p class="text-on-surface-variant font-body leading-relaxed max-w-xl">
+                                Full-grain pebbled leather in Noir. Includes matching shoulder strap and dust bag. This item was part of the Summer Atelier drop.
+                            </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="border border-outline-variant px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container transition-all">View Details</button>
+<button class="border border-outline-variant px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container transition-all">Rate Product</button>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 bg-neutral-950 font-['Manrope'] text-[10px] uppercase tracking-[0.2em]">
+<div class="text-neutral-600">© 2024 GUMES.ID Leather Atelier</div>
+<div class="flex space-x-12">
+<a class="text-neutral-600 hover:text-neutral-200 transition-all duration-300 opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-neutral-600 hover:text-neutral-200 transition-all duration-300 opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-neutral-600 hover:text-neutral-200 transition-all duration-300 opacity-80 hover:opacity-100" href="#">Shipping Info</a>
+</div>
+</footer>
+</body></html>

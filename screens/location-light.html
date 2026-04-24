@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#2e1413",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed-dim": "#d0c4c0",
+                        "secondary-container": "#504745",
+                        "on-error": "#690005",
+                        "tertiary": "#eabcb8",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary": "#362f2c",
+                        "primary-container": "#c5a059",
+                        "surface-container": "#201f1f",
+                        "primary-fixed": "#ffdea5",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#462827",
+                        "on-primary": "#412d00",
+                        "on-secondary-container": "#c2b6b2",
+                        "surface-variant": "#353534",
+                        "outline-variant": "#4e4639",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary-container": "#523331",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "primary": "#e9c176",
+                        "secondary-fixed": "#ede0dc",
+                        "on-background": "#e5e2e1",
+                        "inverse-primary": "#775a19",
+                        "surface-bright": "#393939",
+                        "surface-container-low": "#1c1b1b",
+                        "surface": "#131313",
+                        "tertiary-fixed": "#ffdad7",
+                        "background": "#131313",
+                        "surface-container-highest": "#353534",
+                        "on-primary-fixed": "#261900",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#4e3700",
+                        "tertiary-fixed-dim": "#eabcb8",
+                        "secondary": "#d0c4c0",
+                        "on-secondary-fixed-variant": "#4d4542",
+                        "on-primary-fixed-variant": "#5d4201",
+                        "tertiary-container": "#c69b98",
+                        "surface-tint": "#e9c176",
+                        "inverse-on-surface": "#313030",
+                        "outline": "#9a8f80",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#5f3e3c",
+                        "on-surface-variant": "#d1c5b4",
+                        "primary-fixed-dim": "#e9c176",
+                        "on-secondary-fixed": "#201a18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #f9f7f2; color: #393939; }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-[#f9f7f2] text-[#393939] min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="bg-[#f9f7f2] flex flex-col items-center w-full pt-8 pb-4 px-12 max-w-screen-2xl mx-auto sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
+<div class="w-full flex justify-between items-center mb-6">
+<div class="flex-1"></div>
+<div class="text-2xl font-serif text-[#c5a059] flex flex-col items-center tracking-[0.3em]">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="terrain">terrain</span>
+                GUMES.ID
+            </div>
+<div class="flex-1 flex justify-end">
+<span class="font-body text-[10px] uppercase tracking-widest text-[#c5a059] font-bold">Hello Al</span>
+</div>
+</div>
+<nav class="flex gap-12">
+<a class="text-[#393939] font-medium hover:text-[#c5a059] transition-colors duration-300 font-body text-[10px] uppercase tracking-widest" href="#">New Arrival</a>
+<a class="text-[#393939] font-medium hover:text-[#c5a059] transition-colors duration-300 font-body text-[10px] uppercase tracking-widest" href="#">Product</a>
+<a class="text-[#c5a059] border-b border-[#c5a059] pb-1 font-bold font-body text-[10px] uppercase tracking-widest" href="#">Location</a>
+<a class="text-[#393939] font-medium hover:text-[#c5a059] transition-colors duration-300 font-body text-[10px] uppercase tracking-widest" href="#">Contact Us</a>
+</nav>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-24 px-12 max-w-screen-2xl mx-auto flex flex-col items-center text-center">
+<h1 class="font-serif text-6xl md:text-8xl mb-8 tracking-tighter leading-none">Global Ateliers</h1>
+<p class="font-body text-lg max-w-2xl opacity-70 leading-relaxed">
+                Experience the tactile journey of GUMES.ID across our curated physical spaces. Each location is an architectural dialogue between heritage craft and contemporary minimalism.
+            </p>
+</section>
+<!-- Locations Bento Grid -->
+<section class="px-6 md:px-12 pb-32 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Flagship Location: Florence -->
+<div class="md:col-span-8 bg-white overflow-hidden flex flex-col md:flex-row group transition-all duration-700 hover:bg-[#f2eee6]">
+<div class="w-full md:w-1/2 h-[500px]">
+<img alt="Florence Atelier" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" data-alt="Interior of a luxury leather atelier in Florence, featuring high ceilings, stone walls, and minimalist wooden display tables with golden lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv7562cmDWZnJ9txF_pcqiH0fSeb77hcGrY2S9DPvNJtLkS0tLMJ_4C1FvldO9eS8gHCv7UHLF_DO8PKU6BWL-95VWx5gzLo_tHWe7iNaW9IKi0_kERzwaHBByQQC_03VnzX9k9wlydfTUHFC1Yt41pahIzi8SeVjGG4-aTeSvsY3P4fF0NXxtF1qAKMxOMfHbClbNDk7-YC7cCJvFXgDyR9R7teboRyj_9Vcys0_JkfpzGcpxLk6LbvaZHMaG5M5vgTBxMmchiMcC"/>
+</div>
+<div class="w-full md:w-1/2 p-12 flex flex-col justify-between">
+<div>
+<span class="font-body text-[10px] uppercase tracking-[0.2em] text-[#c5a059] mb-4 block">Flagship Atelier</span>
+<h2 class="font-serif text-4xl mb-6">Florence</h2>
+<p class="font-body text-sm leading-loose opacity-60 mb-8">
+                                Located in the heart of the historic leather district, our Florence flagship serves as both a showroom and a live workshop where artisans demonstrate traditional burnishing techniques.
+                            </p>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#c5a059]" data-icon="location_on">location_on</span>
+<span class="font-body text-xs tracking-wide">Via de' Tornabuoni, 15, 50123 Firenze FI, Italy</span>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#c5a059]" data-icon="schedule">schedule</span>
+<span class="font-body text-xs tracking-wide">Mon — Sat: 10:00 - 19:00<br/>Sun: By Appointment</span>
+</div>
+</div>
+</div>
+<button class="mt-12 self-start font-body text-[10px] uppercase tracking-widest font-bold border-b border-[#393939] pb-1 hover:text-[#c5a059] hover:border-[#c5a059] transition-all">
+                            View Map
+                        </button>
+</div>
+</div>
+<!-- Map Widget: Florence -->
+<div class="md:col-span-4 bg-[#f2eee6] flex flex-col items-center justify-center p-8 relative overflow-hidden">
+<img alt="Florence Map" class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale" data-alt="Minimalist abstract map of Florence with soft beige and cream tones, focus on the Arno river and historic center." data-location="Florence" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCaJEEjVgdspLLm3fCjR_i8cQa2hRWw03ni09C8babh-UOT2kXgGmeV6EChefyXLmW-VidvJE07tJznIBDNUMglHRIPZ7Pe_wQKHAXjIjKrgIps7VdLfXOIYsL-GfL7JhJqAKmC4xhO6Pcq9cwQvXwMfIe9d0gsde3Lrs1ueag8mgf13mRSxiaLeAHVc2bwMtZ8uxHMyIkS90ctMQ8jF7pgL97wtabQrJsMp04IvofnajvJgKfhvmT4wuxL9ewQSke4yncHvUaD-sV"/>
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-6xl text-[#c5a059] mb-4" data-icon="explore" data-weight="fill" style="font-variation-settings: 'FILL' 1;">explore</span>
+<h3 class="font-serif text-2xl mb-2">Tuscany Roots</h3>
+<p class="font-body text-[10px] uppercase tracking-widest opacity-50">Discovery Point 01</p>
+</div>
+</div>
+<!-- Location 02: Kyoto -->
+<div class="md:col-span-4 bg-white p-12 flex flex-col justify-between hover:bg-[#f2eee6] transition-colors duration-500">
+<div>
+<span class="font-body text-[10px] uppercase tracking-[0.2em] text-[#c5a059] mb-4 block">Eastern Concept</span>
+<h2 class="font-serif text-4xl mb-6">Kyoto</h2>
+<div class="space-y-4 mb-8">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#c5a059] text-sm" data-icon="location_on">location_on</span>
+<span class="font-body text-xs tracking-wide">Higashiyama Ward, Kyoto, 605-0001, Japan</span>
+</div>
+<p class="font-body text-xs leading-relaxed opacity-60">A serene sanctuary dedicated to the fusion of Italian leathercraft and Japanese minimalist philosophy.</p>
+</div>
+</div>
+<div class="h-64 overflow-hidden mb-8">
+<img alt="Kyoto Atelier" class="w-full h-full object-cover grayscale" data-alt="Modern minimalist Japanese interior with light wood, tatami mats, and curated leather shoes displayed on floating shelves." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0anjaYrgBAin5b_GiRf-HgIg8yl9d4TRTotuyHB7QHbGkAs-Vscio9Fl8qf4viVrbnMR3pdOkLzkzWTbLywx3L2MdO1YVX-63rQdJ93F2lOXJ22hLgQVBV0aP7SuyPw8BMXn4qzfR6H0OQr5PfDc0ftuBlWkx_ZCx1YTkyf9h3H46jtcXU3vSmY02bQQaszpIuOgqakJ1PlX-NDaHkqozb-i5pRSmo-JvFeGkxSgrek8cRIr1MmWJY5i5fcd_jFLTWahLolnY4jtL"/>
+</div>
+<button class="font-body text-[10px] uppercase tracking-widest font-bold border-b border-[#393939] pb-1 self-start">Get Directions</button>
+</div>
+<!-- Location 03: Paris -->
+<div class="md:col-span-8 bg-white overflow-hidden flex flex-col md:flex-row-reverse group transition-all duration-700 hover:bg-[#f2eee6]">
+<div class="w-full md:w-1/2 h-[500px]">
+<img alt="Paris Atelier" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" data-alt="A Parisian street view of a small boutique with a golden door handle and elegant GUMES lettering on the glass." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWplC-_TvcdmaG8oQQ3rDaOYkDemDfOGLYHenma35lQup7PF1zq5z6Xo7Elgmvi9H1Jh0zHHwR_jdLWuboJzk4KYsn34Fi0pOokmW8fUsTIkuqOL4YPhlSzkueu2yruTZ5QGR0XV0gxD5rMEMYUL2kj9kmeN1WP8QF38oyd_qfk-Q2-IghvdzahjflVJdUqQ6_NkG80dd3D-Uas2y6_GM7d0JOX-kQ6IWY_66_NjhTACRuflcTOx17s64l2T8-h2aiJZCBfI0gYPaF"/>
+</div>
+<div class="w-full md:w-1/2 p-12 flex flex-col justify-between">
+<div>
+<span class="font-body text-[10px] uppercase tracking-[0.2em] text-[#c5a059] mb-4 block">Fashion Hub</span>
+<h2 class="font-serif text-4xl mb-6">Le Marais</h2>
+<p class="font-body text-sm leading-loose opacity-60 mb-8">
+                                Tucked away in a quiet courtyard of the 3rd arrondissement, our Paris atelier offers bespoke tailoring services for our exclusive heritage collection.
+                            </p>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#c5a059]" data-icon="location_on">location_on</span>
+<span class="font-body text-xs tracking-wide">Rue des Francs Bourgeois, 75003 Paris, France</span>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#c5a059]" data-icon="call">call</span>
+<span class="font-body text-xs tracking-wide">+33 1 42 77 00 00</span>
+</div>
+</div>
+</div>
+<button class="mt-12 self-start font-body text-[10px] uppercase tracking-widest font-bold border-b border-[#393939] pb-1 hover:text-[#c5a059] hover:border-[#c5a059] transition-all">
+                            View Map
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact CTA -->
+<section class="bg-[#f2eee6] py-32">
+<div class="max-w-screen-xl mx-auto px-12 flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1">
+<h2 class="font-serif text-5xl mb-8 leading-tight">Can't visit in person?<br/><span class="text-[#c5a059]">Connect with our Curators.</span></h2>
+<p class="font-body text-lg opacity-70 mb-12">Our digital atelier is always open. Speak with a product specialist to guide your tactile journey from anywhere in the world.</p>
+<div class="flex gap-8">
+<a class="bg-gradient-to-r from-[#e9c176] to-[#c5a059] px-10 py-5 text-white font-body text-[10px] uppercase tracking-[0.2em] font-bold shadow-xl" href="#">Contact Us</a>
+<a class="px-10 py-5 border border-[#393939]/20 font-body text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-white transition-colors" href="#">Book a Private Call</a>
+</div>
+</div>
+<div class="flex-1 w-full aspect-square bg-white relative p-1">
+<img alt="Artisan hands" class="w-full h-full object-cover grayscale" data-alt="Close-up of artisan hands stitching thick leather with waxed thread, warm afternoon light catching the texture of the material." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK9Izj8qlqQLIz2u-PHPZzeu-4F2dzbUfMSFL9FJZWUWGzI0jFwtlEhC0QwEbFEUj5z0zMyisO6YpnD2Y2yT9WJxl5JwBeCzO559InfCZIhu8z_DjXsb-1_6RN20LMiDmY-QK_YaR80JXWlzkznk5hLfRQAr8jSzfbicJ06mI5gzZyFzKP0epoEhu0jFQvs-WQpARuQNwIIZayNK-jl6zAk7Uo32txxGpXqKqolEKW1enqUaiMxqoyf9qhGVgmRiJ32q1T_YYFy64p"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f9f7f2] flex flex-col items-center py-12 w-full mt-auto border-t-0">
+<div class="w-full max-w-screen-2xl px-12 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="font-body text-[10px] tracking-tight opacity-60">
+                © 2024 GUMES.ID - THE TACTILE ATELIER
+            </div>
+<div class="flex gap-10">
+<a class="font-body text-[10px] tracking-tight text-[#393939] opacity-60 hover:opacity-100 transition-opacity uppercase" href="#">Privacy Policy</a>
+<a class="font-body text-[10px] tracking-tight text-[#393939] opacity-60 hover:opacity-100 transition-opacity uppercase" href="#">Terms of Service</a>
+<a class="font-body text-[10px] tracking-tight text-[#393939] opacity-60 hover:opacity-100 transition-opacity uppercase" href="#">Shipping</a>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-xl opacity-40 hover:opacity-100 cursor-pointer transition-opacity" data-icon="brand_awareness">brand_awareness</span>
+<span class="material-symbols-outlined text-xl opacity-40 hover:opacity-100 cursor-pointer transition-opacity" data-icon="share">share</span>
+</div>
+</div>
+</footer>
+</body></html>
