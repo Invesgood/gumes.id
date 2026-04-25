@@ -34,7 +34,6 @@ interface Product {
 export default function NewArrival() {
   const [newArrivals, setNewArrivals] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [quickViewId, setQuickViewId] = useState<string | null>(null);
   const [cardColors, setCardColors] = useState<Record<string, string>>({});
   const [sizePickerId, setSizePickerId] = useState<string | null>(null);
   const [addedId, setAddedId] = useState<string | null>(null);
@@ -73,8 +72,6 @@ export default function NewArrival() {
         setCardColors(init);
       });
   }, []);
-
-  const quickViewProduct = newArrivals.find((p) => p.id === quickViewId);
 
   return (
     <>
@@ -187,15 +184,6 @@ export default function NewArrival() {
                     </div>
                   )}
 
-                  {/* Quick view button */}
-                  <div className="absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <button
-                      onClick={(e) => { e.stopPropagation(); setQuickViewId(product.id); }}
-                      className="w-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface text-[11px] font-bold tracking-widest uppercase py-4 border-t border-outline-variant/30 hover:bg-surface-container transition-colors"
-                    >
-                      Quick View
-                    </button>
-                  </div>
                 </div>
 
                 {/* Info */}
@@ -366,77 +354,6 @@ export default function NewArrival() {
         </section>
 
       </main>
-
-      {/* ── Quick View Modal ── */}
-      {quickViewId && quickViewProduct && (
-        <div
-          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-8 bg-black/60 backdrop-blur-sm"
-          onClick={() => setQuickViewId(null)}
-        >
-          <div
-            className="bg-surface w-full md:max-w-3xl max-h-[90vh] overflow-y-auto md:rounded-none shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="relative aspect-square">
-                <Image
-                  src={quickViewProduct.image}
-                  alt={quickViewProduct.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-8 md:p-10 flex flex-col">
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <p className="text-primary text-[10px] tracking-widest uppercase mb-1">
-                      {quickViewProduct.badge}
-                    </p>
-                    <h3 className="font-[family-name:var(--font-headline)] text-3xl">
-                      {quickViewProduct.name}
-                    </h3>
-                    <p className="text-outline text-xs uppercase tracking-widest mt-1">
-                      {quickViewProduct.material}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setQuickViewId(null)}
-                    className="text-on-surface-variant hover:text-on-surface transition-colors"
-                  >
-                    <span className="material-symbols-outlined">close</span>
-                  </button>
-                </div>
-
-                <p className="font-[family-name:var(--font-headline)] text-2xl text-primary-container mb-8">
-                  {quickViewProduct.price}
-                </p>
-
-                <p className="text-sm text-on-surface-variant leading-relaxed mb-8">
-                  {quickViewProduct.description ||
-                    "Lihat halaman detail untuk informasi lengkap tentang bahan, ukuran, dan proses pembuatan produk ini."}
-                </p>
-
-                <div className="flex flex-col gap-3 mt-auto">
-                  <Link
-                    href={`/product/${quickViewProduct.id}`}
-                    onClick={() => setQuickViewId(null)}
-                    className="w-full burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase py-4 hover:brightness-110 transition-all flex items-center justify-center gap-2"
-                  >
-                    <span className="material-symbols-outlined text-base">arrow_forward</span>
-                    Lihat Detail & Pilih Ukuran
-                  </Link>
-                  <Link
-                    href="/cart"
-                    className="w-full border border-outline-variant text-[11px] font-bold tracking-widest uppercase py-4 text-center hover:bg-surface-container transition-colors block"
-                  >
-                    Lihat Cart
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Footer />
     </>

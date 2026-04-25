@@ -10,6 +10,7 @@ export interface Review {
   rating: number;
   comment: string;
   date: string;
+  category: string;
 }
 
 const DATA_PATH = path.join(process.cwd(), "src/data/reviews.json");

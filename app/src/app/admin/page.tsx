@@ -13,6 +13,7 @@ interface Review {
   rating: number;
   comment: string;
   date: string;
+  category: string;
 }
 
 interface Product {
@@ -82,6 +83,7 @@ export default function AdminPage() {
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [deletingReviewId, setDeletingReviewId] = useState<string | null>(null);
+  const [reviewCategory, setReviewCategory] = useState("Semua");
 
   const [toast, setToast] = useState<{ msg: string; type: "success" | "error" } | null>(null);
 
@@ -462,40 +464,71 @@ export default function AdminPage() {
             <span className="text-[11px] uppercase tracking-widest text-outline">{reviews.length} ulasan</span>
           </div>
 
-          {reviews.length === 0 ? (
-            <div className="text-center py-20 text-outline text-sm">Belum ada ulasan.</div>
-          ) : (
-            <div className="divide-y divide-outline-variant/10">
-              {reviews.map((review) => (
-                <div key={review.id} className="px-6 py-5 flex items-start gap-5 hover:bg-surface-container-high transition-colors">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 flex-wrap mb-1">
-                      <span className="font-medium text-sm text-on-surface">{review.customerName}</span>
-                      <span className="text-[10px] uppercase tracking-widest text-outline">{review.productName}</span>
-                      <span className="text-[10px] text-outline/60">{review.orderId}</span>
+          {/* Filter tabs */}
+          <div className="flex border-b border-outline-variant/20">
+            {["Semua", "Sendal", "Sepatu"].map((cat) => {
+              const count = cat === "Semua" ? reviews.length : reviews.filter((r) => r.category === cat).length;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setReviewCategory(cat)}
+                  className={`px-6 py-3 text-[11px] font-bold uppercase tracking-widest transition-colors border-b-2 ${
+                    reviewCategory === cat
+                      ? "border-primary-container text-primary-container"
+                      : "border-transparent text-outline hover:text-on-surface"
+                  }`}
+                >
+                  {cat}
+                  <span className={`ml-2 text-[10px] ${reviewCategory === cat ? "text-primary-container" : "text-outline"}`}>
+                    ({count})
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {(() => {
+            const filtered = reviewCategory === "Semua" ? reviews : reviews.filter((r) => r.category === reviewCategory);
+            return filtered.length === 0 ? (
+              <div className="text-center py-20 text-outline text-sm">Belum ada ulasan{reviewCategory !== "Semua" ? ` untuk kategori ${reviewCategory}` : ""}.</div>
+            ) : (
+              <div className="divide-y divide-outline-variant/10">
+                {filtered.map((review) => (
+                  <div key={review.id} className="px-6 py-5 flex items-start gap-5 hover:bg-surface-container-high transition-colors">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 flex-wrap mb-1">
+                        <span className="font-medium text-sm text-on-surface">{review.customerName}</span>
+                        <span className="text-[10px] uppercase tracking-widest text-outline">{review.productName}</span>
+                        {review.category && (
+                          <span className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 bg-surface-container-highest text-primary-container">
+                            {review.category}
+                          </span>
+                        )}
+                        <span className="text-[10px] text-outline/60">{review.orderId}</span>
+                      </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {[1,2,3,4,5].map((s) => (
+                          <span key={s} className="material-symbols-outlined text-base" style={{ fontVariationSettings: review.rating >= s ? "'FILL' 1" : "'FILL' 0", color: review.rating >= s ? "#c68642" : "var(--color-outline-variant)" }}>star</span>
+                        ))}
+                      </div>
+                      {review.comment && (
+                        <p className="text-sm text-on-surface-variant">{review.comment}</p>
+                      )}
+                      <p className="text-[10px] text-outline mt-2">{review.date}</p>
                     </div>
-                    <div className="flex gap-0.5 mb-2">
-                      {[1,2,3,4,5].map((s) => (
-                        <span key={s} className="material-symbols-outlined text-base" style={{ fontVariationSettings: review.rating >= s ? "'FILL' 1" : "'FILL' 0", color: review.rating >= s ? "#c68642" : "var(--color-outline-variant)" }}>star</span>
-                      ))}
-                    </div>
-                    {review.comment && (
-                      <p className="text-sm text-on-surface-variant">{review.comment}</p>
-                    )}
-                    <p className="text-[10px] text-outline mt-2">{review.date}</p>
+                    <button
+                      onClick={() => handleDeleteReview(review.id)}
+                      disabled={deletingReviewId === review.id}
+                      className="text-on-surface-variant hover:text-error transition-colors disabled:opacity-40 shrink-0"
+                      title="Hapus ulasan"
+                    >
+                      <span className="material-symbols-outlined text-xl">delete</span>
+                    </button>
                   </div>
-                  <button
-                    onClick={() => handleDeleteReview(review.id)}
-                    disabled={deletingReviewId === review.id}
-                    className="text-on-surface-variant hover:text-error transition-colors disabled:opacity-40 shrink-0"
-                    title="Hapus ulasan"
-                  >
-                    <span className="material-symbols-outlined text-xl">delete</span>
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </main>
 
