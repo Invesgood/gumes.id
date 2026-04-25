@@ -78,7 +78,7 @@ export default function Checkout() {
           </div>
 
           {/* Order Summary */}
-          <aside className="lg:col-span-5 bg-surface-container-lowest p-8 md:p-12 shadow-[0_40px_80px_rgba(0,0,0,0.02)] sticky top-48">
+          <aside className="lg:col-span-5 bg-surface-container-lowest p-8 md:p-12 border border-outline-variant/30 shadow-md sticky top-48">
             <h2 className="font-[family-name:var(--font-headline)] text-xl uppercase tracking-[0.2em] mb-8">Order Summary</h2>
             <div className="flex gap-6 mb-8 pb-8 border-b border-outline-variant/10">
               <div className="w-24 h-28 bg-surface-container overflow-hidden relative">

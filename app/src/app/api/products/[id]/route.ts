@@ -17,6 +17,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     price: body.price,
     priceNum: Number(body.priceNum) || 0,
     image: body.image,
+    gallery: Array.isArray(body.gallery) ? body.gallery : [],
+    colorImages: body.colorImages && typeof body.colorImages === "object" ? body.colorImages : {},
     category: body.category,
     colors: Array.isArray(body.colors) ? body.colors : (body.colors ? [body.colors] : ["hitam"]),
     isNewArrival: Boolean(body.isNewArrival),

@@ -15,7 +15,7 @@ export default function Profile() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Sidebar */}
           <div className="space-y-8">
-            <div className="bg-surface-container-lowest p-8 text-center">
+            <div className="bg-surface-container-lowest p-8 text-center border border-outline-variant/30 shadow-md">
               <div className="w-20 h-20 burnished-gradient mx-auto flex items-center justify-center mb-4">
                 <span className="text-white font-[family-name:var(--font-headline)] text-2xl font-bold">AV</span>
               </div>
@@ -44,7 +44,7 @@ export default function Profile() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-12">
             {/* Personal Info */}
-            <section className="bg-surface-container-lowest p-8 md:p-12">
+            <section className="bg-surface-container-lowest p-8 md:p-12 border border-outline-variant/30 shadow-md">
               <h3 className="font-[family-name:var(--font-headline)] text-xl mb-8 flex items-center gap-3">
                 <span className="material-symbols-outlined text-primary">person</span>
                 Personal Information
@@ -73,7 +73,7 @@ export default function Profile() {
             </section>
 
             {/* Shipping Address */}
-            <section className="bg-surface-container-lowest p-8 md:p-12">
+            <section className="bg-surface-container-lowest p-8 md:p-12 border border-outline-variant/30 shadow-md">
               <h3 className="font-[family-name:var(--font-headline)] text-xl mb-8 flex items-center gap-3">
                 <span className="material-symbols-outlined text-primary">home</span>
                 Default Shipping Address

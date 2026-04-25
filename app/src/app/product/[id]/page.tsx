@@ -9,6 +9,14 @@ import { useParams } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
 import { formatIDR } from "@/lib/cart";
 
+interface Review {
+  id: string;
+  customerName: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 interface Product {
   id: string;
   name: string;
@@ -16,6 +24,8 @@ interface Product {
   price: string;
   priceNum: number;
   image: string;
+  gallery?: string[];
+  colorImages?: Record<string, string>;
   category: string;
   colors: string[];
   isNewArrival: boolean;
@@ -41,6 +51,8 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
   const [sizeError, setSizeError] = useState(false);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [displayImage, setDisplayImage] = useState<string>("");
   const { addItem } = useCart();
 
   useEffect(() => {
@@ -50,8 +62,12 @@ export default function ProductDetail() {
         const found = data.find((p) => p.id === id);
         setProduct(found || null);
         if (found?.colors?.length) setSelectedColor(found.colors[0]);
+        setDisplayImage(found?.image || "");
         setLoading(false);
       });
+    fetch(`/api/reviews?productId=${id}`)
+      .then((r) => r.json())
+      .then(setReviews);
   }, [id]);
 
   const handleAddToCart = useCallback(() => {
@@ -120,31 +136,52 @@ export default function ProductDetail() {
           {/* Main grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
 
-            {/* Image */}
-            <div className="relative aspect-[4/5] bg-surface-container-low overflow-hidden">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover"
-                priority
-              />
-              {/* Badges */}
-              <div className="absolute top-5 left-5 flex flex-col gap-2">
-                {product.badge && (
-                  <div className="bg-surface-container-lowest px-3 py-1">
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-primary-container">
-                      {product.badge}
-                    </span>
-                  </div>
-                )}
-                {product.bestSeller && (
-                  <div className="bg-on-surface px-3 py-1 flex items-center gap-1">
-                    <span className="material-symbols-outlined text-surface" style={{ fontVariationSettings: "'FILL' 1", fontSize: "11px" }}>star</span>
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-surface">Best Seller</span>
-                  </div>
-                )}
+            {/* Image + thumbnails */}
+            <div className="flex flex-col gap-3">
+              <div className="relative aspect-square bg-surface-container-low overflow-hidden border border-outline-variant/30 shadow-md">
+                <Image
+                  src={displayImage || product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition-opacity duration-300"
+                  priority
+                  unoptimized={(displayImage || product.image).startsWith("/")}
+                />
+                {/* Badges */}
+                <div className="absolute top-5 left-5 flex flex-col gap-2">
+                  {product.badge && (
+                    <div className="bg-surface-container-lowest px-3 py-1">
+                      <span className="text-[10px] uppercase tracking-widest font-bold text-primary-container">
+                        {product.badge}
+                      </span>
+                    </div>
+                  )}
+                  {product.bestSeller && (
+                    <div className="bg-on-surface px-3 py-1 flex items-center gap-1">
+                      <span className="material-symbols-outlined text-surface" style={{ fontVariationSettings: "'FILL' 1", fontSize: "11px" }}>star</span>
+                      <span className="text-[10px] uppercase tracking-widest font-bold text-surface">Best Seller</span>
+                    </div>
+                  )}
+                </div>
               </div>
+
+              {/* Thumbnails */}
+              {(product.gallery?.length ?? 0) > 0 && (
+                <div className="flex gap-2 overflow-x-auto pb-1">
+                  {[product.image, ...(product.gallery || [])].map((img, i) => {
+                    const isActive = (displayImage || product.image) === img;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setDisplayImage(img)}
+                        className={`relative w-16 h-16 shrink-0 overflow-hidden border-2 transition-all ${isActive ? "border-on-surface" : "border-outline-variant/30 opacity-60 hover:opacity-100"}`}
+                      >
+                        <Image src={img} alt="" fill className="object-cover" unoptimized={img.startsWith("/")} />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Info */}
@@ -183,7 +220,10 @@ export default function ProductDetail() {
                       return (
                         <button
                           key={cid}
-                          onClick={() => setSelectedColor(cid)}
+                          onClick={() => {
+                            setSelectedColor(cid);
+                            setDisplayImage(product.colorImages?.[cid] || product.image);
+                          }}
                           title={c.label}
                           className={`flex items-center gap-2 px-3 py-2 border-2 transition-all text-[11px] font-bold uppercase tracking-widest ${
                             selectedColor === cid
@@ -277,6 +317,44 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
+
+          {/* Reviews */}
+          {reviews.length > 0 && (
+            <div className="mt-20 border-t border-outline-variant/20 pt-16">
+              <div className="flex items-end gap-6 mb-10">
+                <h2 className="font-[family-name:var(--font-headline)] text-3xl">Ulasan Pembeli</h2>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="flex">
+                    {[1,2,3,4,5].map((s) => {
+                      const avg = reviews.reduce((a, r) => a + r.rating, 0) / reviews.length;
+                      return (
+                        <span key={s} className="material-symbols-outlined text-lg" style={{ fontVariationSettings: avg >= s ? "'FILL' 1" : "'FILL' 0", color: avg >= s ? "#c68642" : "var(--color-outline-variant)" }}>star</span>
+                      );
+                    })}
+                  </div>
+                  <span className="text-sm text-outline">{(reviews.reduce((a,r)=>a+r.rating,0)/reviews.length).toFixed(1)} · {reviews.length} ulasan</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {reviews.map((review) => (
+                  <div key={review.id} className="bg-surface-container-lowest p-6 border border-outline-variant/20">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-medium text-sm text-on-surface">{review.customerName}</span>
+                      <span className="text-[10px] text-outline uppercase tracking-widest">{review.date}</span>
+                    </div>
+                    <div className="flex gap-0.5 mb-3">
+                      {[1,2,3,4,5].map((s) => (
+                        <span key={s} className="material-symbols-outlined text-base" style={{ fontVariationSettings: review.rating >= s ? "'FILL' 1" : "'FILL' 0", color: review.rating >= s ? "#c68642" : "var(--color-outline-variant)" }}>star</span>
+                      ))}
+                    </div>
+                    {review.comment && (
+                      <p className="text-sm text-on-surface-variant leading-relaxed">{review.comment}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </main>
       <Footer />

@@ -163,7 +163,7 @@ export default function Cart() {
 
             {/* ── Order Summary ── */}
             <aside className="lg:col-span-5 xl:col-span-4 sticky top-48">
-              <div className="bg-surface-container-lowest shadow-[0_2px_40px_rgba(0,0,0,0.06)]">
+              <div className="bg-surface-container-lowest border border-outline-variant/30 shadow-md">
                 <div className="px-8 pt-8 pb-6 border-b border-outline-variant/10">
                   <h2 className="font-[family-name:var(--font-headline)] text-2xl">Order Summary</h2>
                 </div>

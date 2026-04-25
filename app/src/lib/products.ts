@@ -8,6 +8,8 @@ export interface Product {
   price: string;
   priceNum: number;
   image: string;
+  gallery?: string[];
+  colorImages?: Record<string, string>;
   category: string;
   colors: string[];
   isNewArrival: boolean;

@@ -4,6 +4,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+interface Review {
+  id: string;
+  productId: string;
+  productName: string;
+  orderId: string;
+  customerName: string;
+  rating: number;
+  comment: string;
+  date: string;
+}
+
 interface Product {
   id: string;
   name: string;
@@ -11,6 +22,8 @@ interface Product {
   price: string;
   priceNum: number;
   image: string;
+  gallery?: string[];
+  colorImages?: Record<string, string>;
   category: string;
   colors: string[];
   isNewArrival: boolean;
@@ -35,6 +48,8 @@ const emptyForm = (): Omit<Product, "id"> => ({
   price: "",
   priceNum: 0,
   image: "",
+  gallery: [],
+  colorImages: {},
   category: CATEGORIES[0],
   colors: [],
   isNewArrival: false,
@@ -56,9 +71,17 @@ export default function AdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm());
   const [saving, setSaving] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [colorImageFiles, setColorImageFiles] = useState<Record<string, File>>({});
+  const [colorImagePreviews, setColorImagePreviews] = useState<Record<string, string>>({});
+  const [galleryFiles, setGalleryFiles] = useState<{ file: File; preview: string }[]>([]);
 
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [deletingReviewId, setDeletingReviewId] = useState<string | null>(null);
 
   const [toast, setToast] = useState<{ msg: string; type: "success" | "error" } | null>(null);
 
@@ -67,7 +90,7 @@ export default function AdminPage() {
   }, []);
 
   useEffect(() => {
-    if (authed) fetchProducts();
+    if (authed) { fetchProducts(); fetchReviews(); }
   }, [authed]);
 
   useEffect(() => {
@@ -84,6 +107,25 @@ export default function AdminPage() {
     setLoading(false);
   }
 
+  async function fetchReviews() {
+    const res = await fetch("/api/reviews");
+    const data = await res.json();
+    setReviews(data);
+  }
+
+  async function handleDeleteReview(id: string) {
+    setDeletingReviewId(id);
+    try {
+      await fetch(`/api/reviews/${id}`, { method: "DELETE" });
+      setReviews((prev) => prev.filter((r) => r.id !== id));
+      setToast({ msg: "Ulasan dihapus.", type: "success" });
+    } catch {
+      setToast({ msg: "Gagal menghapus.", type: "error" });
+    } finally {
+      setDeletingReviewId(null);
+    }
+  }
+
   function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     if (pwInput === ADMIN_PASSWORD) {
@@ -98,16 +140,25 @@ export default function AdminPage() {
   function openAdd() {
     setForm(emptyForm());
     setEditingId(null);
+    setImageFile(null);
+    setImagePreview("");
+    setColorImageFiles({});
+    setColorImagePreviews({});
+    setGalleryFiles([]);
     setShowForm(true);
   }
 
   function openEdit(p: Product) {
+    const num = p.priceNum || Number(p.price.replace(/\D/g, ""));
+    const formatted = num ? "Rp " + num.toLocaleString("id-ID") : p.price;
     setForm({
       name: p.name,
       material: p.material,
-      price: p.price,
-      priceNum: p.priceNum,
+      price: formatted,
+      priceNum: num,
       image: p.image,
+      gallery: p.gallery || [],
+      colorImages: p.colorImages || {},
       category: p.category,
       colors: p.colors || [],
       isNewArrival: p.isNewArrival,
@@ -116,6 +167,11 @@ export default function AdminPage() {
       featured: p.featured || false,
       description: p.description || "",
     });
+    setImageFile(null);
+    setImagePreview(p.image);
+    setColorImageFiles({});
+    setColorImagePreviews(p.colorImages || {});
+    setGalleryFiles([]);
     setEditingId(p.id);
     setShowForm(true);
   }
@@ -124,12 +180,39 @@ export default function AdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
+      let imagePath = form.image;
+      if (imageFile) {
+        const fd = new FormData();
+        fd.append("file", imageFile);
+        const uploadRes = await fetch("/api/upload", { method: "POST", body: fd });
+        if (!uploadRes.ok) throw new Error("Upload failed");
+        imagePath = (await uploadRes.json()).url;
+      }
+
+      const updatedColorImages: Record<string, string> = { ...(form.colorImages || {}) };
+      for (const [colorId, file] of Object.entries(colorImageFiles)) {
+        const fd = new FormData();
+        fd.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: fd });
+        if (!res.ok) throw new Error("Upload failed");
+        updatedColorImages[colorId] = (await res.json()).url;
+      }
+
+      const updatedGallery = [...(form.gallery || [])];
+      for (const { file } of galleryFiles) {
+        const fd = new FormData();
+        fd.append("file", file);
+        const res = await fetch("/api/upload", { method: "POST", body: fd });
+        if (!res.ok) throw new Error("Upload failed");
+        updatedGallery.push((await res.json()).url);
+      }
+
       const url = editingId ? `/api/products/${editingId}` : "/api/products";
       const method = editingId ? "PUT" : "POST";
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, image: imagePath, gallery: updatedGallery, colorImages: updatedColorImages }),
       });
       if (!res.ok) throw new Error("Failed");
       await fetchProducts();
@@ -262,14 +345,15 @@ export default function AdminPage() {
 
       <main className="max-w-screen-xl mx-auto px-6 md:px-10 py-10">
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
           {[
             { label: "Total Products", value: products.length, icon: "inventory_2" },
             { label: "New Arrivals", value: products.filter((p) => p.isNewArrival).length, icon: "new_releases" },
             { label: "Featured", value: products.filter((p) => p.featured).length, icon: "star" },
             { label: "Categories", value: [...new Set(products.map((p) => p.category))].length, icon: "category" },
+            { label: "Ulasan", value: reviews.length, icon: "rate_review" },
           ].map((stat) => (
-            <div key={stat.label} className="bg-surface-container p-6">
+            <div key={stat.label} className="bg-surface-container p-6 border border-outline-variant/30 shadow-sm">
               <div className="flex items-center gap-3 mb-2">
                 <span className="material-symbols-outlined text-primary-container text-xl">{stat.icon}</span>
                 <span className="text-[10px] uppercase tracking-widest text-outline">{stat.label}</span>
@@ -280,7 +364,7 @@ export default function AdminPage() {
         </div>
 
         {/* Product Table */}
-        <div className="bg-surface-container">
+        <div className="bg-surface-container border border-outline-variant/30 shadow-md">
           <div className="flex items-center justify-between px-6 py-5 border-b border-outline-variant/20">
             <h2 className="font-[family-name:var(--font-headline)] text-xl">Products</h2>
             <button
@@ -367,6 +451,52 @@ export default function AdminPage() {
             </div>
           )}
         </div>
+
+        {/* Reviews Section */}
+        <div className="bg-surface-container border border-outline-variant/30 shadow-md mt-10">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-outline-variant/20">
+            <h2 className="font-[family-name:var(--font-headline)] text-xl flex items-center gap-2">
+              <span className="material-symbols-outlined text-primary-container">rate_review</span>
+              Ulasan Pembeli
+            </h2>
+            <span className="text-[11px] uppercase tracking-widest text-outline">{reviews.length} ulasan</span>
+          </div>
+
+          {reviews.length === 0 ? (
+            <div className="text-center py-20 text-outline text-sm">Belum ada ulasan.</div>
+          ) : (
+            <div className="divide-y divide-outline-variant/10">
+              {reviews.map((review) => (
+                <div key={review.id} className="px-6 py-5 flex items-start gap-5 hover:bg-surface-container-high transition-colors">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 flex-wrap mb-1">
+                      <span className="font-medium text-sm text-on-surface">{review.customerName}</span>
+                      <span className="text-[10px] uppercase tracking-widest text-outline">{review.productName}</span>
+                      <span className="text-[10px] text-outline/60">{review.orderId}</span>
+                    </div>
+                    <div className="flex gap-0.5 mb-2">
+                      {[1,2,3,4,5].map((s) => (
+                        <span key={s} className="material-symbols-outlined text-base" style={{ fontVariationSettings: review.rating >= s ? "'FILL' 1" : "'FILL' 0", color: review.rating >= s ? "#c68642" : "var(--color-outline-variant)" }}>star</span>
+                      ))}
+                    </div>
+                    {review.comment && (
+                      <p className="text-sm text-on-surface-variant">{review.comment}</p>
+                    )}
+                    <p className="text-[10px] text-outline mt-2">{review.date}</p>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteReview(review.id)}
+                    disabled={deletingReviewId === review.id}
+                    className="text-on-surface-variant hover:text-error transition-colors disabled:opacity-40 shrink-0"
+                    title="Hapus ulasan"
+                  >
+                    <span className="material-symbols-outlined text-xl">delete</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </main>
 
       {/* ── Add / Edit Modal ── */}
@@ -416,26 +546,20 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
-                    Price Display *
+                    Harga *
                   </label>
                   <input
                     required
                     value={form.price}
-                    onChange={(e) => setForm({ ...form, price: e.target.value })}
+                    onChange={(e) => {
+                      const digits = e.target.value.replace(/\D/g, "");
+                      const num = Number(digits);
+                      const formatted = digits ? "Rp " + num.toLocaleString("id-ID") : "";
+                      setForm({ ...form, price: formatted, priceNum: num });
+                    }}
                     className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary-container transition-colors"
                     placeholder="e.g. Rp 12.600.000"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
-                    Price (number, IDR)
-                  </label>
-                  <input
-                    type="number"
-                    value={form.priceNum || ""}
-                    onChange={(e) => setForm({ ...form, priceNum: Number(e.target.value) })}
-                    className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary-container transition-colors"
-                    placeholder="e.g. 12600000"
+                    inputMode="numeric"
                   />
                 </div>
                 <div>
@@ -502,20 +626,127 @@ export default function AdminPage() {
 
               <div>
                 <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
-                  Image URL *
+                  Foto Produk {!editingId && "*"}
                 </label>
-                <input
-                  required
-                  value={form.image}
-                  onChange={(e) => setForm({ ...form, image: e.target.value })}
-                  className="w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 text-sm text-on-surface outline-none focus:border-primary-container transition-colors"
-                  placeholder="https://..."
-                />
-                {form.image && (
+                <label className="flex items-center gap-3 cursor-pointer w-full border border-outline-variant bg-surface-container-lowest px-4 py-3 hover:border-primary-container transition-colors">
+                  <span className="material-symbols-outlined text-outline text-xl">upload_file</span>
+                  <span className="text-sm text-on-surface-variant truncate">
+                    {imageFile ? imageFile.name : "Pilih foto dari komputer…"}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    required={!editingId && !form.image}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      setImageFile(file);
+                      setImagePreview(URL.createObjectURL(file));
+                    }}
+                  />
+                </label>
+                {imagePreview && (
                   <div className="mt-3 relative w-24 h-24 bg-surface-container-low overflow-hidden border border-outline-variant/20">
-                    <Image src={form.image} alt="preview" fill className="object-cover" onError={() => {}} />
+                    <Image src={imagePreview} alt="preview" fill className="object-cover" unoptimized />
                   </div>
                 )}
+              </div>
+
+              {/* Per-color images */}
+              {form.colors.length > 0 && (
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+                    Foto Per Warna <span className="text-outline font-normal">(opsional)</span>
+                  </label>
+                  <div className="space-y-2">
+                    {form.colors.map((colorId) => {
+                      const colorDef = COLORS.find((c) => c.id === colorId);
+                      const hasFile = !!colorImageFiles[colorId];
+                      const hasExisting = !!(form.colorImages?.[colorId] || colorImagePreviews[colorId]);
+                      return (
+                        <div key={colorId} className="flex items-center gap-3">
+                          <span className="w-4 h-4 rounded-full shrink-0 border border-white/20" style={{ backgroundColor: colorDef?.hex }} />
+                          <span className="text-xs text-on-surface-variant w-14 shrink-0">{colorDef?.label}</span>
+                          <label className="flex-1 flex items-center gap-2 cursor-pointer border border-outline-variant bg-surface-container-lowest px-3 py-2 hover:border-primary-container transition-colors">
+                            <span className="material-symbols-outlined text-outline text-base">upload_file</span>
+                            <span className="text-xs text-on-surface-variant truncate">
+                              {hasFile ? colorImageFiles[colorId].name : hasExisting ? "Sudah ada — klik untuk ganti" : "Pilih foto…"}
+                            </span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (!file) return;
+                                setColorImageFiles((prev) => ({ ...prev, [colorId]: file }));
+                                setColorImagePreviews((prev) => ({ ...prev, [colorId]: URL.createObjectURL(file) }));
+                              }}
+                            />
+                          </label>
+                          {colorImagePreviews[colorId] && (
+                            <div className="relative w-10 h-10 bg-surface-container-low overflow-hidden border border-outline-variant/20 shrink-0">
+                              <Image src={colorImagePreviews[colorId]} alt={colorDef?.label || ""} fill className="object-cover" unoptimized />
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Gallery tambahan */}
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+                  Foto Galeri Tambahan <span className="text-outline font-normal">(opsional, bisa lebih dari 1)</span>
+                </label>
+                <div className="flex flex-wrap gap-3">
+                  {/* Existing gallery */}
+                  {(form.gallery || []).map((url, i) => (
+                    <div key={url} className="relative w-20 h-20 border border-outline-variant/30 overflow-hidden group">
+                      <Image src={url} alt={`gallery-${i}`} fill className="object-cover" unoptimized={url.startsWith("/")} />
+                      <button
+                        type="button"
+                        onClick={() => setForm({ ...form, gallery: (form.gallery || []).filter((_, idx) => idx !== i) })}
+                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                      >
+                        <span className="material-symbols-outlined text-white text-lg">delete</span>
+                      </button>
+                    </div>
+                  ))}
+                  {/* New files preview */}
+                  {galleryFiles.map((g, i) => (
+                    <div key={i} className="relative w-20 h-20 border border-primary-container/40 overflow-hidden group">
+                      <Image src={g.preview} alt="" fill className="object-cover" unoptimized />
+                      <button
+                        type="button"
+                        onClick={() => setGalleryFiles((prev) => prev.filter((_, idx) => idx !== i))}
+                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                      >
+                        <span className="material-symbols-outlined text-white text-lg">delete</span>
+                      </button>
+                    </div>
+                  ))}
+                  {/* Add button */}
+                  <label className="w-20 h-20 border-2 border-dashed border-outline-variant flex flex-col items-center justify-center cursor-pointer hover:border-primary-container transition-colors">
+                    <span className="material-symbols-outlined text-outline text-xl">add_photo_alternate</span>
+                    <span className="text-[9px] text-outline mt-1">Tambah</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      onChange={(e) => {
+                        const files = Array.from(e.target.files || []);
+                        const newEntries = files.map((file) => ({ file, preview: URL.createObjectURL(file) }));
+                        setGalleryFiles((prev) => [...prev, ...newEntries]);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                </div>
               </div>
 
               <div>

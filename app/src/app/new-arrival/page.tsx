@@ -5,6 +5,14 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useCart } from "@/components/CartProvider";
+
+const COLORS = [
+  { id: "hitam", label: "Hitam", hex: "#1a1a1a" },
+  { id: "coklat", label: "Coklat", hex: "#5d4037" },
+  { id: "tan",    label: "Tan",    hex: "#c68642" },
+];
 
 interface Product {
   id: string;
@@ -13,6 +21,8 @@ interface Product {
   price: string;
   priceNum: number;
   image: string;
+  colorImages?: Record<string, string>;
+  colors?: string[];
   category: string;
   isNewArrival: boolean;
   bestSeller: boolean;
@@ -25,11 +35,43 @@ export default function NewArrival() {
   const [newArrivals, setNewArrivals] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [quickViewId, setQuickViewId] = useState<string | null>(null);
+  const [cardColors, setCardColors] = useState<Record<string, string>>({});
+  const [sizePickerId, setSizePickerId] = useState<string | null>(null);
+  const [addedId, setAddedId] = useState<string | null>(null);
+  const router = useRouter();
+  const { addItem } = useCart();
+
+  const SIZES = [39, 40, 41, 42, 43];
+
+  function handleAddToCart(e: React.MouseEvent, product: Product, size: number) {
+    e.stopPropagation();
+    const activeCid = cardColors[product.id] || product.colors?.[0];
+    const displayImage = (activeCid && product.colorImages?.[activeCid]) || product.image;
+    addItem({
+      productId: product.id,
+      name: product.name,
+      material: product.material,
+      priceNum: product.priceNum,
+      price: product.price,
+      image: displayImage,
+      size,
+      color: activeCid || undefined,
+    });
+    setSizePickerId(null);
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 2000);
+  }
 
   useEffect(() => {
     fetch("/api/products?newArrival=true")
       .then((r) => r.json())
-      .then((data) => { setNewArrivals(data); setLoading(false); });
+      .then((data) => {
+        setNewArrivals(data);
+        setLoading(false);
+        const init: Record<string, string> = {};
+        data.forEach((p: Product) => { if (p.colors?.length) init[p.id] = p.colors[0]; });
+        setCardColors(init);
+      });
   }, []);
 
   const quickViewProduct = newArrivals.find((p) => p.id === quickViewId);
@@ -116,16 +158,24 @@ export default function NewArrival() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
-            {newArrivals.map((product) => (
-              <article key={product.id} className="group flex flex-col">
-                {/* Image + hover actions */}
-                <div className="relative aspect-[4/5] bg-surface-container-low overflow-hidden mb-6">
+            {newArrivals.map((product) => {
+              const activeCid = cardColors[product.id] || product.colors?.[0];
+              const displayImage = (activeCid && product.colorImages?.[activeCid]) || product.image;
+              return (
+              <article
+                key={product.id}
+                onClick={() => router.push(`/product/${product.id}`)}
+                className="group flex flex-col border border-outline-variant/30 hover:border-outline-variant/60 shadow-sm hover:shadow-md transition-all cursor-pointer"
+              >
+                {/* Image */}
+                <div className="relative aspect-square bg-surface-container-low overflow-hidden">
                   <Image
-                    src={product.image}
+                    src={displayImage}
                     alt={product.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    unoptimized={displayImage.startsWith("/")}
                   />
 
                   {/* Badge */}
@@ -140,7 +190,7 @@ export default function NewArrival() {
                   {/* Quick view button */}
                   <div className="absolute bottom-0 inset-x-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <button
-                      onClick={() => setQuickViewId(product.id)}
+                      onClick={(e) => { e.stopPropagation(); setQuickViewId(product.id); }}
                       className="w-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface text-[11px] font-bold tracking-widest uppercase py-4 border-t border-outline-variant/30 hover:bg-surface-container transition-colors"
                     >
                       Quick View
@@ -149,31 +199,79 @@ export default function NewArrival() {
                 </div>
 
                 {/* Info */}
-                <div className="flex-1 flex flex-col">
-                  <div className="flex justify-between items-start mb-1">
-                    <h3 className="font-[family-name:var(--font-headline)] text-2xl">
-                      {product.name}
-                    </h3>
-                  </div>
-                  <p className="text-outline text-[11px] uppercase tracking-widest mb-4">
+                <div className="flex-1 flex flex-col px-4 pt-4 pb-4">
+                  <h3 className="font-[family-name:var(--font-headline)] text-2xl mb-1">
+                    {product.name}
+                  </h3>
+                  <p className="text-outline text-[11px] uppercase tracking-widest mb-3">
                     {product.material}
                   </p>
 
-                  <div className="flex items-center justify-between mt-auto">
-                    <span className="font-[family-name:var(--font-headline)] text-xl text-primary-container">
-                      {product.price}
-                    </span>
-                    <Link
-                      href={`/product/${product.id}`}
-                      className="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase px-6 py-3 burnished-gradient text-on-primary hover:brightness-110 transition-all"
-                    >
-                      <span className="material-symbols-outlined text-base">arrow_forward</span>
-                      Lihat Detail
-                    </Link>
-                  </div>
+                  {/* Color swatches */}
+                  {(product.colors?.length ?? 0) > 0 && (
+                    <div className="flex items-center gap-3 mb-4" onClick={(e) => e.stopPropagation()}>
+                      {(product.colors ?? []).map((cid) => {
+                        const c = COLORS.find((x) => x.id === cid);
+                        if (!c) return null;
+                        const isActive = activeCid === cid;
+                        return (
+                          <button
+                            key={cid}
+                            title={c.label}
+                            onClick={(e) => { e.stopPropagation(); setCardColors((prev) => ({ ...prev, [product.id]: cid })); }}
+                            className={`w-5 h-5 rounded-full transition-all ${isActive ? "ring-2 ring-offset-2 ring-on-surface scale-110" : "opacity-60 hover:opacity-100 hover:scale-110"}`}
+                            style={{ backgroundColor: c.hex }}
+                          />
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Size picker */}
+                  {sizePickerId === product.id ? (
+                    <div className="mt-auto" onClick={(e) => e.stopPropagation()}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] uppercase tracking-widest text-outline">Pilih Ukuran</span>
+                        <button onClick={(e) => { e.stopPropagation(); setSizePickerId(null); }} className="text-outline hover:text-on-surface">
+                          <span className="material-symbols-outlined text-base">close</span>
+                        </button>
+                      </div>
+                      <div className="flex gap-1.5 flex-wrap">
+                        {SIZES.map((s) => (
+                          <button
+                            key={s}
+                            onClick={(e) => handleAddToCart(e, product, s)}
+                            className="w-9 h-9 text-xs border border-outline-variant hover:bg-on-surface hover:text-surface hover:border-on-surface transition-all font-medium"
+                          >
+                            {s}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between mt-auto gap-2">
+                      <span className="font-[family-name:var(--font-headline)] text-xl text-primary-container">
+                        {product.price}
+                      </span>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); if (addedId === product.id) return; setSizePickerId(product.id); }}
+                        className={`flex items-center gap-1.5 text-[10px] font-bold tracking-widest uppercase px-4 py-2.5 transition-all shrink-0 ${
+                          addedId === product.id
+                            ? "bg-on-surface text-surface"
+                            : "burnished-gradient text-on-primary hover:brightness-110"
+                        }`}
+                      >
+                        <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: addedId === product.id ? "'FILL' 1" : "'FILL' 0" }}>
+                          {addedId === product.id ? "check" : "shopping_bag"}
+                        </span>
+                        {addedId === product.id ? "Added" : "Cart"}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
