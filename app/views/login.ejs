@@ -1,0 +1,52 @@
+<%- include('partials/head', { title: title }) %>
+
+<main class="min-h-screen flex items-center justify-center px-6 py-12 relative overflow-hidden bg-surface-container-lowest">
+  <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
+    <div class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]"></div>
+    <div class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-primary-container/10 blur-[100px]"></div>
+  </div>
+
+  <div class="w-full max-w-md z-10 space-y-12">
+    <div class="flex flex-col items-center text-center space-y-6">
+      <a href="/"><span class="material-symbols-outlined text-primary" style="font-size:64px">filter_hdr</span></a>
+      <div class="space-y-2">
+        <h1 class="font-[family-name:var(--font-headline)] text-4xl font-bold tracking-widest text-primary">GUMES.ID</h1>
+        <p class="text-[10px] uppercase tracking-[0.3em] text-outline">Leather Atelier &amp; Curators</p>
+      </div>
+    </div>
+
+    <div class="bg-surface-container p-8 md:p-12 shadow-[40px_0_100px_-20px_rgba(0,0,0,0.1)]">
+      <form id="login-form" class="space-y-8" data-redirect="<%= redirect %>">
+        <div class="space-y-6">
+          <div class="group">
+            <label class="text-[10px] uppercase tracking-widest text-outline group-focus-within:text-primary transition-colors" for="email">Email Address</label>
+            <input class="w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 focus:outline-none focus:border-primary placeholder:text-outline/30 transition-all"
+                   id="email" name="email" placeholder="artisan@gumes.id" type="email" required />
+          </div>
+          <div class="group">
+            <label class="text-[10px] uppercase tracking-widest text-outline group-focus-within:text-primary transition-colors" for="password">Password</label>
+            <input class="w-full bg-transparent border-0 border-b border-outline-variant py-3 px-0 focus:outline-none focus:border-primary placeholder:text-outline/30 transition-all"
+                   id="password" name="password" placeholder="••••••••" type="password" required />
+          </div>
+        </div>
+
+        <div id="login-error" class="hidden text-error text-xs border border-error/30 px-3 py-2"></div>
+
+        <div class="pt-4 space-y-6">
+          <button id="login-submit" class="w-full burnished-gradient py-4 text-on-primary text-xs font-extrabold uppercase tracking-[0.2em] shadow-lg hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60" type="submit">
+            <span id="login-label">Sign In to Atelier</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="text-center">
+      <p class="text-xs tracking-wider text-outline">
+        Don't have an account?
+        <a href="/signup" class="text-primary font-bold ml-2 underline underline-offset-8 decoration-primary/30 hover:decoration-primary transition-all">Sign Up</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/foot', { pageScript: '/js/auth.js' }) %>

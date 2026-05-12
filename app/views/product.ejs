@@ -1,0 +1,173 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/navbar') %>
+
+<script id="product-data" type="application/json"><%- JSON.stringify(product).replace(/<\//g, "<\\/") %></script>
+<script id="reviews-data" type="application/json"><%- JSON.stringify(reviews).replace(/<\//g, "<\\/") %></script>
+
+<main class="min-h-screen bg-surface pt-48 pb-24">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-12">
+
+    <nav class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-outline mb-10">
+      <a href="/" class="hover:text-primary-container transition-colors">Koleksi</a>
+      <span>/</span>
+      <span class="text-on-surface-variant"><%= product.category %></span>
+      <span>/</span>
+      <span class="text-on-surface"><%= product.name %></span>
+    </nav>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+
+      <!-- Image + thumbnails -->
+      <div class="flex flex-col gap-3">
+        <div class="relative aspect-square bg-surface-container-low overflow-hidden border border-outline-variant/30 shadow-md">
+          <img id="main-image" src="<%= product.image %>" alt="<%= product.name %>"
+               class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+          <div class="absolute top-5 left-5 flex flex-col gap-2">
+            <% if (product.badge) { %>
+              <div class="bg-surface-container-lowest px-3 py-1">
+                <span class="text-[10px] uppercase tracking-widest font-bold text-primary-container"><%= product.badge %></span>
+              </div>
+            <% } %>
+            <% if (product.bestSeller) { %>
+              <div class="bg-on-surface px-3 py-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-surface" style="font-variation-settings:'FILL' 1;font-size:11px">star</span>
+                <span class="text-[10px] uppercase tracking-widest font-bold text-surface">Best Seller</span>
+              </div>
+            <% } %>
+          </div>
+        </div>
+        <% const thumbs = [product.image, ...(product.gallery || [])]; %>
+        <% if (thumbs.length > 1) { %>
+          <div class="flex gap-2 overflow-x-auto pb-1" id="thumb-strip">
+            <% thumbs.forEach(function(img){ %>
+              <button type="button" data-thumb="<%= img %>"
+                class="thumb relative w-16 h-16 shrink-0 overflow-hidden border-2 border-outline-variant/30 opacity-60 hover:opacity-100 transition-all">
+                <img src="<%= img %>" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              </button>
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col">
+        <div class="mb-6 pb-6 border-b border-outline-variant/20">
+          <p class="text-primary text-[11px] tracking-[0.3em] uppercase mb-2">
+            <%= product.category %> · <%= product.isNewArrival ? 'New Arrival' : 'Koleksi' %>
+          </p>
+          <h1 class="font-[family-name:var(--font-headline)] text-3xl md:text-4xl mb-2"><%= product.name %></h1>
+          <p class="text-outline text-xs uppercase tracking-widest"><%= product.material %></p>
+        </div>
+
+        <div class="mb-6">
+          <span class="font-[family-name:var(--font-headline)] text-2xl md:text-3xl text-primary-container"><%= product.price %></span>
+        </div>
+
+        <!-- Color selector -->
+        <% if ((product.colors || []).length > 0) { %>
+          <div class="mb-8" id="color-section">
+            <p class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+              Warna: <span id="color-label" class="text-on-surface"></span>
+            </p>
+            <div class="flex gap-3 flex-wrap" id="color-buttons">
+              <% const COLORS = {hitam:{label:'Hitam',hex:'#1a1a1a'},coklat:{label:'Coklat',hex:'#5d4037'},tan:{label:'Tan',hex:'#c68642'}}; %>
+              <% product.colors.forEach(function(cid){ var c = COLORS[cid]; if(!c) return; %>
+                <button type="button" data-color="<%= cid %>" data-image="<%= product.colorImages[cid] || product.image %>"
+                  class="color-btn flex items-center gap-2 px-3 py-2 border-2 border-outline-variant text-on-surface-variant hover:border-on-surface transition-all text-[11px] font-bold uppercase tracking-widest">
+                  <span class="w-4 h-4 rounded-full" style="background-color:<%= c.hex %>"></span>
+                  <%= c.label %>
+                </button>
+              <% }); %>
+            </div>
+          </div>
+        <% } %>
+
+        <!-- Size selector -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-3">
+            <p id="size-label" class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant">Pilih Ukuran (EU)</p>
+          </div>
+          <div class="flex gap-2 flex-wrap" id="size-buttons">
+            <% [39,40,41,42,43].forEach(function(s){ %>
+              <button type="button" data-size="<%= s %>"
+                class="size-btn w-12 h-12 text-sm border-2 border-outline-variant text-on-surface-variant font-medium hover:border-on-surface hover:text-on-surface transition-all">
+                <%= s %>
+              </button>
+            <% }); %>
+          </div>
+        </div>
+
+        <!-- Add to cart -->
+        <div class="flex gap-3 mb-8">
+          <button type="button" id="add-to-cart-btn"
+            class="flex-1 flex items-center justify-center gap-2 py-4 text-[11px] font-bold tracking-widest uppercase burnished-gradient text-on-primary hover:brightness-110 transition-all">
+            <span id="add-icon" class="material-symbols-outlined text-base">shopping_bag</span>
+            <span id="add-label">Tambah ke Cart</span>
+          </button>
+          <a href="/cart" class="px-6 py-4 border border-outline-variant text-[11px] font-bold tracking-widest uppercase hover:bg-surface-container transition-colors flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">shopping_cart</span>
+          </a>
+        </div>
+
+        <!-- Description -->
+        <% if (product.description) { %>
+          <div class="mb-8 pb-8 border-b border-outline-variant/20">
+            <h3 class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">Deskripsi Produk</h3>
+            <p class="text-on-surface-variant leading-relaxed text-sm"><%= product.description %></p>
+          </div>
+        <% } %>
+
+        <!-- Details -->
+        <div class="space-y-3">
+          <% [{icon:'verified',text:'100% kulit asli pilihan'},{icon:'badge',text:'Dikerjakan manual oleh pengrajin berpengalaman'},{icon:'local_shipping',text:'Gratis ongkir seluruh Indonesia'},{icon:'replay',text:'Garansi 30 hari, free return'}].forEach(function(item){ %>
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary-container text-base"><%= item.icon %></span>
+              <span class="text-xs text-on-surface-variant"><%= item.text %></span>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews -->
+    <% if (reviews.length > 0) { %>
+      <% const avg = reviews.reduce(function(a,r){return a+r.rating;},0)/reviews.length; %>
+      <div class="mt-20 border-t border-outline-variant/20 pt-16">
+        <div class="flex items-end gap-6 mb-10 flex-wrap">
+          <h2 class="font-[family-name:var(--font-headline)] text-3xl">Ulasan Pembeli</h2>
+          <div class="flex items-center gap-2 mb-1">
+            <div class="flex">
+              <% for (var s=1; s<=5; s++) { %>
+                <span class="material-symbols-outlined text-lg"
+                  style="font-variation-settings:'FILL' <%= avg >= s ? 1 : 0 %>;color:<%= avg >= s ? '#c68642' : 'var(--color-outline-variant)' %>">star</span>
+              <% } %>
+            </div>
+            <span class="text-sm text-outline"><%= avg.toFixed(1) %> · <%= reviews.length %> ulasan</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <% reviews.forEach(function(r){ %>
+            <div class="bg-surface-container-lowest p-6 border border-outline-variant/20">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-medium text-sm text-on-surface"><%= r.customerName %></span>
+                <span class="text-[10px] text-outline uppercase tracking-widest"><%= r.date %></span>
+              </div>
+              <div class="flex gap-0.5 mb-3">
+                <% for (var s=1; s<=5; s++) { %>
+                  <span class="material-symbols-outlined text-base"
+                    style="font-variation-settings:'FILL' <%= r.rating >= s ? 1 : 0 %>;color:<%= r.rating >= s ? '#c68642' : 'var(--color-outline-variant)' %>">star</span>
+                <% } %>
+              </div>
+              <% if (r.comment) { %>
+                <p class="text-sm text-on-surface-variant leading-relaxed"><%= r.comment %></p>
+              <% } %>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
+<%- include('partials/foot', { pageScript: '/js/product.js' }) %>

@@ -1,0 +1,37 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/navbar') %>
+
+<main class="min-h-screen flex flex-col items-center justify-center pt-48 pb-32 px-6 text-center">
+  <span class="material-symbols-outlined text-primary-container mb-6" style="font-size:80px;font-variation-settings:'FILL' 1">check_circle</span>
+  <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Order Confirmed</p>
+  <h1 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl mb-4">Terima Kasih!</h1>
+  <% if (order) { %>
+    <p class="text-outline text-sm mb-2">Order ID</p>
+    <p class="font-mono text-on-surface mb-6"><%= order.id %></p>
+    <p class="text-on-surface-variant max-w-md mb-10">
+      Order lo lagi diproses. Kami akan kirim notifikasi ke <strong class="text-on-surface"><%= order.customer_email %></strong> begitu pesanan dikirim.
+    </p>
+    <div class="border border-outline-variant/30 bg-surface-container-lowest p-6 max-w-md w-full text-left mb-10">
+      <h2 class="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-4">Ringkasan</h2>
+      <% (order.items || []).forEach(function(it){ %>
+        <div class="flex justify-between text-sm py-1.5">
+          <span class="text-on-surface-variant truncate max-w-[200px]"><%= it.name %> <% if(it.size){ %>· EU <%= it.size %><% } %></span>
+          <span>×<%= it.quantity %></span>
+        </div>
+      <% }); %>
+      <div class="border-t border-outline-variant/20 pt-3 mt-3 flex justify-between font-bold">
+        <span class="text-[11px] uppercase tracking-widest">Total</span>
+        <span class="text-primary-container">Rp <%= Number(order.total).toLocaleString('id-ID') %></span>
+      </div>
+    </div>
+  <% } else { %>
+    <p class="text-on-surface-variant max-w-md mb-10">Order lo udah masuk.</p>
+  <% } %>
+  <div class="flex gap-3">
+    <a href="/" class="burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase px-10 py-4 hover:brightness-110 transition-all">Lanjut Belanja</a>
+    <a href="/orders" class="border border-outline-variant text-[11px] font-bold tracking-widest uppercase px-10 py-4 hover:bg-surface-container transition-colors">Lihat Pesanan</a>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
+<%- include('partials/foot') %>

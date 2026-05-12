@@ -1,0 +1,65 @@
+<%- include('partials/head', { title: title }) %>
+
+<main class="min-h-screen flex items-stretch bg-surface">
+  <div class="hidden lg:flex w-7/12 relative overflow-hidden bg-surface-container-low">
+    <div class="absolute inset-0 burnished-gradient opacity-10"></div>
+    <div class="relative z-10 flex flex-col justify-center px-24 space-y-8">
+      <div>
+        <span class="text-xs uppercase tracking-[0.3em] text-outline mb-4 block">The Heritage Collection</span>
+        <h1 class="font-[family-name:var(--font-headline)] text-7xl font-bold tracking-tight leading-[1.1]">
+          Crafting <br />
+          <span class="italic font-normal">Legacy</span> <br />
+          Since 1984.
+        </h1>
+      </div>
+      <p class="text-lg text-secondary max-w-md leading-relaxed">
+        Join an exclusive circle of connoisseurs. Our atelier combines centuries-old techniques with modern precision to create leather goods that age as beautifully as the stories they carry.
+      </p>
+    </div>
+  </div>
+
+  <div class="w-full lg:w-5/12 flex flex-col bg-surface">
+    <div class="flex-1 flex flex-col justify-center px-8 sm:px-12 md:px-24 py-12">
+      <div class="max-w-md w-full mx-auto">
+        <div class="mb-12">
+          <a href="/" class="hidden lg:block text-2xl font-bold tracking-widest text-primary-container font-[family-name:var(--font-headline)] mb-12">GUMES.ID</a>
+          <h2 class="font-[family-name:var(--font-headline)] text-4xl font-bold mb-4">Create Account</h2>
+          <p class="text-secondary text-sm">Become a Digital Curator Member and explore our bespoke collections.</p>
+        </div>
+
+        <form id="signup-form" class="space-y-10">
+          <div class="group">
+            <label class="block text-[10px] uppercase tracking-[0.2em] text-outline group-focus-within:text-primary transition-colors mb-2" for="full_name">Full Name</label>
+            <input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:outline-none focus:border-primary px-0 py-3 placeholder:text-outline-variant/50 transition-all"
+                   id="full_name" name="name" placeholder="Enter your full name" type="text" required />
+          </div>
+          <div class="group">
+            <label class="block text-[10px] uppercase tracking-[0.2em] text-outline group-focus-within:text-primary transition-colors mb-2" for="email">Email Address</label>
+            <input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:outline-none focus:border-primary px-0 py-3 placeholder:text-outline-variant/50 transition-all"
+                   id="email" name="email" placeholder="hello@curator.com" type="email" required />
+          </div>
+          <div class="group">
+            <label class="block text-[10px] uppercase tracking-[0.2em] text-outline group-focus-within:text-primary transition-colors mb-2" for="password">Password (min 6 karakter)</label>
+            <input class="w-full bg-transparent border-t-0 border-x-0 border-b border-outline-variant focus:outline-none focus:border-primary px-0 py-3 placeholder:text-outline-variant/50 transition-all"
+                   id="password" name="password" placeholder="••••••••••••" type="password" required minlength="6" />
+          </div>
+
+          <div id="signup-error" class="hidden text-error text-xs border border-error/30 px-3 py-2"></div>
+
+          <div class="pt-6 space-y-6">
+            <button id="signup-submit" class="burnished-gradient w-full py-5 text-on-primary text-xs font-bold uppercase tracking-[0.2em] shadow-lg hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-60" type="submit">
+              <span id="signup-label">Initialize Membership</span>
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-16 pt-8 border-t border-surface-container-high flex flex-col items-center space-y-4">
+          <p class="text-xs text-secondary italic">Already part of the legacy?</p>
+          <a href="/login" class="text-xs uppercase tracking-[0.15em] font-bold hover:text-primary transition-colors">Sign In to Atelier</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/foot', { pageScript: '/js/auth.js' }) %>

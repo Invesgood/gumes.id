@@ -1,0 +1,27 @@
+[
+  {
+    "id": "1777106834801",
+    "name": "sdasd",
+    "material": "asdasd",
+    "price": "Rp 10.000",
+    "priceNum": 10000,
+    "image": "/images/1777106834755.webp",
+    "colorImages": {
+      "coklat": "/images/1777106834770.webp",
+      "hitam": "/images/1777106834777.webp",
+      "tan": "/images/1777106834791.webp"
+    },
+    "category": "Sepatu",
+    "colors": [
+      "coklat",
+      "hitam",
+      "tan"
+    ],
+    "isNewArrival": true,
+    "bestSeller": false,
+    "badge": "",
+    "featured": false,
+    "description": "asdas",
+    "gallery": []
+  }
+]

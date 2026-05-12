@@ -1,26 +1,30 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "gumes-shoes",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev": "concurrently \"npm:dev:css\" \"npm:dev:server\"",
+    "dev:server": "node --watch server.js",
+    "dev:css": "tailwindcss -i src/styles/input.css -o public/css/main.css --watch",
+    "build:css": "tailwindcss -i src/styles/input.css -o public/css/main.css --minify",
+    "start": "node server.js",
+    "db:init": "node db/init.js",
+    "db:seed": "node db/seed.js"
   },
   "dependencies": {
-    "next": "16.2.3",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "bcryptjs": "^2.4.3",
+    "busboy": "^1.6.0",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "pg": "^8.13.1",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@tailwindcss/cli": "^4.0.0",
+    "concurrently": "^9.1.2",
+    "tailwindcss": "^4.0.0"
   }
 }

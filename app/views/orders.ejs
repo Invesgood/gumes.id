@@ -1,0 +1,93 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/navbar') %>
+
+<script id="orders-data" type="application/json"><%- JSON.stringify(orders).replace(/<\//g, "<\\/") %></script>
+
+<main class="pt-48 pb-24 px-6 md:px-12 max-w-5xl mx-auto min-h-screen">
+  <header class="mb-16">
+    <h1 class="font-[family-name:var(--font-headline)] text-5xl font-light tracking-tight">Order History</h1>
+    <p class="mt-4 text-sm tracking-[0.2em] uppercase text-outline">Your curated acquisitions</p>
+  </header>
+
+  <div id="toast" class="hidden fixed top-6 right-6 z-50 bg-on-surface text-surface px-6 py-4 text-sm font-medium shadow-lg"></div>
+
+  <% if (orders.length === 0) { %>
+    <div class="flex flex-col items-center justify-center py-32 text-center">
+      <span class="material-symbols-outlined text-outline-variant mb-6" style="font-size:64px">shopping_bag</span>
+      <h2 class="font-[family-name:var(--font-headline)] text-3xl mb-3">Belum ada pesanan</h2>
+      <p class="text-on-surface-variant text-sm mb-10 max-w-xs">Mulai jelajahi koleksi kami dan tambahkan ke selection lo.</p>
+      <a href="/" class="burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase px-10 py-4 hover:brightness-110 transition-all">Browse Collection</a>
+    </div>
+  <% } else { %>
+    <div class="space-y-6">
+      <% orders.forEach(function(o){ %>
+        <% const statusColor = o.status === 'delivered' ? 'text-green-600' : o.status === 'in_transit' ? 'text-primary' : 'text-outline'; %>
+        <div class="bg-surface-container-lowest p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border border-outline-variant/30 hover:border-outline-variant/60 shadow-sm hover:shadow-md transition-all">
+          <div class="flex-1">
+            <div class="flex items-center gap-4 mb-2 flex-wrap">
+              <span class="font-[family-name:var(--font-headline)] font-bold"><%= o.id %></span>
+              <span class="text-[10px] uppercase tracking-widest font-bold <%= statusColor %>"><%= o.status %></span>
+            </div>
+            <p class="text-sm text-outline"><%= o.itemNames %></p>
+            <p class="text-xs text-outline/60 mt-1"><%= o.date %></p>
+          </div>
+          <div class="flex items-center gap-6 flex-wrap">
+            <span class="font-[family-name:var(--font-headline)] text-lg">Rp <%= Number(o.total).toLocaleString('id-ID') %></span>
+            <% if (o.status === 'delivered') { %>
+              <button type="button" data-review-order="<%= o.id %>"
+                class="text-[10px] uppercase tracking-widest font-bold text-primary-container border-b border-primary-container pb-0.5 hover:opacity-70 transition-opacity flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">rate_review</span>
+                Tulis Ulasan
+              </button>
+            <% } %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+
+  <!-- Review modal -->
+  <div id="review-modal" class="hidden fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-lg w-full p-8 md:p-12 shadow-2xl border border-outline-variant/30">
+      <div class="flex items-start justify-between mb-6">
+        <div>
+          <p class="text-primary text-[11px] tracking-widest uppercase mb-1">Tulis Ulasan</p>
+          <h3 id="modal-order-title" class="font-[family-name:var(--font-headline)] text-2xl"></h3>
+        </div>
+        <button type="button" id="modal-close" class="text-outline hover:text-on-surface">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="review-form" class="space-y-6">
+        <div>
+          <label class="block text-[10px] uppercase tracking-widest text-outline mb-3">Rating</label>
+          <div class="flex gap-2" id="rating-stars">
+            <% for (var s=1; s<=5; s++) { %>
+              <button type="button" data-star="<%= s %>" class="star-btn text-outline-variant hover:text-primary transition-colors">
+                <span class="material-symbols-outlined" style="font-size:32px">star</span>
+              </button>
+            <% } %>
+          </div>
+          <input type="hidden" name="rating" id="rating-value" value="0" />
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-widest text-outline mb-2">Nama</label>
+          <input name="customerName" type="text" required value="<%= user.name || user.email %>"
+            class="w-full bg-transparent border-b border-outline-variant py-2 focus:outline-none focus:border-primary" />
+        </div>
+        <div>
+          <label class="block text-[10px] uppercase tracking-widest text-outline mb-2">Komentar (opsional)</label>
+          <textarea name="comment" rows="4"
+            class="w-full bg-transparent border border-outline-variant px-3 py-2 focus:outline-none focus:border-primary resize-none"></textarea>
+        </div>
+        <button type="submit" id="review-submit"
+          class="w-full burnished-gradient text-on-primary py-4 text-[11px] uppercase tracking-widest font-bold hover:brightness-110 transition-all disabled:opacity-60">
+          Kirim Ulasan
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer') %>
+<%- include('partials/foot', { pageScript: '/js/orders.js' }) %>
