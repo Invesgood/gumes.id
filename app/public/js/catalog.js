@@ -85,7 +85,7 @@
           <span class="text-[10px] uppercase tracking-widest ${sizeError ? "text-error font-bold" : "text-outline"}">${sizeError ? "Pilih ukuran dulu" : "Ukuran (EU)"}</span>
           ${activeSize ? `<span class="text-[10px] uppercase tracking-widest text-on-surface font-bold">EU ${activeSize}</span>` : ""}
         </div>
-        <div class="grid grid-cols-5 gap-1.5">
+        <div class="grid grid-cols-5 gap-1.5 max-w-[14rem]">
           ${SIZES.map((s) => {
             const isActive = activeSize === s;
             return `<button type="button" data-pick-size="${s}" data-product="${p.id}"
