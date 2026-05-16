@@ -22,8 +22,9 @@
     color: null,
     sort: "default",
     cardColors: {},   // productId -> selected colorId
-    sizePickerId: null,
+    cardSizes: {},    // productId -> selected size
     addedId: null,
+    sizeErrorId: null,
   };
 
   // init default color per product
@@ -49,7 +50,6 @@
     const activeCid = state.cardColors[p.id] || (p.colors && p.colors[0]);
     const displayImage = (activeCid && p.colorImages && p.colorImages[activeCid]) || p.image;
     const added = state.addedId === p.id;
-    const picker = state.sizePickerId === p.id;
 
     const badgeHTML = p.badge
       ? `<div class="bg-surface-container px-3 py-1">
@@ -62,39 +62,46 @@
            <span class="text-[10px] uppercase tracking-widest font-bold text-surface">Best Seller</span>
          </div>` : "";
 
-    const colorSwatches = (p.colors && p.colors.length)
-      ? `<div class="flex items-center gap-3 mb-4" data-stop>
-          ${p.colors.map((cid) => {
-            const c = COLORS.find((x) => x.id === cid);
-            if (!c) return "";
-            const isActive = activeCid === cid;
-            return `<button type="button" data-card-color="${cid}" data-product="${p.id}"
-              class="w-5 h-5 border transition-all ${isActive ? "border-on-surface ring-2 ring-offset-2 ring-offset-surface-container-low ring-on-surface scale-110" : "border-outline-variant/70 opacity-70 hover:opacity-100 hover:scale-110"}"
-              style="background-color:${c.hex}" title="${c.label}"></button>`;
-          }).join("")}
-         </div>` : "";
+    const activeSize = state.cardSizes[p.id] || null;
+    const sizeError = state.sizeErrorId === p.id;
 
-    const bottom = picker
-      ? `<div class="mt-auto" data-stop>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] uppercase tracking-widest text-outline">Pilih Ukuran</span>
-            <button type="button" data-cancel-picker class="text-outline hover:text-on-surface">
-              <span class="material-symbols-outlined text-base">close</span>
-            </button>
-          </div>
-          <div class="flex gap-1.5 flex-wrap">
-            ${SIZES.map((s) => `<button type="button" data-pick-size="${s}" data-product="${p.id}"
-              class="w-9 h-9 text-xs border border-outline-variant hover:bg-on-surface hover:text-surface hover:border-on-surface transition-all font-medium">${s}</button>`).join("")}
-          </div>
-        </div>`
-      : `<div class="flex items-center justify-between mt-auto gap-2">
-          <span class="font-[family-name:var(--font-headline)] text-sm md:text-lg text-primary-container leading-tight">${escapeHtml(p.price)}</span>
-          <button type="button" data-open-picker data-product="${p.id}"
-            class="flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase px-3 py-2.5 transition-all shrink-0 ${added ? "bg-on-surface text-surface" : "burnished-gradient text-on-primary hover:brightness-110"}">
-            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' ${added ? 1 : 0}">${added ? "check" : "shopping_bag"}</span>
-            <span class="hidden sm:inline">${added ? "Added" : "Cart"}</span>
-          </button>
-        </div>`;
+    const swatchesHTML = (p.colors && p.colors.length)
+      ? p.colors.map((cid) => {
+          const c = COLORS.find((x) => x.id === cid);
+          if (!c) return "";
+          const isActive = activeCid === cid;
+          return `<button type="button" data-card-color="${cid}" data-product="${p.id}"
+            class="w-5 h-5 border transition-all ${isActive ? "border-on-surface ring-2 ring-offset-2 ring-offset-surface-container-low ring-on-surface scale-110" : "border-outline-variant/70 opacity-70 hover:opacity-100 hover:scale-110"}"
+            style="background-color:${c.hex}" title="${c.label}"></button>`;
+        }).join("")
+      : "";
+
+    const priceRow = `<div class="flex items-center justify-between mb-3">
+        <span class="font-[family-name:var(--font-headline)] text-sm md:text-lg text-primary-container leading-tight">${escapeHtml(p.price)}</span>
+      </div>`;
+
+    const sizeRow = `<div data-stop class="mb-3">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[10px] uppercase tracking-widest ${sizeError ? "text-error font-bold" : "text-outline"}">${sizeError ? "Pilih ukuran dulu" : "Ukuran (EU)"}</span>
+          ${activeSize ? `<span class="text-[10px] uppercase tracking-widest text-on-surface font-bold">EU ${activeSize}</span>` : ""}
+        </div>
+        <div class="grid grid-cols-5 gap-1.5">
+          ${SIZES.map((s) => {
+            const isActive = activeSize === s;
+            return `<button type="button" data-pick-size="${s}" data-product="${p.id}"
+              class="aspect-square flex items-center justify-center text-[11px] md:text-xs border transition-all font-medium ${isActive ? "bg-on-surface text-surface border-on-surface" : "border-outline-variant hover:border-on-surface"}">${s}</button>`;
+          }).join("")}
+        </div>
+      </div>`;
+
+    const colorCartRow = `<div class="flex items-center justify-between gap-2 mt-auto" data-stop>
+        <div class="flex items-center gap-3">${swatchesHTML}</div>
+        <button type="button" data-add-cart data-product="${p.id}"
+          class="flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase px-3 py-2.5 transition-all shrink-0 ${added ? "bg-on-surface text-surface" : "burnished-gradient text-on-primary hover:brightness-110"}">
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' ${added ? 1 : 0}">${added ? "check" : "shopping_bag"}</span>
+          <span class="hidden sm:inline">${added ? "Added" : "Cart"}</span>
+        </button>
+      </div>`;
 
     return `<article data-product-card="${p.id}"
         class="group flex flex-col bg-surface-container-low border border-outline-variant/60 hover:border-outline-variant shadow-sm hover:shadow-lg transition-all cursor-pointer">
@@ -106,8 +113,9 @@
         <div class="flex-1 flex flex-col px-4 pt-4 pb-4">
           <h2 class="font-[family-name:var(--font-headline)] mb-0.5 text-sm md:text-xl leading-tight">${escapeHtml(p.name)}</h2>
           <p class="text-[10px] md:text-xs text-outline uppercase tracking-widest mb-3">${escapeHtml(p.material)}</p>
-          ${colorSwatches}
-          ${bottom}
+          ${priceRow}
+          ${sizeRow}
+          ${colorCartRow}
         </div>
       </article>`;
   }
@@ -198,13 +206,12 @@
 
     // Filter clicks
     const cat = t.closest(".filter-cat, .filter-cat-m");
-    if (cat) { state.category = cat.dataset.value; state.sizePickerId = null; render(); return; }
+    if (cat) { state.category = cat.dataset.value; render(); return; }
 
     const color = t.closest(".filter-color, .filter-color-m");
     if (color) {
       const v = color.dataset.value;
       state.color = state.color === v ? null : v;
-      state.sizePickerId = null;
       render();
       return;
     }
@@ -231,28 +238,33 @@
       return;
     }
 
-    // Open size picker
-    const openPicker = t.closest("[data-open-picker]");
-    if (openPicker) {
-      e.stopPropagation();
-      if (state.addedId === openPicker.dataset.product) return;
-      state.sizePickerId = openPicker.dataset.product;
-      render();
-      return;
-    }
-    if (t.closest("[data-cancel-picker]")) {
-      e.stopPropagation();
-      state.sizePickerId = null; render(); return;
-    }
-
-    // Pick size → add to cart
+    // Pick size → just select (no add)
     const pickSize = t.closest("[data-pick-size]");
     if (pickSize) {
       e.stopPropagation();
       const productId = pickSize.dataset.product;
-      const size = parseInt(pickSize.dataset.pickSize, 10);
+      state.cardSizes[productId] = parseInt(pickSize.dataset.pickSize, 10);
+      if (state.sizeErrorId === productId) state.sizeErrorId = null;
+      render();
+      return;
+    }
+
+    // Add to cart button
+    const addCart = t.closest("[data-add-cart]");
+    if (addCart) {
+      e.stopPropagation();
+      const productId = addCart.dataset.product;
       const p = products.find((x) => x.id === productId);
       if (!p) return;
+      const size = state.cardSizes[productId];
+      if (!size) {
+        state.sizeErrorId = productId;
+        render();
+        setTimeout(() => {
+          if (state.sizeErrorId === productId) { state.sizeErrorId = null; render(); }
+        }, 2000);
+        return;
+      }
       const activeCid = state.cardColors[p.id] || (p.colors && p.colors[0]);
       const displayImage = (activeCid && p.colorImages && p.colorImages[activeCid]) || p.image;
       window.GumesCart.add({
@@ -265,7 +277,6 @@
         size,
         color: activeCid || null,
       });
-      state.sizePickerId = null;
       state.addedId = p.id;
       render();
       setTimeout(() => { state.addedId = null; render(); }, 2000);

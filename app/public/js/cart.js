@@ -44,6 +44,7 @@
       if (existing) existing.quantity = (existing.quantity || 1) + 1;
       else items.push({ ...item, quantity: 1 });
       write(items);
+      document.dispatchEvent(new CustomEvent("gumes:cart-added", { detail: { item } }));
     },
 
     setQty(productId, size, color, qty) {

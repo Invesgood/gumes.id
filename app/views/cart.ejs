@@ -1,47 +1,78 @@
 <%- include('partials/head', { title: title }) %>
-<%- include('partials/navbar') %>
 
-<main class="pt-56 pb-32 px-6 md:px-12 max-w-screen-2xl mx-auto min-h-screen">
-  <%- include('partials/stepper', { activeStep: 'cart' }) %>
-  <header class="mb-14">
-    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Pilihan Anda</p>
-    <h1 class="font-[family-name:var(--font-headline)] text-5xl md:text-6xl font-light tracking-tight">Keranjang Belanja</h1>
-    <p id="cart-count-text" class="mt-3 text-sm tracking-[0.2em] uppercase text-outline hidden"></p>
-  </header>
+<main class="flex-1 flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
 
-  <!-- Empty state -->
-  <div id="cart-empty" class="hidden flex-col items-center justify-center py-32 text-center">
-    <span class="material-symbols-outlined text-outline-variant mb-6" style="font-size:64px;font-variation-settings:'FILL' 0,'wght' 100">shopping_bag</span>
-    <h2 class="font-[family-name:var(--font-headline)] text-3xl mb-3">Keranjang Anda kosong</h2>
-    <p class="text-on-surface-variant text-sm mb-10 max-w-xs">Jelajahi koleksi kami dan tambahkan item pilihan Anda.</p>
-    <a href="/" class="burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase px-10 py-4 hover:brightness-110 transition-all">Lihat Koleksi</a>
-  </div>
+  <!-- LEFT: scrollable content -->
+  <section id="cart-left" class="flex-1 lg:w-7/12 lg:h-screen lg:overflow-y-auto bg-surface">
+    <div class="max-w-2xl mx-auto px-6 md:px-12 lg:px-16">
 
-  <!-- Items + summary -->
-  <div id="cart-content" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-    <div class="lg:col-span-7">
-      <div id="cart-items" class="divide-y divide-outline-variant/10"></div>
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pt-8 gap-4 border-t border-outline-variant/10">
-        <a href="/" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-all group">
-          <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform">arrow_right_alt</span>
-          Lanjut Belanja
+      <!-- Inline minimal header -->
+      <div class="flex items-center justify-between py-6 border-b border-outline-variant/20">
+        <a href="/" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors group">
+          <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform" style="transform:rotate(180deg)">arrow_right_alt</span>
+          <span class="hidden sm:inline">Lanjut Belanja</span>
         </a>
-        <div class="flex items-center gap-4 text-[11px] uppercase tracking-[0.2em]">
-          <span class="text-outline">Butuh bantuan?</span>
-          <a href="/contact" class="text-on-surface border-b border-outline-variant hover:border-primary-container hover:text-primary-container transition-all">Hubungi Kami</a>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary-container" style="font-size:16px">lock</span>
+          <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface">Checkout Aman</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <button id="theme-toggle" class="cursor-pointer" aria-label="Toggle dark mode">
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" style="font-size:20px">
+              <%= locals.theme === 'dark' ? 'light_mode' : 'dark_mode' %>
+            </span>
+          </button>
+          <a href="<%= locals.user ? '/profile' : '/login' %>" aria-label="Akun">
+            <span class="material-symbols-outlined text-primary-container cursor-pointer" style="font-size:20px">person</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="py-12">
+        <%- include('partials/stepper', { activeStep: 'cart' }) %>
+        <header class="mb-12">
+          <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Pilihan Anda</p>
+          <h1 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl font-light tracking-tight">Keranjang Belanja</h1>
+          <p id="cart-count-text" class="mt-3 text-sm tracking-[0.2em] uppercase text-outline hidden"></p>
+        </header>
+
+        <!-- Empty state -->
+        <div id="cart-empty" class="hidden flex-col items-center justify-center py-24 text-center">
+          <span class="material-symbols-outlined text-outline-variant mb-6" style="font-size:64px;font-variation-settings:'FILL' 0,'wght' 100">shopping_bag</span>
+          <h2 class="font-[family-name:var(--font-headline)] text-3xl mb-3">Keranjang Anda kosong</h2>
+          <p class="text-on-surface-variant text-sm mb-10 max-w-xs">Jelajahi koleksi kami dan tambahkan item pilihan Anda.</p>
+          <a href="/" class="burnished-gradient text-on-primary text-[11px] font-bold tracking-widest uppercase px-10 py-4 hover:brightness-110 transition-all">Lihat Koleksi</a>
+        </div>
+
+        <!-- Items -->
+        <div id="cart-content" class="hidden">
+          <div id="cart-items" class="divide-y divide-outline-variant/10"></div>
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pt-8 mt-2 gap-4 border-t border-outline-variant/10">
+            <a href="/" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-all group">
+              <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform">arrow_right_alt</span>
+              Lanjut Belanja
+            </a>
+            <div class="flex items-center gap-4 text-[11px] uppercase tracking-[0.2em]">
+              <span class="text-outline">Butuh bantuan?</span>
+              <a href="/contact" class="text-on-surface border-b border-outline-variant hover:border-primary-container hover:text-primary-container transition-all">Hubungi Kami</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <aside class="lg:col-span-5 lg:sticky lg:top-[200px] lg:h-[calc(100vh_-_220px)] lg:overflow-y-auto bg-surface-container-lowest border border-outline-variant/50 shadow-md">
-        <!-- Header -->
-        <div class="px-8 pt-8 pb-6 border-b border-outline-variant/30">
+  <!-- RIGHT: fixed summary -->
+  <aside id="cart-summary" class="hidden lg:w-5/12 lg:h-screen bg-surface-container/40 border-t lg:border-t-0 lg:border-l border-outline-variant/30">
+    <div class="lg:h-full lg:overflow-y-auto px-6 md:px-12 lg:px-12 py-10">
+      <div class="max-w-md lg:max-w-lg">
+
+        <div class="pb-6 border-b border-outline-variant/30 mb-6">
           <p class="text-primary text-[10px] tracking-[0.3em] uppercase mb-2">Ringkasan</p>
           <h2 class="font-[family-name:var(--font-headline)] text-2xl">Pesanan Saya</h2>
         </div>
 
-        <!-- Section: Item Pesanan -->
-        <section class="px-8 py-6 border-b border-outline-variant/30">
+        <section class="pb-6 mb-6 border-b border-outline-variant/30">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant">Item Pesanan</h3>
             <span id="summary-count" class="text-[10px] uppercase tracking-widest text-outline">0 item</span>
@@ -49,8 +80,7 @@
           <div id="summary-items" class="space-y-3"></div>
         </section>
 
-        <!-- Section: Rincian Biaya -->
-        <section class="px-8 py-6 border-b border-outline-variant/30 bg-surface-container/40">
+        <section class="pb-6 mb-6 border-b border-outline-variant/30">
           <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Rincian Biaya</h3>
           <div class="space-y-3">
             <div class="flex justify-between items-center text-sm">
@@ -68,8 +98,7 @@
           </div>
         </section>
 
-        <!-- Section: Total -->
-        <section class="px-8 py-6 border-b border-outline-variant/30">
+        <section class="pb-6 mb-6 border-b border-outline-variant/30">
           <div class="flex justify-between items-center gap-4">
             <div class="min-w-0">
               <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-1">Total Pembayaran</p>
@@ -79,29 +108,27 @@
           </div>
         </section>
 
-        <!-- Section: CTA + Garansi -->
-        <div class="px-8 py-8 space-y-5">
-          <a href="/checkout" class="block w-full burnished-gradient text-on-primary py-5 text-[11px] uppercase tracking-[0.3em] font-bold text-center hover:brightness-110 transition-all">
-            Lanjut ke Pembayaran
-          </a>
-          <div class="space-y-3 pt-2">
-            <div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
-              <span class="material-symbols-outlined text-base text-primary-container">verified_user</span>
-              Pembayaran aman & terenkripsi
-            </div>
-            <div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
-              <span class="material-symbols-outlined text-base text-primary-container">local_shipping</span>
-              Gratis ongkir seluruh Indonesia
-            </div>
-            <div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
-              <span class="material-symbols-outlined text-base text-primary-container">replay</span>
-              Garansi pengembalian 30 hari
-            </div>
+        <a href="/checkout" class="block w-full burnished-gradient text-on-primary py-5 text-[11px] uppercase tracking-[0.3em] font-bold text-center hover:brightness-110 transition-all">
+          Lanjut ke Pembayaran
+        </a>
+
+        <div class="space-y-3 pt-6">
+          <div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
+            <span class="material-symbols-outlined text-base text-primary-container">verified_user</span>
+            Pembayaran aman & terenkripsi
+          </div>
+          <div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
+            <span class="material-symbols-outlined text-base text-primary-container">local_shipping</span>
+            Gratis ongkir seluruh Indonesia
+          </div>
+          <div class="flex items-center gap-3 text-[10px] text-outline uppercase tracking-widest">
+            <span class="material-symbols-outlined text-base text-primary-container">replay</span>
+            Garansi pengembalian 30 hari
           </div>
         </div>
-    </aside>
-  </div>
+      </div>
+    </div>
+  </aside>
 </main>
 
-<%- include('partials/footer') %>
 <%- include('partials/foot', { pageScript: '/js/cart-page.js' }) %>

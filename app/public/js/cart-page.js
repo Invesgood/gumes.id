@@ -13,6 +13,8 @@
   const subtotalEl = document.getElementById("sum-subtotal");
   const taxEl = document.getElementById("sum-tax");
   const totalEl = document.getElementById("sum-total");
+  const summaryAsideEl = document.getElementById("cart-summary");
+  const leftSectionEl = document.getElementById("cart-left");
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
@@ -34,9 +36,9 @@
       : "";
 
     return `<div class="group flex gap-6 md:gap-8 py-8 first:pt-0" data-key="${itemKey(item)}">
-      <div class="relative w-28 md:w-36 aspect-[3/4] bg-surface-container overflow-hidden shrink-0">
+      <div class="relative w-36 md:w-52 aspect-[4/3] bg-surface-container overflow-hidden shrink-0">
         <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}"
-             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+             class="absolute inset-0 w-full h-full object-contain" loading="lazy" />
       </div>
       <div class="flex-1 flex flex-col justify-between py-1 min-w-0">
         <div class="flex justify-between items-start gap-4">
@@ -93,6 +95,9 @@
       emptyEl.classList.remove("hidden");
       emptyEl.classList.add("flex");
       countText.classList.add("hidden");
+      summaryAsideEl?.classList.add("hidden");
+      leftSectionEl?.classList.remove("lg:w-7/12");
+      leftSectionEl?.classList.add("lg:w-full");
       return;
     }
     emptyEl.classList.add("hidden");
@@ -101,6 +106,9 @@
     contentEl.classList.add("grid");
     countText.classList.remove("hidden");
     countText.textContent = `${total} ${total === 1 ? "item" : "items"} selected`;
+    summaryAsideEl?.classList.remove("hidden");
+    leftSectionEl?.classList.add("lg:w-7/12");
+    leftSectionEl?.classList.remove("lg:w-full");
 
     itemsEl.innerHTML = items.map(itemHTML).join("");
     summaryItemsEl.innerHTML = items.map(summaryItemHTML).join("");

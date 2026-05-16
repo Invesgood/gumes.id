@@ -1,16 +1,41 @@
 <%- include('partials/head', { title: title }) %>
-<%- include('partials/navbar') %>
 
 <%
   const fieldCls = 'block w-full bg-surface-container-lowest border border-outline-variant px-4 pt-5 pb-2 text-sm placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container/40 transition-colors';
   const floatLabel = 'absolute left-4 top-1.5 text-[10px] uppercase tracking-widest text-outline pointer-events-none';
 %>
 
-<main class="pt-56 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
-  <%- include('partials/stepper', { activeStep: 'info' }) %>
-  <form id="checkout-form" class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<main class="flex-1 flex flex-col lg:flex-row lg:h-screen lg:overflow-hidden">
 
-    <div class="lg:col-span-7 space-y-10">
+  <!-- LEFT: scrollable form -->
+  <section class="flex-1 lg:w-7/12 lg:h-screen lg:overflow-y-auto bg-surface">
+    <div class="max-w-2xl mx-auto px-6 md:px-12 lg:px-16">
+
+      <!-- Inline minimal header -->
+      <div class="flex items-center justify-between py-6 border-b border-outline-variant/20">
+        <a href="/cart" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors group">
+          <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform" style="transform:rotate(180deg)">arrow_right_alt</span>
+          <span class="hidden sm:inline">Keranjang</span>
+        </a>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary-container" style="font-size:16px">lock</span>
+          <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-on-surface">Checkout Aman</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <button id="theme-toggle" type="button" class="cursor-pointer" aria-label="Toggle dark mode">
+            <span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" style="font-size:20px">
+              <%= locals.theme === 'dark' ? 'light_mode' : 'dark_mode' %>
+            </span>
+          </button>
+          <a href="<%= locals.user ? '/profile' : '/login' %>" aria-label="Akun">
+            <span class="material-symbols-outlined text-primary-container cursor-pointer" style="font-size:20px">person</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="py-12">
+        <%- include('partials/stepper', { activeStep: 'info' }) %>
+        <form id="checkout-form" class="space-y-10">
 
       <!-- ── STEP 1: Informasi ── -->
       <section data-step-panel="info" class="space-y-10">
@@ -202,52 +227,61 @@
           </button>
         </div>
       </section>
-    </div>
+        </form>
 
-    <!-- ── Sidebar Summary ── -->
-    <aside class="lg:col-span-5 lg:sticky lg:top-[200px] lg:h-[calc(100vh_-_220px)] lg:overflow-y-auto bg-surface-container-lowest border border-outline-variant/50 shadow-md">
-      <div class="px-8 pt-8 pb-6 border-b border-outline-variant/30">
-        <p class="text-primary text-[10px] tracking-[0.3em] uppercase mb-2">Ringkasan</p>
-        <h2 class="font-[family-name:var(--font-headline)] text-2xl">Pesanan Saya</h2>
+        <div id="empty-cart-redirect" class="hidden text-center py-32">
+          <p class="text-on-surface-variant mb-4">Keranjang kosong. Tambahkan produk dulu.</p>
+          <a href="/" class="text-[11px] uppercase tracking-widest text-primary-container border-b border-primary-container">Lihat Koleksi</a>
+        </div>
       </div>
-      <section class="px-8 py-6 border-b border-outline-variant/30">
-        <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Item Pesanan</h3>
-        <div id="co-items" class="space-y-3"></div>
-      </section>
-      <section class="px-8 py-6 border-b border-outline-variant/30 bg-surface-container/40">
-        <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Rincian Biaya</h3>
-        <div class="space-y-3">
-          <div class="flex justify-between text-sm">
-            <span class="text-outline uppercase tracking-widest text-xs">Subtotal</span>
-            <span id="co-subtotal" class="font-[family-name:var(--font-headline)]">Rp 0</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-outline uppercase tracking-widest text-xs">Pengiriman</span>
-            <span id="co-shipping" class="text-xs font-medium text-primary-container">Gratis</span>
-          </div>
-          <div class="flex justify-between text-sm">
-            <span class="text-outline uppercase tracking-widest text-xs">PPN (11%)</span>
-            <span id="co-tax" class="font-[family-name:var(--font-headline)]">Rp 0</span>
-          </div>
-        </div>
-      </section>
-      <section class="px-8 py-6">
-        <div class="flex justify-between items-baseline">
-          <div>
-            <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-1">Total Pembayaran</p>
-            <p class="text-[10px] text-outline">Sudah termasuk pajak</p>
-          </div>
-          <span id="co-total" class="font-[family-name:var(--font-headline)] text-3xl text-primary-container">Rp 0</span>
-        </div>
-      </section>
-    </aside>
-  </form>
+    </div>
+  </section>
 
-  <div id="empty-cart-redirect" class="hidden text-center py-32">
-    <p class="text-on-surface-variant mb-4">Keranjang kosong. Tambahkan produk dulu.</p>
-    <a href="/" class="text-[11px] uppercase tracking-widest text-primary-container border-b border-primary-container">Lihat Koleksi</a>
-  </div>
+  <!-- RIGHT: fixed summary -->
+  <aside class="lg:w-5/12 lg:h-screen bg-surface-container/40 border-t lg:border-t-0 lg:border-l border-outline-variant/30">
+    <div class="lg:h-full lg:overflow-y-auto px-6 md:px-12 lg:px-12 py-10">
+      <div class="max-w-md lg:max-w-lg">
+
+        <div class="pb-6 border-b border-outline-variant/30 mb-6">
+          <p class="text-primary text-[10px] tracking-[0.3em] uppercase mb-2">Ringkasan</p>
+          <h2 class="font-[family-name:var(--font-headline)] text-2xl">Pesanan Saya</h2>
+        </div>
+
+        <section class="pb-6 mb-6 border-b border-outline-variant/30">
+          <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Item Pesanan</h3>
+          <div id="co-items" class="space-y-3"></div>
+        </section>
+
+        <section class="pb-6 mb-6 border-b border-outline-variant/30">
+          <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Rincian Biaya</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between text-sm">
+              <span class="text-outline uppercase tracking-widest text-xs">Subtotal</span>
+              <span id="co-subtotal" class="font-[family-name:var(--font-headline)]">Rp 0</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-outline uppercase tracking-widest text-xs">Pengiriman</span>
+              <span id="co-shipping" class="text-xs font-medium text-primary-container">Gratis</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-outline uppercase tracking-widest text-xs">PPN (11%)</span>
+              <span id="co-tax" class="font-[family-name:var(--font-headline)]">Rp 0</span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="flex justify-between items-baseline">
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-1">Total Pembayaran</p>
+              <p class="text-[10px] text-outline">Sudah termasuk pajak</p>
+            </div>
+            <span id="co-total" class="font-[family-name:var(--font-headline)] text-3xl text-primary-container">Rp 0</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </aside>
 </main>
 
-<%- include('partials/footer') %>
 <%- include('partials/foot', { pageScript: '/js/checkout.js' }) %>
