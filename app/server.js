@@ -54,6 +54,23 @@ app.get("/", async (req, res) => {
   });
 });
 
+app.get("/new-arrival", async (req, res) => {
+  const all = await fetchProducts();
+  const products = all.filter((p) => p.isNewArrival);
+  res.render("new-arrival", {
+    title: "New Arrivals — GUMES.ID",
+    products,
+  });
+});
+
+app.get("/location", (req, res) => {
+  res.render("location", { title: "Our Atelier — GUMES.ID" });
+});
+
+app.get("/contact", (req, res) => {
+  res.render("contact", { title: "Contact — GUMES.ID" });
+});
+
 app.get("/product/:id", async (req, res) => {
   const product = await fetchProductById(req.params.id);
   if (!product) {
@@ -283,6 +300,29 @@ app.post("/api/auth/login", async (req, res) => {
 
 app.post("/api/auth/logout", (req, res) => {
   req.session.destroy(() => res.json({ ok: true }));
+});
+
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, inquiry, message } = req.body || {};
+    if (!name || !email || !message) {
+      return res.status(400).json({ error: "Nama, email & pesan wajib diisi" });
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: "Format email tidak valid" });
+    }
+    if (message.length > 5000) {
+      return res.status(400).json({ error: "Pesan terlalu panjang (maks 5000 karakter)" });
+    }
+    await query(
+      `INSERT INTO contact_messages (name, email, inquiry, message) VALUES ($1,$2,$3,$4)`,
+      [name.slice(0, 200), email.slice(0, 200), (inquiry || "").slice(0, 200), message]
+    );
+    res.json({ ok: true });
+  } catch (e) {
+    console.error("contact error", e);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 app.post("/api/reviews", async (req, res) => {

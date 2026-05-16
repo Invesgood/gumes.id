@@ -1,0 +1,143 @@
+<%- include('partials/head', { title: title }) %>
+<%- include('partials/navbar') %>
+
+<main class="flex-grow pt-48 bg-surface">
+
+  <!-- ── Hero ── -->
+  <section class="py-20 md:py-24 px-6 md:px-12 max-w-screen-2xl mx-auto flex flex-col items-center text-center">
+    <p class="text-primary text-xs tracking-[0.3em] uppercase mb-4">Visit Our Atelier</p>
+    <h1 class="font-[family-name:var(--font-headline)] text-5xl md:text-7xl mb-6 tracking-tighter leading-none">
+      Jakarta Timur
+    </h1>
+    <p class="text-lg max-w-2xl opacity-70 leading-relaxed">
+      Satu-satunya atelier kami. Sebuah dialog arsitektural antara warisan kerajinan kulit dan minimalisme kontemporer di jantung Jakarta Timur.
+    </p>
+  </section>
+
+  <!-- ── Location Card ── -->
+  <section class="px-6 md:px-12 pb-20 md:pb-32 max-w-screen-2xl mx-auto">
+    <div class="bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row group transition-all duration-700 hover:bg-surface-container">
+
+      <!-- Image -->
+      <div class="w-full md:w-1/2 h-[400px] md:h-[600px] overflow-hidden relative">
+        <img
+          src="/images/1777106834770.webp"
+          alt="GUMES.ID Atelier Jakarta Timur"
+          class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+        />
+      </div>
+
+      <!-- Info -->
+      <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.2em] text-primary mb-4 block">Flagship Atelier</span>
+          <h2 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl mb-6">GUMES Atelier</h2>
+          <p class="text-sm leading-loose opacity-60 mb-8">
+            Berada di kawasan Rawamangun, atelier kami berfungsi sebagai showroom sekaligus workshop hidup tempat para artisan memperagakan teknik burnishing tradisional. Setiap pasang dirajut langsung di tempat ini.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary">location_on</span>
+              <span class="text-xs tracking-wide leading-relaxed">
+                Jl. Pemuda Raya No. 88<br />
+                Rawamangun, Pulo Gadung<br />
+                Jakarta Timur 13220
+              </span>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary">schedule</span>
+              <span class="text-xs tracking-wide whitespace-pre-line leading-relaxed">Senin — Sabtu: 10.00 – 21.00 WIB
+Minggu: 11.00 – 20.00 WIB</span>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary">call</span>
+              <span class="text-xs tracking-wide">+62 21 4788 1234</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-12">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Rawamangun+Pulo+Gadung+Jakarta+Timur"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 burnished-gradient text-on-primary text-[10px] uppercase tracking-[0.2em] font-bold px-8 py-4 hover:brightness-110 transition-all"
+          >
+            <span class="material-symbols-outlined text-base">explore</span>
+            Get Directions
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 px-8 py-4 border border-on-surface/20 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-on-surface hover:text-surface hover:border-on-surface transition-colors"
+          >
+            <span class="material-symbols-outlined text-base">call</span>
+            Book a Visit
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Map Embed ── -->
+  <section class="px-6 md:px-12 pb-20 md:pb-32 max-w-screen-2xl mx-auto">
+    <div class="mb-8 flex items-end justify-between flex-wrap gap-4">
+      <div>
+        <p class="text-primary text-xs tracking-[0.3em] uppercase mb-2">Find Us</p>
+        <h2 class="font-[family-name:var(--font-headline)] text-3xl md:text-4xl">On the Map</h2>
+      </div>
+      <p class="text-outline text-xs uppercase tracking-widest">Rawamangun · Jakarta Timur</p>
+    </div>
+    <div class="w-full aspect-[16/9] md:aspect-[21/9] bg-surface-container-lowest overflow-hidden border border-outline-variant/20">
+      <iframe
+        src="https://www.google.com/maps?q=Rawamangun+Pulo+Gadung+Jakarta+Timur&output=embed"
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="GUMES Atelier Jakarta Timur"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="bg-surface-container py-20 md:py-32">
+    <div class="max-w-screen-xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center gap-12 md:gap-16">
+      <div class="flex-1">
+        <h2 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl mb-8 leading-tight">
+          Tidak bisa datang langsung?<br />
+          <span class="text-primary">Hubungi kurator kami.</span>
+        </h2>
+        <p class="text-base md:text-lg opacity-70 mb-10">
+          Atelier digital kami selalu terbuka. Bicara dengan product specialist untuk memandu perjalanan taktil Anda dari mana saja.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="/contact"
+            class="burnished-gradient px-8 md:px-10 py-4 md:py-5 text-on-primary text-[10px] uppercase tracking-[0.2em] font-bold shadow-xl hover:brightness-110 transition-all"
+          >
+            Contact Us
+          </a>
+          <a
+            href="/"
+            class="px-8 md:px-10 py-4 md:py-5 border border-on-surface/20 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-surface-container-lowest transition-colors"
+          >
+            Browse Collection
+          </a>
+        </div>
+      </div>
+      <div class="flex-1 w-full aspect-square bg-surface-container-lowest relative">
+        <img
+          src="/images/1777106834777.webp"
+          alt="Artisan hands"
+          class="absolute inset-0 w-full h-full object-cover grayscale"
+        />
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<%- include('partials/footer') %>
+<%- include('partials/foot') %>
