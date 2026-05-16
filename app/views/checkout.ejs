@@ -1,85 +1,251 @@
 <%- include('partials/head', { title: title }) %>
 <%- include('partials/navbar') %>
 
-<main class="pt-48 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+<%
+  const fieldCls = 'block w-full bg-surface-container-lowest border border-outline-variant px-4 pt-5 pb-2 text-sm placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container/40 transition-colors';
+  const floatLabel = 'absolute left-4 top-1.5 text-[10px] uppercase tracking-widest text-outline pointer-events-none';
+%>
+
+<main class="pt-56 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+  <%- include('partials/stepper', { activeStep: 'info' }) %>
   <form id="checkout-form" class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-    <div class="lg:col-span-7 space-y-16">
-      <div>
-        <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Checkout</p>
-        <h1 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl font-light tracking-tight mb-3">Shipping Information</h1>
-        <p class="text-outline text-sm">Lengkapi data pengiriman untuk melanjutkan ke pembayaran.</p>
-      </div>
+    <div class="lg:col-span-7 space-y-10">
 
-      <div class="space-y-5">
+      <!-- ── STEP 1: Informasi ── -->
+      <section data-step-panel="info" class="space-y-10">
         <div>
-          <label class="text-[11px] uppercase tracking-widest text-outline">Nama Lengkap</label>
-          <input type="text" name="name" required class="mt-2 w-full bg-transparent border-b border-outline-variant py-2 focus:outline-none focus:border-primary-container" />
+          <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Langkah 1 dari 3</p>
+          <h1 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl font-light tracking-tight mb-3">Informasi Pengiriman</h1>
+          <p class="text-outline text-sm">Lengkapi alamat pengiriman dengan lengkap.</p>
         </div>
-        <div>
-          <label class="text-[11px] uppercase tracking-widest text-outline">Email</label>
-          <input type="email" name="email" required class="mt-2 w-full bg-transparent border-b border-outline-variant py-2 focus:outline-none focus:border-primary-container" />
-        </div>
-        <div>
-          <label class="text-[11px] uppercase tracking-widest text-outline">Alamat Lengkap</label>
-          <input type="text" name="address" required class="mt-2 w-full bg-transparent border-b border-outline-variant py-2 focus:outline-none focus:border-primary-container" />
-        </div>
-        <div class="grid grid-cols-2 gap-5">
-          <div>
-            <label class="text-[11px] uppercase tracking-widest text-outline">Kota</label>
-            <input type="text" name="city" required class="mt-2 w-full bg-transparent border-b border-outline-variant py-2 focus:outline-none focus:border-primary-container" />
-          </div>
-          <div>
-            <label class="text-[11px] uppercase tracking-widest text-outline">Kode Pos</label>
-            <input type="text" name="postal" required class="mt-2 w-full bg-transparent border-b border-outline-variant py-2 focus:outline-none focus:border-primary-container" />
+
+        <!-- Contact -->
+        <div class="space-y-3">
+          <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant">Kontak</h3>
+          <div class="relative">
+            <input type="email" name="email" required placeholder=" " class="<%= fieldCls %>" />
+            <label class="<%= floatLabel %>">Email</label>
           </div>
         </div>
-      </div>
 
-      <div id="checkout-error" class="hidden text-error text-sm border border-error/30 bg-error-container/20 px-4 py-3"></div>
+        <!-- Shipping address -->
+        <div class="space-y-3">
+          <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant">Alamat Pengiriman</h3>
+
+          <div class="relative">
+            <select name="country" class="<%= fieldCls %> appearance-none pr-10">
+              <option value="ID" selected>Indonesia</option>
+            </select>
+            <label class="<%= floatLabel %>">Negara</label>
+            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none" style="font-size:18px">arrow_downward</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="relative">
+              <input type="text" name="first_name" required placeholder="First name" class="<%= fieldCls %> pt-3" />
+            </div>
+            <div class="relative">
+              <input type="text" name="last_name" placeholder="Last name" class="<%= fieldCls %> pt-3" />
+            </div>
+          </div>
+
+          <div class="relative">
+            <input type="text" name="address" required placeholder="Alamat" class="<%= fieldCls %> pt-3" />
+          </div>
+
+          <div class="relative">
+            <input type="text" name="district" required placeholder="Kecamatan, cth: Bogor Barat" class="<%= fieldCls %> pt-3" />
+          </div>
+
+          <div class="relative">
+            <input type="text" name="city" required placeholder="Kota, cth: Bogor" class="<%= fieldCls %> pt-3" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="relative">
+              <select name="province" required class="<%= fieldCls %> appearance-none pr-10">
+                <option value="" disabled>Pilih provinsi</option>
+                <% ['Aceh','Bali','Banten','Bengkulu','DI Yogyakarta','DKI Jakarta','Gorontalo','Jambi','Jawa Barat','Jawa Tengah','Jawa Timur','Kalimantan Barat','Kalimantan Selatan','Kalimantan Tengah','Kalimantan Timur','Kalimantan Utara','Kepulauan Bangka Belitung','Kepulauan Riau','Lampung','Maluku','Maluku Utara','Nusa Tenggara Barat','Nusa Tenggara Timur','Papua','Papua Barat','Papua Barat Daya','Papua Pegunungan','Papua Selatan','Papua Tengah','Riau','Sulawesi Barat','Sulawesi Selatan','Sulawesi Tengah','Sulawesi Tenggara','Sulawesi Utara','Sumatera Barat','Sumatera Selatan','Sumatera Utara'].forEach(function(p){ %>
+                  <option value="<%= p %>" <%= p === 'Banten' ? 'selected' : '' %>><%= p %></option>
+                <% }); %>
+              </select>
+              <label class="<%= floatLabel %>">Provinsi</label>
+              <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none" style="font-size:18px">arrow_downward</span>
+            </div>
+            <div class="relative">
+              <input type="text" name="postal" required inputmode="numeric" pattern="[0-9]{5}" placeholder="Kode POS, cth: 16122" class="<%= fieldCls %> pt-3" />
+            </div>
+          </div>
+
+          <div class="relative">
+            <input type="tel" name="phone" required inputmode="tel" placeholder="Nomor HP/ Telepon" class="<%= fieldCls %> pt-3" />
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-4">
+          <a href="/cart" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors group">
+            <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform" style="transform:rotate(180deg)">arrow_right_alt</span>
+            Kembali ke Keranjang
+          </a>
+          <button type="button" data-next-step="shipping" class="burnished-gradient text-on-primary px-8 py-4 text-[11px] uppercase tracking-[0.3em] font-bold hover:brightness-110 transition-all">
+            Lanjut ke Pengiriman
+          </button>
+        </div>
+      </section>
+
+      <!-- ── STEP 2: Pengiriman ── -->
+      <section data-step-panel="shipping" class="space-y-10 hidden">
+        <div>
+          <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Langkah 2 dari 3</p>
+          <h1 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl font-light tracking-tight mb-3">Metode Pengiriman</h1>
+          <p class="text-outline text-sm">Pilih opsi pengiriman yang sesuai.</p>
+        </div>
+
+        <div class="space-y-3" data-shipping-group>
+          <label class="block border border-outline-variant p-5 cursor-pointer transition-colors hover:border-primary-container has-[:checked]:border-primary-container has-[:checked]:bg-primary-container/5">
+            <div class="flex items-start gap-4">
+              <input type="radio" name="shipping_method" value="regular" data-cost="0" checked class="mt-1 accent-primary-container" />
+              <div class="flex-1">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-sm font-bold uppercase tracking-widest">Regular</span>
+                  <span class="text-sm font-bold text-primary-container">Gratis</span>
+                </div>
+                <p class="text-xs text-outline">Estimasi 3-5 hari kerja ke seluruh Indonesia.</p>
+              </div>
+            </div>
+          </label>
+          <label class="block border border-outline-variant p-5 cursor-pointer transition-colors hover:border-primary-container has-[:checked]:border-primary-container has-[:checked]:bg-primary-container/5">
+            <div class="flex items-start gap-4">
+              <input type="radio" name="shipping_method" value="express" data-cost="25000" class="mt-1 accent-primary-container" />
+              <div class="flex-1">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-sm font-bold uppercase tracking-widest">Express</span>
+                  <span class="text-sm font-bold text-primary-container">Rp 25.000</span>
+                </div>
+                <p class="text-xs text-outline">Estimasi 1-2 hari kerja (Jabodetabek 1 hari).</p>
+              </div>
+            </div>
+          </label>
+          <label class="block border border-outline-variant p-5 cursor-pointer transition-colors hover:border-primary-container has-[:checked]:border-primary-container has-[:checked]:bg-primary-container/5">
+            <div class="flex items-start gap-4">
+              <input type="radio" name="shipping_method" value="sameday" data-cost="40000" class="mt-1 accent-primary-container" />
+              <div class="flex-1">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-sm font-bold uppercase tracking-widest">Same Day</span>
+                  <span class="text-sm font-bold text-primary-container">Rp 40.000</span>
+                </div>
+                <p class="text-xs text-outline">Hanya untuk Jabodetabek. Order sebelum 14:00.</p>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div class="flex justify-between items-center pt-4">
+          <button type="button" data-prev-step="info" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors group">
+            <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform" style="transform:rotate(180deg)">arrow_right_alt</span>
+            Kembali
+          </button>
+          <button type="button" data-next-step="payment" class="burnished-gradient text-on-primary px-8 py-4 text-[11px] uppercase tracking-[0.3em] font-bold hover:brightness-110 transition-all">
+            Lanjut ke Pembayaran
+          </button>
+        </div>
+      </section>
+
+      <!-- ── STEP 3: Pembayaran ── -->
+      <section data-step-panel="payment" class="space-y-10 hidden">
+        <div>
+          <p class="text-primary text-xs tracking-[0.3em] uppercase mb-3">Langkah 3 dari 3</p>
+          <h1 class="font-[family-name:var(--font-headline)] text-4xl md:text-5xl font-light tracking-tight mb-3">Metode Pembayaran</h1>
+          <p class="text-outline text-sm">Pilih cara pembayaran untuk menyelesaikan pesanan.</p>
+        </div>
+
+        <div class="space-y-3" data-payment-group>
+          <label class="block border border-outline-variant p-5 cursor-pointer transition-colors hover:border-primary-container has-[:checked]:border-primary-container has-[:checked]:bg-primary-container/5">
+            <div class="flex items-start gap-4">
+              <input type="radio" name="payment_method" value="transfer" checked class="mt-1 accent-primary-container" />
+              <div class="flex-1">
+                <span class="block text-sm font-bold uppercase tracking-widest mb-1">Transfer Bank</span>
+                <p class="text-xs text-outline">BCA · Mandiri · BNI · BRI. Instruksi dikirim ke email setelah order.</p>
+              </div>
+            </div>
+          </label>
+          <label class="block border border-outline-variant p-5 cursor-pointer transition-colors hover:border-primary-container has-[:checked]:border-primary-container has-[:checked]:bg-primary-container/5">
+            <div class="flex items-start gap-4">
+              <input type="radio" name="payment_method" value="ewallet" class="mt-1 accent-primary-container" />
+              <div class="flex-1">
+                <span class="block text-sm font-bold uppercase tracking-widest mb-1">E-Wallet</span>
+                <p class="text-xs text-outline">GoPay · OVO · DANA · ShopeePay.</p>
+              </div>
+            </div>
+          </label>
+          <label class="block border border-outline-variant p-5 cursor-pointer transition-colors hover:border-primary-container has-[:checked]:border-primary-container has-[:checked]:bg-primary-container/5">
+            <div class="flex items-start gap-4">
+              <input type="radio" name="payment_method" value="cod" class="mt-1 accent-primary-container" />
+              <div class="flex-1">
+                <span class="block text-sm font-bold uppercase tracking-widest mb-1">Bayar di Tempat (COD)</span>
+                <p class="text-xs text-outline">Bayar tunai saat pesanan tiba. Tersedia untuk wilayah terpilih.</p>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div id="checkout-error" class="hidden text-error text-sm border border-error/30 bg-error-container/20 px-4 py-3"></div>
+
+        <div class="flex justify-between items-center pt-4">
+          <button type="button" data-prev-step="shipping" class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-outline hover:text-primary-container transition-colors group">
+            <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform" style="transform:rotate(180deg)">arrow_right_alt</span>
+            Kembali
+          </button>
+          <button type="submit" id="co-submit" class="burnished-gradient text-on-primary px-10 py-4 text-[11px] uppercase tracking-[0.3em] font-bold hover:brightness-110 transition-all disabled:opacity-50">
+            <span id="co-submit-label">Bayar Sekarang</span>
+          </button>
+        </div>
+      </section>
     </div>
 
-    <aside class="lg:col-span-5 lg:sticky lg:top-48 bg-surface-container-lowest border border-outline-variant/30 shadow-md">
-      <div class="px-8 pt-8 pb-6 border-b border-outline-variant/10">
-        <h2 class="font-[family-name:var(--font-headline)] text-2xl">Order Summary</h2>
+    <!-- ── Sidebar Summary ── -->
+    <aside class="lg:col-span-5 lg:sticky lg:top-[200px] lg:h-[calc(100vh_-_220px)] lg:overflow-y-auto bg-surface-container-lowest border border-outline-variant/50 shadow-md">
+      <div class="px-8 pt-8 pb-6 border-b border-outline-variant/30">
+        <p class="text-primary text-[10px] tracking-[0.3em] uppercase mb-2">Ringkasan</p>
+        <h2 class="font-[family-name:var(--font-headline)] text-2xl">Pesanan Saya</h2>
       </div>
-      <div class="px-8 py-6 space-y-4">
-        <div id="co-items" class="space-y-3 pb-4 border-b border-outline-variant/10"></div>
-        <div class="space-y-3 py-2">
+      <section class="px-8 py-6 border-b border-outline-variant/30">
+        <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Item Pesanan</h3>
+        <div id="co-items" class="space-y-3"></div>
+      </section>
+      <section class="px-8 py-6 border-b border-outline-variant/30 bg-surface-container/40">
+        <h3 class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-4">Rincian Biaya</h3>
+        <div class="space-y-3">
           <div class="flex justify-between text-sm">
             <span class="text-outline uppercase tracking-widest text-xs">Subtotal</span>
-            <span id="co-subtotal">Rp 0</span>
+            <span id="co-subtotal" class="font-[family-name:var(--font-headline)]">Rp 0</span>
           </div>
           <div class="flex justify-between text-sm">
-            <span class="text-outline uppercase tracking-widest text-xs">Shipping</span>
-            <span class="text-xs">Complimentary</span>
+            <span class="text-outline uppercase tracking-widest text-xs">Pengiriman</span>
+            <span id="co-shipping" class="text-xs font-medium text-primary-container">Gratis</span>
           </div>
           <div class="flex justify-between text-sm">
             <span class="text-outline uppercase tracking-widest text-xs">PPN (11%)</span>
-            <span id="co-tax">Rp 0</span>
+            <span id="co-tax" class="font-[family-name:var(--font-headline)]">Rp 0</span>
           </div>
         </div>
-        <div class="flex justify-between items-center border-t border-outline-variant/10 pt-5">
-          <span class="text-sm uppercase tracking-[0.2em] font-medium">Total</span>
-          <span id="co-total" class="font-[family-name:var(--font-headline)] text-2xl text-primary-container">Rp 0</span>
+      </section>
+      <section class="px-8 py-6">
+        <div class="flex justify-between items-baseline">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant mb-1">Total Pembayaran</p>
+            <p class="text-[10px] text-outline">Sudah termasuk pajak</p>
+          </div>
+          <span id="co-total" class="font-[family-name:var(--font-headline)] text-3xl text-primary-container">Rp 0</span>
         </div>
-      </div>
-      <div class="px-8 pb-8">
-        <button type="submit" id="co-submit"
-          class="w-full burnished-gradient text-on-primary py-5 text-[11px] uppercase tracking-[0.3em] font-bold hover:brightness-110 transition-all disabled:opacity-50">
-          <span id="co-submit-label">Place Order</span>
-        </button>
-        <p class="text-[10px] text-outline uppercase tracking-widest mt-4 text-center">
-          <span class="material-symbols-outlined text-base align-middle text-primary-container">lock</span>
-          Payment akan diproses di langkah berikutnya
-        </p>
-      </div>
+      </section>
     </aside>
   </form>
 
   <div id="empty-cart-redirect" class="hidden text-center py-32">
-    <p class="text-on-surface-variant mb-4">Cart kosong. Tambahkan produk dulu.</p>
-    <a href="/" class="text-[11px] uppercase tracking-widest text-primary-container border-b border-primary-container">Browse Collection</a>
+    <p class="text-on-surface-variant mb-4">Keranjang kosong. Tambahkan produk dulu.</p>
+    <a href="/" class="text-[11px] uppercase tracking-widest text-primary-container border-b border-primary-container">Lihat Koleksi</a>
   </div>
 </main>
 

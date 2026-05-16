@@ -19,23 +19,24 @@
   --color-tertiary-container: #c69b98;
   --color-on-tertiary: #462827;
 
+  /* Light surface layers — cream tones, each step ~3-5% darker for clear elevation */
+  --color-background: #f6f3ec;
   --color-surface: #f9f7f2;
-  --color-surface-dim: #e5e2e1;
-  --color-surface-bright: #f9f7f2;
-  --color-surface-container: #f4f2ed;
-  --color-surface-container-low: #f9f7f2;
-  --color-surface-container-high: #ebe9e4;
-  --color-surface-container-highest: #e5e2e1;
+  --color-surface-dim: #ece8df;
+  --color-surface-bright: #fdfbf6;
   --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f1e9;
+  --color-surface-container: #efebe1;
+  --color-surface-container-high: #e8e3d6;
+  --color-surface-container-highest: #e0dac9;
   --color-surface-variant: #e7e2d9;
 
-  --color-background: #f9f7f2;
   --color-on-background: #1c1b1b;
   --color-on-surface: #1c1b1b;
-  --color-on-surface-variant: #4e4639;
+  --color-on-surface-variant: #5a5246;
 
   --color-outline: #807667;
-  --color-outline-variant: #d1c5b4;
+  --color-outline-variant: #c8bca9;
 
   --color-inverse-surface: #313030;
   --color-inverse-on-surface: #f5f0ef;
@@ -57,36 +58,39 @@
 }
 
 .dark {
-  --color-primary: #C8A96A;
-  --color-primary-container: #8C6B3F;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #E5C07B;
+  --color-primary: #E5C07B;
+  --color-primary-container: #C8A96A;
+  --color-on-primary: #2a1d00;
+  --color-on-primary-container: #f3dba0;
 
-  --color-surface: #111111;
-  --color-surface-dim: #0B0B0C;
-  --color-surface-bright: #2A2A2A;
-  --color-surface-container: #141414;
-  --color-surface-container-low: #111111;
-  --color-surface-container-high: #1F1F1F;
-  --color-surface-container-highest: #2A2A2A;
-  --color-surface-container-lowest: #0B0B0C;
-  --color-surface-variant: #1A1A1A;
+  /* Dark surface layers — M3 elevation: each step ~lighter to "raise" cards.
+     Background is genuinely dark; cards step up clearly. Warm tint to match
+     the cream/bronze palette. */
+  --color-background: #07070a;
+  --color-surface: #0d0c0b;
+  --color-surface-dim: #060606;
+  --color-surface-bright: #3a3631;
+  --color-surface-container-lowest: #1c1a17;
+  --color-surface-container-low: #26231f;
+  --color-surface-container: #2e2a25;
+  --color-surface-container-high: #38332d;
+  --color-surface-container-highest: #443e36;
+  --color-surface-variant: #322d27;
 
-  --color-background: #0B0B0C;
-  --color-on-background: #ffffff;
-  --color-on-surface: #ffffff;
-  --color-on-surface-variant: #B3B3B3;
+  --color-on-background: #f0ece3;
+  --color-on-surface: #f0ece3;
+  --color-on-surface-variant: #c4bdaf;
 
-  --color-secondary: #B3B3B3;
-  --color-secondary-container: #1A1A1A;
+  --color-secondary: #cfc7b5;
+  --color-secondary-container: #25231f;
   --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #B3B3B3;
+  --color-on-secondary-container: #cfc7b5;
 
-  --color-outline: #6F6F6F;
-  --color-outline-variant: #2C2C2C;
+  --color-outline: #8a8275;
+  --color-outline-variant: #3a3631;
 
-  --color-inverse-surface: #ffffff;
-  --color-inverse-on-surface: #0B0B0C;
+  --color-inverse-surface: #f0ece3;
+  --color-inverse-on-surface: #1a1917;
   --color-inverse-primary: #8C6B3F;
 
   --color-error: #ffb4ab;

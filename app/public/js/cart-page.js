@@ -9,6 +9,7 @@
   const countText = document.getElementById("cart-count-text");
   const itemsEl = document.getElementById("cart-items");
   const summaryItemsEl = document.getElementById("summary-items");
+  const summaryCountEl = document.getElementById("summary-count");
   const subtotalEl = document.getElementById("sum-subtotal");
   const taxEl = document.getElementById("sum-tax");
   const totalEl = document.getElementById("sum-total");
@@ -103,6 +104,7 @@
 
     itemsEl.innerHTML = items.map(itemHTML).join("");
     summaryItemsEl.innerHTML = items.map(summaryItemHTML).join("");
+    if (summaryCountEl) summaryCountEl.textContent = `${total} item`;
 
     const subtotal = window.GumesCart.subtotal();
     const tax = Math.round(subtotal * 0.11);

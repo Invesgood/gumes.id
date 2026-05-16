@@ -38,21 +38,27 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS orders (
-  id               TEXT PRIMARY KEY,
-  user_id          INTEGER REFERENCES users(id) ON DELETE SET NULL,
-  customer_name    TEXT NOT NULL,
-  customer_email   TEXT NOT NULL,
-  customer_address TEXT NOT NULL,
-  customer_city    TEXT NOT NULL,
-  customer_postal  TEXT NOT NULL,
-  subtotal         INTEGER NOT NULL,
-  tax              INTEGER NOT NULL DEFAULT 0,
-  shipping         INTEGER NOT NULL DEFAULT 0,
-  total            INTEGER NOT NULL,
-  status           TEXT NOT NULL DEFAULT 'pending',
-  payment_url      TEXT,
-  created_at       TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  id                 TEXT PRIMARY KEY,
+  user_id            INTEGER REFERENCES users(id) ON DELETE SET NULL,
+  customer_name      TEXT NOT NULL,
+  customer_email     TEXT NOT NULL,
+  customer_phone     TEXT,
+  customer_address   TEXT NOT NULL,
+  customer_district  TEXT,
+  customer_city      TEXT NOT NULL,
+  customer_province  TEXT,
+  customer_postal    TEXT NOT NULL,
+  subtotal           INTEGER NOT NULL,
+  tax                INTEGER NOT NULL DEFAULT 0,
+  shipping           INTEGER NOT NULL DEFAULT 0,
+  total              INTEGER NOT NULL,
+  status             TEXT NOT NULL DEFAULT 'pending',
+  payment_url        TEXT,
+  created_at         TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS customer_phone TEXT;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS customer_district TEXT;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS customer_province TEXT;
 
 CREATE TABLE IF NOT EXISTS order_items (
   id          SERIAL PRIMARY KEY,

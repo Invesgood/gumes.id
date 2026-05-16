@@ -69,7 +69,7 @@
             if (!c) return "";
             const isActive = activeCid === cid;
             return `<button type="button" data-card-color="${cid}" data-product="${p.id}"
-              class="w-5 h-5 rounded-full transition-all ${isActive ? "ring-2 ring-offset-2 ring-on-surface scale-110" : "opacity-60 hover:opacity-100 hover:scale-110"}"
+              class="w-5 h-5 border transition-all ${isActive ? "border-on-surface ring-2 ring-offset-2 ring-offset-surface-container-low ring-on-surface scale-110" : "border-outline-variant/70 opacity-70 hover:opacity-100 hover:scale-110"}"
               style="background-color:${c.hex}" title="${c.label}"></button>`;
           }).join("")}
          </div>` : "";
@@ -97,8 +97,8 @@
         </div>`;
 
     return `<article data-product-card="${p.id}"
-        class="group flex flex-col border border-outline-variant/30 hover:border-outline-variant/60 shadow-sm hover:shadow-md transition-all cursor-pointer">
-        <div class="relative aspect-square bg-surface-container-lowest overflow-hidden">
+        class="group flex flex-col bg-surface-container-low border border-outline-variant/60 hover:border-outline-variant shadow-sm hover:shadow-lg transition-all cursor-pointer">
+        <div class="relative aspect-square bg-surface-container overflow-hidden">
           <img src="${escapeHtml(displayImage)}" alt="${escapeHtml(p.name)}" loading="lazy"
             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           <div class="absolute top-5 left-5 flex flex-col gap-1.5">${badgeHTML}${bestHTML}</div>

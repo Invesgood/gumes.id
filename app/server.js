@@ -162,7 +162,7 @@ app.post("/api/checkout", async (req, res) => {
     if (!customer || !items?.length) {
       return res.status(400).json({ error: "Cart dan customer harus diisi" });
     }
-    const { name, email, address, city, postal } = customer;
+    const { name, email, phone, address, district, city, province, postal } = customer;
     if (!name || !email || !address || !city || !postal) {
       return res.status(400).json({ error: "Lengkapi semua field pengiriman" });
     }
@@ -171,10 +171,12 @@ app.post("/api/checkout", async (req, res) => {
     try {
       await client.query("BEGIN");
       await client.query(
-        `INSERT INTO orders (id, user_id, customer_name, customer_email, customer_address,
-                             customer_city, customer_postal, subtotal, tax, shipping, total, status)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,'pending')`,
-        [orderId, req.session.user?.id || null, name, email, address, city, postal,
+        `INSERT INTO orders (id, user_id, customer_name, customer_email, customer_phone,
+                             customer_address, customer_district, customer_city, customer_province,
+                             customer_postal, subtotal, tax, shipping, total, status)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,'pending')`,
+        [orderId, req.session.user?.id || null, name, email, phone || null,
+          address, district || null, city, province || null, postal,
           subtotal | 0, tax | 0, shipping | 0, total | 0]
       );
       for (const it of items) {

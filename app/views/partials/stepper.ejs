@@ -1,0 +1,24 @@
+<%
+  const steps = [
+    { key: 'cart',     label: 'Keranjang' },
+    { key: 'info',     label: 'Informasi' },
+    { key: 'shipping', label: 'Pengiriman' },
+    { key: 'payment',  label: 'Pembayaran' },
+  ];
+  const activeIdx = Math.max(0, steps.findIndex(s => s.key === locals.activeStep));
+%>
+<nav aria-label="Checkout progress" data-stepper class="flex items-center flex-wrap gap-x-2 gap-y-1 text-[11px] md:text-xs uppercase tracking-[0.2em] mb-10">
+  <% steps.forEach(function(s, i){
+       const isActive = i === activeIdx;
+       const isDone = i < activeIdx;
+       const cls = isActive
+         ? 'text-on-surface font-bold'
+         : isDone
+           ? 'text-on-surface-variant'
+           : 'text-outline'; %>
+    <span data-step="<%= s.key %>" class="<%= cls %>"><%= s.label %></span>
+    <% if (i < steps.length - 1) { %>
+      <span class="material-symbols-outlined text-outline-variant" style="font-size:16px">arrow_forward</span>
+    <% } %>
+  <% }); %>
+</nav>
