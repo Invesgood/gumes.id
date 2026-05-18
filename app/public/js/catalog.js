@@ -76,7 +76,9 @@
         }).join("")
       : "";
 
-    const priceRow = `<div class="flex items-center justify-between mb-3">
+    const variants = p.stockVariants || {};
+    const stockFor = (sz, cid) => Number(variants[`${sz}_${cid || "default"}`] || 0);
+    const priceRow = `<div class="flex items-center justify-between gap-2 mb-3">
         <span class="font-[family-name:var(--font-headline)] text-sm md:text-lg text-primary-container leading-tight">${escapeHtml(p.price)}</span>
       </div>`;
 
@@ -88,14 +90,33 @@
         <div class="grid grid-cols-5 gap-1.5 max-w-[14rem]">
           ${SIZES.map((s) => {
             const isActive = activeSize === s;
-            return `<button type="button" data-pick-size="${s}" data-product="${p.id}"
-              class="aspect-square flex items-center justify-center text-[11px] md:text-xs border transition-all font-medium ${isActive ? "bg-on-surface text-surface border-on-surface" : "border-outline-variant hover:border-on-surface"}">${s}</button>`;
+            const habis = stockFor(s, activeCid) === 0;
+            const base = "aspect-square flex items-center justify-center text-[11px] md:text-xs border transition-all font-medium";
+            const cls = habis
+              ? `${base} border-outline-variant/40 text-outline/50 line-through cursor-not-allowed`
+              : isActive
+                ? `${base} bg-on-surface text-surface border-on-surface`
+                : `${base} border-outline-variant hover:border-on-surface`;
+            return `<button type="button" data-pick-size="${s}" data-product="${p.id}" ${habis ? "disabled" : ""}
+              class="${cls}">${s}</button>`;
           }).join("")}
         </div>
       </div>`;
 
+    const ratingNum = Number(p.rating || 0);
+    const reviewCount = Number(p.reviewCount || 0);
+    const ratingHTML = reviewCount > 0
+      ? `<div class="flex items-center gap-1" title="${ratingNum.toFixed(1)} dari ${reviewCount} ulasan">
+          ${[1,2,3,4,5].map((s) => `<span class="material-symbols-outlined text-[13px]" style="font-variation-settings:'FILL' ${ratingNum >= s - 0.5 ? 1 : 0};color:${ratingNum >= s - 0.5 ? '#c68642' : 'var(--color-outline-variant)'}">star</span>`).join("")}
+          <span class="text-[10px] text-outline ml-0.5">(${reviewCount})</span>
+        </div>`
+      : `<span class="text-[10px] uppercase tracking-widest text-outline/60">Belum ada ulasan</span>`;
+
     const colorCartRow = `<div class="flex items-center justify-between gap-2 mt-auto" data-stop>
-        <div class="flex items-center gap-3">${swatchesHTML}</div>
+        <div class="flex items-center gap-3 flex-wrap">
+          ${swatchesHTML ? `<div class="flex items-center gap-2">${swatchesHTML}</div>` : ""}
+          ${ratingHTML}
+        </div>
         <button type="button" data-add-cart data-product="${p.id}"
           class="flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase px-3 py-2.5 transition-all shrink-0 ${added ? "bg-on-surface text-surface" : "burnished-gradient text-on-primary hover:brightness-110"}">
           <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' ${added ? 1 : 0}">${added ? "check" : "shopping_bag"}</span>
@@ -233,7 +254,15 @@
     const swatch = t.closest("[data-card-color]");
     if (swatch) {
       e.stopPropagation();
-      state.cardColors[swatch.dataset.product] = swatch.dataset.cardColor;
+      const productId = swatch.dataset.product;
+      const cid = swatch.dataset.cardColor;
+      state.cardColors[productId] = cid;
+      const pickedSize = state.cardSizes[productId];
+      const p = products.find((x) => x.id === productId);
+      if (p && pickedSize) {
+        const variants = p.stockVariants || {};
+        if (Number(variants[`${pickedSize}_${cid}`] || 0) === 0) delete state.cardSizes[productId];
+      }
       render();
       return;
     }
@@ -242,6 +271,7 @@
     const pickSize = t.closest("[data-pick-size]");
     if (pickSize) {
       e.stopPropagation();
+      if (pickSize.disabled) return;
       const productId = pickSize.dataset.product;
       state.cardSizes[productId] = parseInt(pickSize.dataset.pickSize, 10);
       if (state.sizeErrorId === productId) state.sizeErrorId = null;

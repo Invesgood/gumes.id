@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import rateLimit from "express-rate-limit";
 import bcrypt from "bcryptjs";
 import Busboy from "busboy";
 import sharp from "sharp";
@@ -283,7 +284,16 @@ app.post("/api/auth/signup", async (req, res) => {
   }
 });
 
-app.post("/api/auth/login", async (req, res) => {
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  skipSuccessfulRequests: true,
+  message: { error: "Terlalu banyak percobaan login. Coba lagi dalam 15 menit." },
+});
+
+app.post("/api/auth/login", loginLimiter, async (req, res) => {
   try {
     const { email, password } = req.body || {};
     if (!email || !password) return res.status(400).json({ error: "Email & password wajib" });
@@ -361,12 +371,12 @@ app.post("/api/products", requireAdminAPI, async (req, res) => {
     const id = String(Date.now());
     await query(
       `INSERT INTO products (id, name, material, price_num, image, category, colors, color_images,
-                             gallery, description, badge, is_new_arrival, best_seller, featured)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)`,
+                             gallery, description, badge, is_new_arrival, best_seller, featured, stock_variants)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)`,
       [id, p.name, p.material || "", p.priceNum | 0, p.image || "", p.category,
         p.colors || [], JSON.stringify(p.colorImages || {}),
         p.gallery || [], p.description || "", p.badge || "",
-        !!p.isNewArrival, !!p.bestSeller, !!p.featured]
+        !!p.isNewArrival, !!p.bestSeller, !!p.featured, JSON.stringify(sanitizeStockVariants(p.stockVariants))]
     );
     res.json({ ok: true, id });
   } catch (e) {
@@ -382,12 +392,12 @@ app.put("/api/products/:id", requireAdminAPI, async (req, res) => {
       `UPDATE products SET
          name = $1, material = $2, price_num = $3, image = $4, category = $5,
          colors = $6, color_images = $7, gallery = $8, description = $9, badge = $10,
-         is_new_arrival = $11, best_seller = $12, featured = $13
-       WHERE id = $14`,
+         is_new_arrival = $11, best_seller = $12, featured = $13, stock_variants = $14
+       WHERE id = $15`,
       [p.name, p.material || "", p.priceNum | 0, p.image || "", p.category,
         p.colors || [], JSON.stringify(p.colorImages || {}),
         p.gallery || [], p.description || "", p.badge || "",
-        !!p.isNewArrival, !!p.bestSeller, !!p.featured, req.params.id]
+        !!p.isNewArrival, !!p.bestSeller, !!p.featured, JSON.stringify(sanitizeStockVariants(p.stockVariants)), req.params.id]
     );
     if (result.rowCount === 0) return res.status(404).json({ error: "Not found" });
     res.json({ ok: true });
@@ -482,22 +492,25 @@ function requireAdminAPI(req, res, next) {
 
 // ─── DB helpers ─────────────────────────────────────────────────────────
 
+const PRODUCT_SELECT = `
+  SELECT p.id, p.name, p.material, p.price_num, p.image, p.category, p.colors, p.color_images,
+         p.gallery, p.description, p.badge, p.is_new_arrival, p.best_seller, p.featured, p.stock_variants,
+         COALESCE(r.avg_rating, 0)::float AS avg_rating,
+         COALESCE(r.review_count, 0)::int AS review_count
+    FROM products p
+    LEFT JOIN (
+      SELECT product_id, AVG(rating) AS avg_rating, COUNT(*) AS review_count
+        FROM reviews GROUP BY product_id
+    ) r ON r.product_id = p.id
+`;
+
 async function fetchProducts() {
-  const { rows } = await query(
-    `SELECT id, name, material, price_num, image, category, colors, color_images,
-            gallery, description, badge, is_new_arrival, best_seller, featured
-       FROM products ORDER BY created_at DESC`
-  );
+  const { rows } = await query(`${PRODUCT_SELECT} ORDER BY p.created_at DESC`);
   return rows.map(rowToProduct);
 }
 
 async function fetchProductById(id) {
-  const { rows } = await query(
-    `SELECT id, name, material, price_num, image, category, colors, color_images,
-            gallery, description, badge, is_new_arrival, best_seller, featured
-       FROM products WHERE id = $1`,
-    [id]
-  );
+  const { rows } = await query(`${PRODUCT_SELECT} WHERE p.id = $1`, [id]);
   return rows[0] ? rowToProduct(rows[0]) : null;
 }
 
@@ -556,11 +569,26 @@ function rowToProduct(r) {
     isNewArrival: r.is_new_arrival,
     bestSeller: r.best_seller,
     featured: r.featured,
+    stockVariants: r.stock_variants || {},
+    stock: Object.values(r.stock_variants || {}).reduce((s, n) => s + (Number(n) || 0), 0),
+    rating: Number(r.avg_rating || 0),
+    reviewCount: Number(r.review_count || 0),
   };
 }
 
 function formatIDR(n) {
   return "Rp " + Number(n || 0).toLocaleString("id-ID");
+}
+
+function sanitizeStockVariants(input) {
+  if (!input || typeof input !== "object") return {};
+  const out = {};
+  for (const [key, val] of Object.entries(input)) {
+    if (!/^\d+_[a-z0-9_-]+$/i.test(key)) continue;
+    const n = Math.max(0, parseInt(val, 10) || 0);
+    if (n > 0) out[key] = n;
+  }
+  return out;
 }
 
 // ─── start ─────────────────────────────────────────────────────────────

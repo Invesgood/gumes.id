@@ -7,6 +7,7 @@
     coklat: { label: "Coklat", hex: "#5d4037" },
     tan:    { label: "Tan",    hex: "#c68642" },
   };
+  const SIZES = [39, 40, 41, 42, 43];
 
   let products = JSON.parse(document.getElementById("products-data").textContent);
   let reviews = JSON.parse(document.getElementById("reviews-data").textContent);
@@ -16,10 +17,16 @@
     editingId: null,
     selectedColors: [],
     colorImages: {},        // colorId -> url (already uploaded)
+    stockVariants: {},      // "${size}_${colorId|'default'}" -> qty
     mainImageUrl: "",
     reviewFilter: "Semua",
     deleteTarget: null,     // { type: 'product'|'review', id, name }
   };
+
+  function variantKey(size, color) { return `${size}_${color || "default"}`; }
+  function stockTotal() {
+    return Object.values(state.stockVariants).reduce((s, n) => s + (Number(n) || 0), 0);
+  }
 
   // ── Helpers ──────────────────────────────────────────────────────
   function $(s, root = document) { return root.querySelector(s); }
@@ -69,7 +76,11 @@
       list.innerHTML = `<p class="text-outline text-sm py-12 text-center">Belum ada produk.</p>`;
       return;
     }
-    list.innerHTML = products.map((p) => `
+    list.innerHTML = products.map((p) => {
+      const stock = Number(p.stock || 0);
+      const stockTone = stock === 0 ? "text-error" : stock < 5 ? "text-primary" : "text-on-surface-variant";
+      const stockLabel = stock === 0 ? "Habis" : `${stock} stok`;
+      return `
       <div class="bg-surface-container-lowest border border-outline-variant/30 p-4 flex flex-wrap items-center gap-4">
         <img src="${escapeHtml(p.image || '/images/placeholder.webp')}" alt="" class="w-16 h-16 object-cover border border-outline-variant/30" />
         <div class="flex-1 min-w-0">
@@ -80,7 +91,10 @@
             ${p.isNewArrival ? '<span class="text-[10px] uppercase tracking-widest font-bold text-primary">New</span>' : ''}
           </div>
           <p class="text-sm text-on-surface-variant">${escapeHtml(p.material || '')}</p>
-          <p class="text-sm font-[family-name:var(--font-headline)] text-primary-container">${formatIDR(p.priceNum)}</p>
+          <div class="flex items-center gap-3 flex-wrap">
+            <p class="text-sm font-[family-name:var(--font-headline)] text-primary-container">${formatIDR(p.priceNum)}</p>
+            <span class="text-[10px] uppercase tracking-widest font-bold ${stockTone}">${stockLabel}</span>
+          </div>
         </div>
         <div class="flex gap-2">
           <button type="button" data-edit="${p.id}" class="p-2 border border-outline-variant hover:border-on-surface text-on-surface-variant hover:text-on-surface transition-all" aria-label="Edit">
@@ -90,7 +104,8 @@
             <span class="material-symbols-outlined text-xl">delete</span>
           </button>
         </div>
-      </div>`).join("");
+      </div>`;
+    }).join("");
   }
 
   // ── Reviews render ───────────────────────────────────────────────
@@ -138,6 +153,7 @@
     state.editingId = product?.id || null;
     state.selectedColors = product?.colors ? [...product.colors] : [];
     state.colorImages = product?.colorImages ? { ...product.colorImages } : {};
+    state.stockVariants = product?.stockVariants ? { ...product.stockVariants } : {};
     state.mainImageUrl = product?.image || "";
 
     $("#form-title-tag").textContent = product ? "Edit Produk" : "Produk Baru";
@@ -169,9 +185,40 @@
 
     renderColorChips();
     renderColorImageInputs();
+    renderStockGrid();
 
     $("#form-error").classList.add("hidden");
     $("#product-modal").classList.remove("hidden");
+  }
+
+  function renderStockGrid() {
+    const grid = $("#stock-grid");
+    const cols = state.selectedColors.length > 0
+      ? state.selectedColors.map((cid) => ({ id: cid, label: COLORS[cid]?.label || cid, hex: COLORS[cid]?.hex || "#888" }))
+      : [{ id: "default", label: "Stok", hex: "#888" }];
+
+    const header = `<tr>
+      <th class="text-left text-[10px] uppercase tracking-widest text-outline pb-2 pr-3">EU</th>
+      ${cols.map((c) => `<th class="text-left text-[10px] uppercase tracking-widest text-outline pb-2 pr-3">
+        <span class="inline-flex items-center gap-1.5">
+          ${state.selectedColors.length > 0 ? `<span class="w-3 h-3 rounded-full" style="background-color:${c.hex}"></span>` : ""}
+          ${escapeHtml(c.label)}
+        </span>
+      </th>`).join("")}
+    </tr>`;
+
+    const rows = SIZES.map((s) => `<tr>
+      <td class="text-sm font-medium pr-3 py-1.5">${s}</td>
+      ${cols.map((c) => {
+        const key = variantKey(s, c.id === "default" ? null : c.id);
+        const val = state.stockVariants[key] || 0;
+        return `<td class="pr-3 py-1.5"><input type="number" min="0" step="1" data-stock-key="${key}" value="${val}"
+          class="w-20 bg-transparent border border-outline-variant px-2 py-1 text-sm focus:outline-none focus:border-primary" /></td>`;
+      }).join("")}
+    </tr>`).join("");
+
+    grid.innerHTML = `<table class="w-full"><thead>${header}</thead><tbody>${rows}</tbody></table>`;
+    $("#stock-total").textContent = stockTotal();
   }
 
   function closeForm() { $("#product-modal").classList.add("hidden"); }
@@ -238,6 +285,7 @@
       name: f.name.value.trim(),
       material: f.material.value.trim(),
       priceNum: parseInt(f.priceNum.value, 10) || 0,
+      stockVariants: state.stockVariants,
       image: state.mainImageUrl,
       category: f.category.value,
       colors: state.selectedColors,
@@ -329,15 +377,34 @@
       if (idx >= 0) {
         state.selectedColors.splice(idx, 1);
         delete state.colorImages[cid];
+        for (const k of Object.keys(state.stockVariants)) {
+          if (k.endsWith("_" + cid)) delete state.stockVariants[k];
+        }
       } else {
         state.selectedColors.push(cid);
+        for (const k of Object.keys(state.stockVariants)) {
+          if (k.endsWith("_default")) delete state.stockVariants[k];
+        }
       }
       renderColorChips();
+      renderStockGrid();
       return;
     }
 
     const filterBtn = t.closest(".review-filter-btn");
     if (filterBtn) { state.reviewFilter = filterBtn.dataset.cat; renderReviews(); return; }
+  });
+
+  // Stock grid input (delegated)
+  document.addEventListener("input", (e) => {
+    const t = e.target;
+    if (!(t instanceof Element)) return;
+    if (t.dataset.stockKey) {
+      const n = Math.max(0, parseInt(t.value, 10) || 0);
+      if (n > 0) state.stockVariants[t.dataset.stockKey] = n;
+      else delete state.stockVariants[t.dataset.stockKey];
+      $("#stock-total").textContent = stockTotal();
+    }
   });
 
   // File input listeners (delegated)

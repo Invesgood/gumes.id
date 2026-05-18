@@ -1,11 +1,28 @@
 <%- include('partials/head', { title: title }) %>
-<%- include('partials/navbar') %>
 
 <script id="products-data" type="application/json"><%- JSON.stringify(products).replace(/<\//g, "<\\/") %></script>
 <script id="reviews-data" type="application/json"><%- JSON.stringify(reviews).replace(/<\//g, "<\\/") %></script>
 
-<main class="pt-56 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
+<main class="pt-12 pb-24 px-6 md:px-12 max-w-7xl mx-auto min-h-screen">
   <div id="toast" class="hidden fixed top-6 right-6 z-50 px-6 py-4 text-sm font-medium shadow-lg"></div>
+
+  <div class="flex items-center justify-end gap-6 mb-10 text-[11px] uppercase tracking-widest">
+    <% if (locals.user) { %>
+      <div class="flex items-center gap-2 text-on-surface-variant">
+        <span class="material-symbols-outlined text-primary-container" style="font-size: 18px;">shield_person</span>
+        <span><%= locals.user.name || locals.user.email %></span>
+        <span class="px-2 py-0.5 bg-primary-container text-on-primary-container text-[9px] font-bold tracking-widest">Admin</span>
+      </div>
+    <% } %>
+    <a href="/" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors">
+      <span class="material-symbols-outlined" style="font-size: 18px;">storefront</span>
+      <span>Lihat Toko</span>
+    </a>
+    <button type="button" data-logout class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+      <span class="material-symbols-outlined" style="font-size: 18px;">logout</span>
+      <span>Logout</span>
+    </button>
+  </div>
 
   <header class="mb-12 flex flex-wrap items-end justify-between gap-4">
     <div>
@@ -88,6 +105,15 @@
               <option value="Sepatu">Sepatu</option>
             </select>
           </div>
+        </div>
+
+        <div>
+          <div class="flex items-baseline justify-between mb-3">
+            <label class="block text-[10px] uppercase tracking-widest text-outline">Stok per Ukuran &amp; Warna</label>
+            <span class="text-[10px] text-outline">Total: <span id="stock-total">0</span></span>
+          </div>
+          <div id="stock-grid" class="border border-outline-variant/30 p-3 overflow-x-auto"></div>
+          <p class="text-[10px] text-outline mt-2">Pilih warna dulu di atas untuk membuka kolom stok per warna.</p>
         </div>
 
         <div>
@@ -178,4 +204,5 @@
 </main>
 
 <%- include('partials/footer') %>
+<script src="/js/auth.js" defer></script>
 <%- include('partials/foot', { pageScript: '/js/admin.js' }) %>
